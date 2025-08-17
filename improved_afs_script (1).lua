@@ -18,6 +18,10 @@ local Services = {
 }
 
 
+local player = Services.Players.LocalPlayer
+local tweenService = Services.TweenService
+local virtualInputManager = Services.VirtualInputManager
+
 local Player = Services.Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
@@ -799,8 +803,8 @@ Tabs.Arte:AddButton({
     Title = "Equip",
     Description = "Equip selected artifact",
     Callback = function()
-        if scriptdata.artiSelected then
-            EquipArtifact(state.artiSelected)
+        if ScriptData.artiSelected then
+    EquipArtifact(ScriptData.artiSelected)
         else
             warn("No artifact selected!")
         end
