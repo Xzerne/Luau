@@ -91,7 +91,7 @@ if Services.ReplicatedStorage:FindFirstChild("ModuleScripts") then
     safeRequire(moduleScripts:FindFirstChild("EggStats"), "EggStats")
     safeRequire(moduleScripts:FindFirstChild("WorldData"), "WorldData")
     safeRequire(moduleScripts:FindFirstChild("ConfigValues"), "ConfigValues")
-    safeRequire(moduleScripts:FindFirstChild("LocalSulleyStore"), "LocalSulleyStore")
+    safeRequire(moduleScripts:FindFirstChild("LocalDairebStore"), "LocalDairebStore")
 end
 
 -- Utility Functions
@@ -200,8 +200,8 @@ function Utils.getEggs()
 end
 
 function Utils.getPets()
-    if Modules.LocalSulleyStore then
-        local store = Modules.LocalSulleyStore
+    if Modules.LocalDairebStore then
+        local store = Modules.LocalDairebStore
         local gameData = store.GetStoreProxy("GameData")
         return gameData:GetData("Pets") or {}
     end
@@ -905,5 +905,6 @@ local function initialize()
     print("📊 Found", #ScriptData.worlds, "worlds,", #ScriptData.mobs, "mobs, and", #ScriptData.eggs, "eggs")
     print("⌨️  Press Left Ctrl to minimize/show")
     end
-
-initialize()
+    
+    
+    initialize()
