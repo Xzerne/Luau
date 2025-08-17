@@ -1,0 +1,908 @@
+-- Improved Anime Fighters Simulator Script
+-- Enhanced with features from OTIMOS and better structure
+
+-- Place ID Check
+local ANIME_FIGHTERS_PLACE_ID = 6299805723
+if game.PlaceId ~= ANIME_FIGHTERS_PLACE_ID then 
+    return warn("Wrong game! This script is for Anime Fighters Simulator only.") 
+end
+
+-- Services
+local Services = {
+    ReplicatedStorage = game:GetService("ReplicatedStorage"),
+    Players = game:GetService("Players"),
+    RunService = game:GetService("RunService"),
+    UserInputService = game:GetService("UserInputService"),
+    TweenService = game:GetService("TweenService"),
+    VirtualInputManager = game:GetService("VirtualInputManager"),
+    VirtualUser = game:GetService("VirtualUser"),
+    Workspace = game:GetService("Workspace"),
+    HttpService = game:GetService("HttpService")
+}
+
+-- Variables
+local Player = Services.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+local PlayerGui = Player.PlayerGui
+
+-- Script State
+local ScriptData = {
+    disabled = false,
+    selectedWorld = nil,
+    selectedMob = nil,
+    selectedEgg = nil,
+    selectedFuse = nil,
+    loopSpeed = 0,
+    maxRetries = 3,
+    cooldownTime = 0,
+    lastAction = 0,
+    connections = {},
+    mobs = {},
+    worlds = {},
+    eggs = {}
+}
+
+-- Toggle States
+local Toggles = {
+    autoEgg = false,
+    autoEggCurrent = false,
+    autoFarm = false,
+    autoFarmAll = false,
+    autoCollect = false,
+    autoRaid = false,
+    autoTrial = false,
+    autoDefense = false,
+    autoQuest = false,
+    autoFuse = false,
+    antiAfk = false,
+    hidePets = false
+}
+
+-- Remote/Bindable References
+local RemoteEvents = {
+    Remote = Services.ReplicatedStorage:WaitForChild("Remote"),
+    Bindable = Services.ReplicatedStorage:WaitForChild("Bindable", 5)
+}
+
+-- Module Requirements (with error handling)
+local Modules = {}
+local function safeRequire(path, name)
+    local success, result = pcall(function()
+        return require(path)
+    end)
+    if success then
+        Modules[name] = result
+    else
+        warn(string.format("Failed to load module %s: %s", name, tostring(result)))
+    end
+end
+
+-- Load essential modules
+if Services.ReplicatedStorage:FindFirstChild("ModuleScripts") then
+    local moduleScripts = Services.ReplicatedStorage.ModuleScripts
+    safeRequire(moduleScripts:FindFirstChild("StatCalc"), "StatCalc")
+    safeRequire(moduleScripts:FindFirstChild("NumToString"), "NumToString")
+    safeRequire(moduleScripts:FindFirstChild("PetStats"), "PetStats")
+    safeRequire(moduleScripts:FindFirstChild("EggStats"), "EggStats")
+    safeRequire(moduleScripts:FindFirstChild("WorldData"), "WorldData")
+    safeRequire(moduleScripts:FindFirstChild("ConfigValues"), "ConfigValues")
+end
+
+-- Utility Functions
+local Utils = {}
+
+function Utils.wait(duration)
+    local startTime = tick()
+    while tick() - startTime < duration and Services.RunService.Heartbeat:Wait() do end
+end
+
+function Utils.teleportToPosition(targetCFrame)
+    if not targetCFrame then return false end
+    
+    local currentTime = tick()
+    if currentTime - ScriptData.lastAction < ScriptData.cooldownTime then 
+        return false 
+    end
+    ScriptData.lastAction = currentTime
+    
+    local distance = (HumanoidRootPart.Position - targetCFrame.Position).Magnitude
+    if distance < 10 then return true end
+    
+    HumanoidRootPart.CFrame = targetCFrame
+    return true
+end
+
+function Utils.getWorlds()
+    local worldList = {}
+    local worldsFolder = Services.Workspace:FindFirstChild("Worlds")
+    if worldsFolder then
+        for _, world in ipairs(worldsFolder:GetChildren()) do
+            if world:IsA("Model") or world:IsA("Folder") then
+                table.insert(worldList, world.Name)
+            end
+        end
+    end
+    table.sort(worldList)
+    return worldList
+end
+
+function Utils.getMobs()
+    local mobList = {}
+    local currentWorld = Player.World and Player.World.Value
+    if currentWorld then
+        local worldFolder = Services.Workspace.Worlds:FindFirstChild(currentWorld)
+        if worldFolder and worldFolder:FindFirstChild("Enemies") then
+            for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
+                local displayName = enemy:FindFirstChild("DisplayName")
+                if displayName and not table.find(mobList, displayName.Value) then
+                    table.insert(mobList, displayName.Value)
+                end
+            end
+        end
+    end
+    return mobList
+end
+
+function Utils.getEggs()
+    local eggList = {}
+    if Modules.EggStats then
+        for eggName, info in pairs(Modules.EggStats) do
+            if info.Currency ~= "Robux" and not info.Hidden then
+                local displayText = string.format("%s (%s)", info.DisplayName or eggName, eggName)
+                table.insert(eggList, displayText)
+            end
+        end
+    end
+    return eggList
+end
+
+function Utils.getPets()
+    if Modules.LocalSulleyStore then
+        local store = Modules.LocalSulleyStore
+        local gameData = store.GetStoreProxy("GameData")
+        return gameData:GetData("Pets") or {}
+    end
+    return {}
+end
+
+function Utils.equipArtifact(artifactName)
+    if not artifactName then return false end
+    
+    local success, result = pcall(function()
+        local args = {artifactName, "CurrentSecondArtefact"}
+        RemoteEvents.Remote:FindFirstChild("EquipArtefact"):FireServer(unpack(args))
+        return true
+    end)
+    
+    return success
+end
+
+-- Core Functions
+local Core = {}
+
+function Core.openEgg(eggName, teleport)
+    if ScriptData.disabled then return false end
+    
+    local attempts = 0
+    local success = false
+    
+    while attempts < ScriptData.maxRetries and not success do
+        local openSuccess, result = pcall(function()
+            -- Find egg and teleport if needed
+            if teleport and eggName then
+                local eggModel = Services.Workspace.Worlds:FindFirstChild(eggName .. "Egg")
+                if eggModel and Utils.teleportToPosition(eggModel:GetPivot()) then
+                    Utils.wait(0.3)
+                end
+            end
+            
+            -- Attempt to open egg
+            local remote = RemoteEvents.Remote:FindFirstChild("AttemptMultiOpen")
+            if remote then
+                remote:FireServer(eggName)
+                return true
+            end
+            return false
+        end)
+        
+        if openSuccess and result then
+            success = true
+        else
+            attempts = attempts + 1
+            if attempts < ScriptData.maxRetries then
+                Utils.wait(0.1)
+            end
+        end
+    end
+    
+    return success
+end
+
+function Core.farmMob(mobName)
+    if ScriptData.disabled then return false end
+    
+    local currentWorld = Player.World and Player.World.Value
+    if not currentWorld then return false end
+    
+    local worldFolder = Services.Workspace.Worlds:FindFirstChild(currentWorld)
+    if not worldFolder then return false end
+    
+    local enemies = worldFolder:FindFirstChild("Enemies")
+    if not enemies then return false end
+    
+    for _, enemy in ipairs(enemies:GetChildren()) do
+        local displayName = enemy:FindFirstChild("DisplayName")
+        local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
+        local attackers = enemy:FindFirstChild("Attackers")
+        
+        if displayName and displayName.Value == mobName and humanoidRootPart and attackers then
+            -- Move to enemy
+            Utils.teleportToPosition(humanoidRootPart.CFrame)
+            
+            -- Send pets to attack
+            local success, result = pcall(function()
+                if RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet") then
+                    RemoteEvents.Bindable.SendPet:Fire(enemy, true)
+                end
+            end)
+            
+            return success
+        end
+    end
+    
+    return false
+end
+
+function Core.collectDrops()
+    if ScriptData.disabled then return end
+    
+    pcall(function()
+        local effects = Services.Workspace:FindFirstChild("Effects")
+        if effects then
+            for _, effect in ipairs(effects:GetDescendants()) do
+                if effect.Name == "Base" and effect:IsA("BasePart") then
+                    effect.CFrame = HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end)
+end
+
+function Core.autoFuse()
+    if ScriptData.disabled or not ScriptData.selectedFuse then return false end
+    
+    local pets = Utils.getPets()
+    local petToFuse = nil
+    local fuseablePets = {}
+    
+    -- Find the selected pet to fuse into
+    for _, pet in pairs(pets) do
+        if tostring(pet.UID) == ScriptData.selectedFuse then
+            petToFuse = pet.UID
+            break
+        end
+    end
+    
+    if not petToFuse then return false end
+    
+    -- Get fuseable pets (exclude equipped pets and special rarities)
+    local equippedPets = {}
+    for _, petObj in ipairs(Player.Pets:GetChildren()) do
+        if petObj.Value and petObj.Value.Data and petObj.Value.Data.UID then
+            equippedPets[petObj.Value.Data.UID.Value] = true
+        end
+    end
+    
+    for _, pet in pairs(pets) do
+        if not equippedPets[pet.UID] and pet.UID ~= petToFuse then
+            -- Add logic to exclude special rarities if needed
+            table.insert(fuseablePets, pet.UID)
+        end
+    end
+    
+    if #fuseablePets > 0 then
+        local success, result = pcall(function()
+            RemoteEvents.Remote:FindFirstChild("FeedPets"):FireServer(fuseablePets, petToFuse)
+            return true
+        end)
+        return success
+    end
+    
+    return false
+end
+
+-- Anti-AFK
+function Core.initAntiAfk()
+    if ScriptData.connections.antiAfk then return end
+    
+    ScriptData.connections.antiAfk = Player.Idled:Connect(function()
+        Services.VirtualUser:Button2Down(Vector2.new(0, 0), Services.Workspace.CurrentCamera.CFrame)
+        task.wait(1)
+        Services.VirtualUser:Button2Up(Vector2.new(0, 0), Services.Workspace.CurrentCamera.CFrame)
+    end)
+end
+
+-- UI Creation
+local function createUI()
+    -- Check if UI already exists
+    if PlayerGui:FindFirstChild("ImprovedAFSUI") then
+        PlayerGui.ImprovedAFSUI:Destroy()
+    end
+    
+    -- Create main ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ImprovedAFSUI"
+    screenGui.Parent = PlayerGui
+    screenGui.ResetOnSpawn = false
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    
+    -- Create main frame
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Name = "MainFrame"
+    mainFrame.Parent = screenGui
+    mainFrame.Size = UDim2.new(0, 400, 0, 500)
+    mainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Active = true
+    mainFrame.Draggable = true
+    
+    -- Add corner
+    local mainCorner = Instance.new("UICorner")
+    mainCorner.CornerRadius = UDim.new(0, 12)
+    mainCorner.Parent = mainFrame
+    
+    -- Title bar
+    local titleBar = Instance.new("Frame")
+    titleBar.Name = "TitleBar"
+    titleBar.Parent = mainFrame
+    titleBar.Size = UDim2.new(1, 0, 0, 50)
+    titleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    titleBar.BorderSizePixel = 0
+    
+    local titleCorner = Instance.new("UICorner")
+    titleCorner.CornerRadius = UDim.new(0, 12)
+    titleCorner.Parent = titleBar
+    
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Name = "Title"
+    titleLabel.Parent = titleBar
+    titleLabel.Size = UDim2.new(1, -100, 1, 0)
+    titleLabel.Position = UDim2.new(0, 10, 0, 0)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "Improved AFS Script"
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.TextScaled = true
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    
+    -- Close button
+    local closeButton = Instance.new("TextButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Parent = titleBar
+    closeButton.Size = UDim2.new(0, 40, 0, 40)
+    closeButton.Position = UDim2.new(1, -45, 0, 5)
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 85, 85)
+    closeButton.BorderSizePixel = 0
+    closeButton.Text = "×"
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.TextScaled = true
+    closeButton.Font = Enum.Font.GothamBold
+    
+    local closeCorner = Instance.new("UICorner")
+    closeCorner.CornerRadius = UDim.new(0, 8)
+    closeCorner.Parent = closeButton
+    
+    closeButton.MouseButton1Click:Connect(function()
+        screenGui:Destroy()
+        ScriptData.disabled = true
+        -- Cleanup connections
+        for name, connection in pairs(ScriptData.connections) do
+            if connection then connection:Disconnect() end
+        end
+    end)
+    
+    -- Content frame
+    local contentFrame = Instance.new("Frame")
+    contentFrame.Name = "ContentFrame"
+    contentFrame.Parent = mainFrame
+    contentFrame.Size = UDim2.new(1, -20, 1, -70)
+    contentFrame.Position = UDim2.new(0, 10, 0, 60)
+    contentFrame.BackgroundTransparency = 1
+    
+    -- Scroll frame
+    local scrollFrame = Instance.new("ScrollingFrame")
+    scrollFrame.Name = "ScrollFrame"
+    scrollFrame.Parent = contentFrame
+    scrollFrame.Size = UDim2.new(1, 0, 1, 0)
+    scrollFrame.BackgroundTransparency = 1
+    scrollFrame.ScrollBarThickness = 8
+    scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 1000)
+    
+    -- UI Layout
+    local listLayout = Instance.new("UIListLayout")
+    listLayout.Parent = scrollFrame
+    listLayout.FillDirection = Enum.FillDirection.Vertical
+    listLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+    listLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+    listLayout.Padding = UDim.new(0, 5)
+    
+    -- Helper function to create sections
+    local function createSection(name)
+        local section = Instance.new("Frame")
+        section.Name = name .. "Section"
+        section.Parent = scrollFrame
+        section.Size = UDim2.new(1, 0, 0, 30)
+        section.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+        section.BorderSizePixel = 0
+        
+        local sectionCorner = Instance.new("UICorner")
+        sectionCorner.CornerRadius = UDim.new(0, 8)
+        sectionCorner.Parent = section
+        
+        local sectionLabel = Instance.new("TextLabel")
+        sectionLabel.Name = "Label"
+        sectionLabel.Parent = section
+        sectionLabel.Size = UDim2.new(1, -10, 1, 0)
+        sectionLabel.Position = UDim2.new(0, 10, 0, 0)
+        sectionLabel.BackgroundTransparency = 1
+        sectionLabel.Text = name
+        sectionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        sectionLabel.Font = Enum.Font.GothamBold
+        sectionLabel.TextScaled = true
+        sectionLabel.TextXAlignment = Enum.TextXAlignment.Left
+        
+        return section
+    end
+    
+    -- Helper function to create toggles
+    local function createToggle(parent, text, callback)
+        local toggleFrame = Instance.new("Frame")
+        toggleFrame.Name = text .. "Toggle"
+        toggleFrame.Parent = parent
+        toggleFrame.Size = UDim2.new(1, 0, 0, 35)
+        toggleFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        toggleFrame.BorderSizePixel = 0
+        
+        local toggleCorner = Instance.new("UICorner")
+        toggleCorner.CornerRadius = UDim.new(0, 6)
+        toggleCorner.Parent = toggleFrame
+        
+        local toggleLabel = Instance.new("TextLabel")
+        toggleLabel.Name = "Label"
+        toggleLabel.Parent = toggleFrame
+        toggleLabel.Size = UDim2.new(1, -60, 1, 0)
+        toggleLabel.Position = UDim2.new(0, 10, 0, 0)
+        toggleLabel.BackgroundTransparency = 1
+        toggleLabel.Text = text
+        toggleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        toggleLabel.Font = Enum.Font.Gotham
+        toggleLabel.TextScaled = true
+        toggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+        
+        local toggleButton = Instance.new("TextButton")
+        toggleButton.Name = "Button"
+        toggleButton.Parent = toggleFrame
+        toggleButton.Size = UDim2.new(0, 40, 0, 25)
+        toggleButton.Position = UDim2.new(1, -45, 0.5, -12.5)
+        toggleButton.BackgroundColor3 = Color3.fromRGB(255, 85, 85)
+        toggleButton.BorderSizePixel = 0
+        toggleButton.Text = "OFF"
+        toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        toggleButton.Font = Enum.Font.GothamBold
+        toggleButton.TextScaled = true
+        
+        local buttonCorner = Instance.new("UICorner")
+        buttonCorner.CornerRadius = UDim.new(0, 4)
+        buttonCorner.Parent = toggleButton
+        
+        local isToggled = false
+        toggleButton.MouseButton1Click:Connect(function()
+            isToggled = not isToggled
+            if isToggled then
+                toggleButton.BackgroundColor3 = Color3.fromRGB(85, 255, 85)
+                toggleButton.Text = "ON"
+            else
+                toggleButton.BackgroundColor3 = Color3.fromRGB(255, 85, 85)
+                toggleButton.Text = "OFF"
+            end
+            if callback then callback(isToggled) end
+        end)
+        
+        return toggleFrame
+    end
+    
+    -- Helper function to create dropdowns
+    local function createDropdown(parent, text, options, callback)
+        local dropdownFrame = Instance.new("Frame")
+        dropdownFrame.Name = text .. "Dropdown"
+        dropdownFrame.Parent = parent
+        dropdownFrame.Size = UDim2.new(1, 0, 0, 35)
+        dropdownFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        dropdownFrame.BorderSizePixel = 0
+        
+        local dropdownCorner = Instance.new("UICorner")
+        dropdownCorner.CornerRadius = UDim.new(0, 6)
+        dropdownCorner.Parent = dropdownFrame
+        
+        local dropdownLabel = Instance.new("TextLabel")
+        dropdownLabel.Name = "Label"
+        dropdownLabel.Parent = dropdownFrame
+        dropdownLabel.Size = UDim2.new(0.5, 0, 1, 0)
+        dropdownLabel.Position = UDim2.new(0, 10, 0, 0)
+        dropdownLabel.BackgroundTransparency = 1
+        dropdownLabel.Text = text
+        dropdownLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        dropdownLabel.Font = Enum.Font.Gotham
+        dropdownLabel.TextScaled = true
+        dropdownLabel.TextXAlignment = Enum.TextXAlignment.Left
+        
+        local dropdownButton = Instance.new("TextButton")
+        dropdownButton.Name = "Button"
+        dropdownButton.Parent = dropdownFrame
+        dropdownButton.Size = UDim2.new(0.5, -15, 0, 25)
+        dropdownButton.Position = UDim2.new(0.5, 0, 0.5, -12.5)
+        dropdownButton.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+        dropdownButton.BorderSizePixel = 0
+        dropdownButton.Text = "Select..."
+        dropdownButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        dropdownButton.Font = Enum.Font.Gotham
+        dropdownButton.TextScaled = true
+        
+        local buttonCorner = Instance.new("UICorner")
+        buttonCorner.CornerRadius = UDim.new(0, 4)
+        buttonCorner.Parent = dropdownButton
+        
+        -- Simple dropdown implementation (you could enhance this)
+        local currentIndex = 1
+        dropdownButton.MouseButton1Click:Connect(function()
+            if options and #options > 0 then
+                currentIndex = currentIndex % #options + 1
+                dropdownButton.Text = options[currentIndex]
+                if callback then callback(options[currentIndex]) end
+            end
+        end)
+        
+        return dropdownFrame
+    end
+    
+    -- Create UI sections and elements
+    
+    -- Main section
+    local mainSection = createSection("Main")
+    
+    -- World selection
+    local worldDropdown = createDropdown(scrollFrame, "Select World", Utils.getWorlds(), function(world)
+        ScriptData.selectedWorld = world
+    end)
+    
+    -- Egg farming toggles
+    local autoEggToggle = createToggle(scrollFrame, "Auto Open Egg", function(state)
+        Toggles.autoEgg = state
+        if state then
+            Toggles.autoEggCurrent = false
+        end
+    end)
+    
+    local autoEggCurrentToggle = createToggle(scrollFrame, "Auto Open Egg (Current World)", function(state)
+        Toggles.autoEggCurrent = state
+        if state then
+            Toggles.autoEgg = false
+        end
+    end)
+    
+    -- Farming section
+    local farmSection = createSection("Farming")
+    
+    local autoFarmToggle = createToggle(scrollFrame, "Auto Farm Selected Mob", function(state)
+        Toggles.autoFarm = state
+    end)
+    
+    local mobDropdown = createDropdown(scrollFrame, "Select Mob", Utils.getMobs(), function(mob)
+        ScriptData.selectedMob = mob
+    end)
+    
+    local autoCollectToggle = createToggle(scrollFrame, "Auto Collect Drops", function(state)
+        Toggles.autoCollect = state
+    end)
+    
+    -- Settings section
+    local settingsSection = createSection("Settings")
+    
+    local antiAfkToggle = createToggle(scrollFrame, "Anti-AFK", function(state)
+        Toggles.antiAfk = state
+        if state then
+            Core.initAntiAfk()
+        elseif ScriptData.connections.antiAfk then
+            ScriptData.connections.antiAfk:Disconnect()
+            ScriptData.connections.antiAfk = nil
+        end
+    end)
+    
+    return screenGui
+end
+
+-- Main loops
+local function initMainLoops()
+    -- Auto egg opening loop
+    ScriptData.connections.autoEgg = Services.RunService.Heartbeat:Connect(function()
+        if ScriptData.disabled then return end
+        
+        if Toggles.autoEgg and ScriptData.selectedWorld then
+            local eggName = ScriptData.selectedWorld .. "Egg"
+            Core.openEgg(eggName, false)
+        elseif Toggles.autoEggCurrent then
+            local currentWorld = Player.World and Player.World.Value
+            if currentWorld then
+                local eggName = currentWorld .. "Egg"
+                Core.openEgg(eggName, false)
+            end
+        end
+        
+        Utils.wait(ScriptData.loopSpeed)
+    end)
+    
+    -- Auto farming loop
+    ScriptData.connections.autoFarm = Services.RunService.Heartbeat:Connect(function()
+        if ScriptData.disabled then return end
+        
+        if Toggles.autoFarm and ScriptData.selectedMob then
+            Core.farmMob(ScriptData.selectedMob)
+        end
+        
+        if Toggles.autoCollect then
+            Core.collectDrops()
+        end
+        
+        Utils.wait(ScriptData.loopSpeed)
+    end)
+end
+
+-- Character handling
+local function onCharacterAdded(char)
+    Character = char
+    HumanoidRootPart = char:WaitForChild("HumanoidRootPart")
+end
+
+Player.CharacterAdded:Connect(onCharacterAdded)
+
+-- Cleanup function
+local function cleanup()
+    ScriptData.disabled = true
+    for name, connection in pairs(ScriptData.connections) do
+        if connection then
+            connection:Disconnect()
+        end
+    end
+    if PlayerGui:FindFirstChild("ImprovedAFSUI") then
+        PlayerGui.ImprovedAFSUI:Destroy()
+    end
+end
+
+-- Player leaving cleanup
+Services.Players.PlayerRemoving:Connect(function(player)
+    if player == Player then
+        cleanup()
+    end
+end)
+
+-- Additional Features from OTIMOS
+local Advanced = {}
+
+function Advanced.autoRaid()
+    if ScriptData.disabled or Player.World.Value ~= "Raid" then return end
+    
+    local raidData = Services.Workspace.Worlds.Raid.RaidData
+    local enemies = Services.Workspace.Worlds.Raid.Enemies
+    
+    for _, enemy in ipairs(enemies:GetChildren()) do
+        if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
+            pcall(function()
+                Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
+                if RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet") then
+                    RemoteEvents.Bindable.SendPet:Fire(enemy, true)
+                end
+            end)
+        end
+    end
+end
+
+function Advanced.autoTrial()
+    if ScriptData.disabled or Player.World.Value ~= "Tower" then return end
+    
+    local enemies = Services.Workspace.Worlds.Tower.Enemies
+    for _, enemy in ipairs(enemies:GetChildren()) do
+        if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
+            pcall(function()
+                Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
+                if RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet") then
+                    RemoteEvents.Bindable.SendPet:Fire(enemy, true)
+                end
+            end)
+        end
+    end
+end
+
+function Advanced.autoQuest()
+    if ScriptData.disabled then return end
+    
+    local currentWorld = Player.World and Player.World.Value
+    if currentWorld then
+        pcall(function()
+            local npc = Services.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
+            if npc then
+                RemoteEvents.Remote:FindFirstChild("StartQuest"):FireServer(npc)
+                RemoteEvents.Remote:FindFirstChild("FinishQuest"):FireServer(npc)
+                RemoteEvents.Remote:FindFirstChild("FinishQuestline"):FireServer(npc)
+            end
+        end)
+    end
+end
+
+-- Enhanced main loops with advanced features
+local function initAdvancedLoops()
+    -- Advanced features loop
+    ScriptData.connections.advanced = Services.RunService.Heartbeat:Connect(function()
+        if ScriptData.disabled then return end
+        
+        if Toggles.autoRaid then
+            Advanced.autoRaid()
+        end
+        
+        if Toggles.autoTrial then
+            Advanced.autoTrial()
+        end
+        
+        if Toggles.autoQuest then
+            Advanced.autoQuest()
+        end
+        
+        if Toggles.autoFuse then
+            Core.autoFuse()
+        end
+        
+        Utils.wait(ScriptData.loopSpeed * 2) -- Slower for advanced features
+    end)
+end
+
+-- Keybind system
+local function initKeybinds()
+    local keybindConnection = Services.UserInputService.InputBegan:Connect(function(input, gameProcessed)
+        if gameProcessed then return end
+        
+        if input.KeyCode == Enum.KeyCode.LeftControl then
+            local ui = PlayerGui:FindFirstChild("ImprovedAFSUI")
+            if ui then
+                ui.Enabled = not ui.Enabled
+            end
+        end
+    end)
+    
+    ScriptData.connections.keybind = keybindConnection
+end
+
+-- Performance optimization
+local function optimizePerformance()
+    -- Disable damage numbers for better performance
+    pcall(function()
+        for _, connection in pairs(getconnections(RemoteEvents.Remote.EnemyDamagedEffect.OnClientEvent)) do
+            connection:Disable()
+        end
+    end)
+    
+    -- Set rendering quality
+    settings().Rendering.QualityLevel = 1
+    
+    -- Disable lighting effects
+    local lighting = game:GetService("Lighting")
+    lighting.GlobalShadows = false
+    lighting.FogEnd = math.huge
+end
+
+-- Initialize
+local function initialize()
+    print("🚀 Loading Enhanced AFS Script...")
+    
+    -- Optimize performance first
+    optimizePerformance()
+    
+    -- Load initial data
+    ScriptData.worlds = Utils.getWorlds()
+    ScriptData.mobs = Utils.getMobs()
+    ScriptData.eggs = Utils.getEggs()
+    
+    -- Create UI
+    local ui = createUI()
+    if not ui then
+        warn("❌ Failed to create UI")
+        return
+    end
+    
+    -- Initialize all loops
+    initMainLoops()
+    initAdvancedLoops()
+    initKeybinds()
+    
+    -- Enable anti-AFK by default
+    Toggles.antiAfk = true
+    Core.initAntiAfk()
+    
+    print("✅ Enhanced AFS Script loaded successfully!")
+    print("📊 Found", #ScriptData.worlds, "worlds,", #ScriptData.mobs, "mobs, and", #ScriptData.eggs, "eggs")
+    print("⌨️  Press Left Ctrl to toggle UI")
+    
+    -- Show success notification
+    task.spawn(function()
+        task.wait(1)
+        if PlayerGui:FindFirstChild("ImprovedAFSUI") then
+            local notification = Instance.new("Frame")
+            notification.Name = "Notification"
+            notification.Parent = PlayerGui.ImprovedAFSUI
+            notification.Size = UDim2.new(0, 350, 0, 80)
+            notification.Position = UDim2.new(0.5, -175, 0, -90)
+            notification.BackgroundColor3 = Color3.fromRGB(46, 204, 113)
+            notification.BorderSizePixel = 0
+            notification.ZIndex = 1000
+            
+            local notificationCorner = Instance.new("UICorner")
+            notificationCorner.CornerRadius = UDim.new(0, 12)
+            notificationCorner.Parent = notification
+            
+            local notificationLabel = Instance.new("TextLabel")
+            notificationLabel.Parent = notification
+            notificationLabel.Size = UDim2.new(1, -20, 0.7, 0)
+            notificationLabel.Position = UDim2.new(0, 10, 0, 5)
+            notificationLabel.BackgroundTransparency = 1
+            notificationLabel.Text = "🎉 Enhanced AFS Script Ready!"
+            notificationLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            notificationLabel.Font = Enum.Font.GothamBold
+            notificationLabel.TextScaled = true
+            
+            local subLabel = Instance.new("TextLabel")
+            subLabel.Parent = notification
+            subLabel.Size = UDim2.new(1, -20, 0.3, 0)
+            subLabel.Position = UDim2.new(0, 10, 0.7, 0)
+            subLabel.BackgroundTransparency = 1
+            subLabel.Text = "Press Left Ctrl to show/hide"
+            subLabel.TextColor3 = Color3.fromRGB(236, 240, 241)
+            subLabel.Font = Enum.Font.Gotham
+            subLabel.TextScaled = true
+            
+            -- Animate notification
+            local slideIn = Services.TweenService:Create(notification, 
+                TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+                {Position = UDim2.new(0.5, -175, 0, 20)}
+            )
+            slideIn:Play()
+            
+            -- Remove after delay
+            task.wait(4)
+            local slideOut = Services.TweenService:Create(notification,
+                TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+                {
+                    Position = UDim2.new(0.5, -175, 0, -90), 
+                    BackgroundTransparency = 1
+                }
+            )
+            
+            Services.TweenService:Create(notificationLabel,
+                TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+                {TextTransparency = 1}
+            ):Play()
+            
+            Services.TweenService:Create(subLabel,
+                TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+                {TextTransparency = 1}
+            ):Play()
+            
+            slideOut:Play()
+            slideOut.Completed:Connect(function()
+                notification:Destroy()
+            end)
+        end
+    end)
+end
+
+-- Start the script
+initialize()
