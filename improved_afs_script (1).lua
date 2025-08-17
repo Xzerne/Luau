@@ -905,3 +905,5 @@ local function initialize()
     print("📊 Found", #ScriptData.worlds, "worlds,", #ScriptData.mobs, "mobs, and", #ScriptData.eggs, "eggs")
     print("⌨️  Press Left Ctrl to minimize/show")
     end
+
+initialize()
