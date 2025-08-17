@@ -1,11 +1,10 @@
--- Enhanced AFS Script with Fluent UI and Distance Farm
--- Place ID Check
+
 local ANIME_FIGHTERS_PLACE_ID = 6299805723
 if game.PlaceId ~= ANIME_FIGHTERS_PLACE_ID then 
     return warn("Wrong game! This script is for Anime Fighters Simulator only.") 
 end
 
--- Services
+
 local Services = {
     ReplicatedStorage = game:GetService("ReplicatedStorage"),
     Players = game:GetService("Players"),
@@ -18,16 +17,16 @@ local Services = {
     HttpService = game:GetService("HttpService")
 }
 
--- Variables
+
 local Player = Services.Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 local PlayerGui = Player.PlayerGui
 
--- Load Fluent UI Library
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
--- Script State
+
 local ScriptData = {
     disabled = false,
     selectedWorld = nil,
@@ -39,6 +38,7 @@ local ScriptData = {
     maxRetries = 3,
     cooldownTime = 0.5,
     lastAction = 0,
+    artiSelected = nil,
     connections = {},
     mobs = {},
     worlds = {},
@@ -46,7 +46,6 @@ local ScriptData = {
     farmingMobs = {}
 }
 
--- Toggle States
 local Toggles = {
     autoEgg = false,
     autoEggCurrent = false,
@@ -458,12 +457,13 @@ local function createFluentUI()
         Main = Window:AddTab({ Title = "Main", Icon = "home" }),
         Farming = Window:AddTab({ Title = "Farming", Icon = "zap" }),
         Advanced = Window:AddTab({ Title = "Advanced", Icon = "settings" }),
+        Arte = Window:AddTab({ Title = "Artifacts", Icon = "" }),
         Misc = Window:AddTab({ Title = "Misc", Icon = "more-horizontal" })
     }
     
     local Options = Fluent.Options
     
-    -- Main Tab
+
     do
         Tabs.Main:AddParagraph({
             Title = "Status",
@@ -564,6 +564,21 @@ local function createFluentUI()
             ScriptData.selectedMob = Value
         end)
         
+        
+      Tabs.Farming:AddButton({
+            Title = "Refresh Mobs",
+            Description = "Update mob list for current world",
+            Callback = function()
+                ScriptData.mobs = Utils.getMobs()
+                Options.MobSelect:SetValues(ScriptData.mobs)
+                Fluent:Notify({
+                    Title = "Updated",
+                    Content = string.format("Found %d mobs in current world", #ScriptData.mobs),
+                    Duration = 3
+                })
+            end
+        })
+        
         local autoFarmToggle = Tabs.Farming:AddToggle("AutoFarm", {
             Title = "Auto Farm Selected Mob",
             Default = false
@@ -614,47 +629,9 @@ local function createFluentUI()
             Toggles.autoCollect = Value
         end)
         
-        Tabs.Farming:AddButton({
-            Title = "Refresh Mobs",
-            Description = "Update mob list for current world",
-            Callback = function()
-                ScriptData.mobs = Utils.getMobs()
-                Options.MobSelect:SetValues(ScriptData.mobs)
-                Fluent:Notify({
-                    Title = "Updated",
-                    Content = string.format("Found %d mobs in current world", #ScriptData.mobs),
-                    Duration = 3
-                })
-            end
-        })
         
-        Tabs.Farming:AddButton({
-            Title = "Show Nearby Mobs",
-            Description = "Show mobs within farm distance",
-            Callback = function()
-                local nearbyMobs = Utils.getMobsInDistance(ScriptData.farmDistance)
-                local mobNames = {}
-                for _, mobData in ipairs(nearbyMobs) do
-                    table.insert(mobNames, string.format("%s (%.0fm)", mobData.name, mobData.distance))
-                end
-                
-                if #mobNames > 0 then
-                    Fluent:Notify({
-                        Title = "Nearby Mobs",
-                        Content = string.format("Found %d mobs: %s", #mobNames, table.concat(mobNames, ", ")),
-                        Duration = 5
-                    })
-                else
-                    Fluent:Notify({
-                        Title = "No Mobs",
-                        Content = "No mobs found within " .. ScriptData.farmDistance .. " studs",
-                        Duration = 3
-                    })
-                end
-            end
-        })
-    end
-    
+        
+        
     -- Advanced Tab
     do
         local autoRaidToggle = Tabs.Advanced:AddToggle("AutoRaid", {
@@ -792,9 +769,49 @@ local function createFluentUI()
     return Window
 end
 
--- Main loops
+
+-- Artifacts tabs
+
+do
+
+function EquipArtifact(artifact)
+    local args = {
+        artifact,
+        "CurrentSecondArtefact"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Remote"):WaitForChild("EquipArtefact"):FireServer(unpack(args))
+end
+
+local arti = {"Drops", "Luck", "Time", "Dungeon", "Dreams"}
+
+local ArtiDropdown = Tabs.Arte:AddDropdown("ArtiDropdown", {
+    Title = "Choose An Artifact To Equip | Slot 2",
+    Values = arti,
+    Multi = false,
+    Default = "",
+})
+
+ArtiDropdown:OnChanged(function(Value)
+    ScriptData.artiSelected = Value
+end)
+
+Tabs.Arte:AddButton({
+    Title = "Equip",
+    Description = "Equip selected artifact",
+    Callback = function()
+        if scriptdata.artiSelected then
+            EquipArtifact(state.artiSelected)
+        else
+            warn("No artifact selected!")
+        end
+    end
+})
+
+
+end
+
+
 local function initMainLoops()
-    -- Auto egg opening loop
     ScriptData.connections.autoEgg = Services.RunService.Heartbeat:Connect(function()
         if ScriptData.disabled then return end
         
@@ -812,7 +829,6 @@ local function initMainLoops()
         Utils.wait(ScriptData.loopSpeed)
     end)
     
-    -- Auto farming loop
     ScriptData.connections.autoFarm = Services.RunService.Heartbeat:Connect(function()
         if ScriptData.disabled then return end
         
@@ -829,7 +845,6 @@ local function initMainLoops()
         Utils.wait(ScriptData.loopSpeed)
     end)
     
-    -- Advanced features loop
     ScriptData.connections.advanced = Services.RunService.Heartbeat:Connect(function()
         if ScriptData.disabled then return end
         
@@ -853,7 +868,6 @@ local function initMainLoops()
     end)
 end
 
--- Character handling
 local function onCharacterAdded(char)
     Character = char
     HumanoidRootPart = char:WaitForChild("HumanoidRootPart")
@@ -861,7 +875,6 @@ end
 
 Player.CharacterAdded:Connect(onCharacterAdded)
 
--- Cleanup function
 local function cleanup()
     ScriptData.disabled = true
     for name, connection in pairs(ScriptData.connections) do
@@ -871,40 +884,132 @@ local function cleanup()
     end
 end
 
--- Player leaving cleanup
 Services.Players.PlayerRemoving:Connect(function(player)
     if player == Player then
         cleanup()
     end
 end)
 
--- Initialize
+
+-- Init
 local function initialize()
     print("🚀 Loading Enhanced AFS Script with Fluent UI...")
     
-    -- Load initial data
     ScriptData.worlds = Utils.getWorlds()
     ScriptData.mobs = Utils.getMobs()
     ScriptData.eggs = Utils.getEggs()
     
-    -- Create Fluent UI
+    
     local ui = createFluentUI()
     if not ui then
         warn("❌ Failed to create UI")
         return
     end
     
-    -- Initialize main loops
+    
     initMainLoops()
     
-    -- Enable anti-AFK by default
+   
     Toggles.antiAfk = true
     Core.initAntiAfk()
     
-    print("✅ Enhanced AFS Script loaded successfully!")
-    print("📊 Found", #ScriptData.worlds, "worlds,", #ScriptData.mobs, "mobs, and", #ScriptData.eggs, "eggs")
-    print("⌨️  Press Left Ctrl to minimize/show")
+   
     end
     
-    
+    -- \\ TOGGLE BUTTON
+local function ToogleButtonV()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "DraggableControlButton"
+    screenGui.Parent = player.PlayerGui
+    screenGui.ResetOnSpawn = false
+    
+    local button = Instance.new("TextButton")
+    button.Name = "ControlButton"
+    button.Parent = screenGui
+    button.Size = UDim2.new(0, 60, 0, 60)
+    button.Position = UDim2.new(0, 100, 0, 100)
+    button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    button.BorderSizePixel = 0
+    button.Text = "•"
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextScaled = true
+    button.Font = Enum.Font.GothamBold
+    button.Active = true
+    button.Draggable = true
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 12)
+    corner.Parent = button
+    
+    local shadow = Instance.new("Frame")
+    shadow.Name = "Shadow"
+    shadow.Parent = button
+    shadow.Size = UDim2.new(1, 4, 1, 4)
+    shadow.Position = UDim2.new(0, 2, 0, 2)
+    shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    shadow.BackgroundTransparency = 0.7
+    shadow.BorderSizePixel = 0
+    shadow.ZIndex = button.ZIndex - 1
+    
+    local shadowCorner = Instance.new("UICorner")
+    shadowCorner.CornerRadius = UDim.new(0, 12)
+    shadowCorner.Parent = shadow
+    
+    local originalSize = button.Size
+    local hoverSize = UDim2.new(0, 65, 0, 65)
+    
+    local hoverTween = tweenService:Create(
+        button,
+        TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {Size = hoverSize, BackgroundColor3 = Color3.fromRGB(55, 55, 55)}
+    )
+    
+    local unhoverTween = tweenService:Create(
+        button,
+        TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {Size = originalSize, BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
+    )
+    
+    button.MouseEnter:Connect(function()
+        hoverTween:Play()
+    end)
+    
+    button.MouseLeave:Connect(function()
+        unhoverTween:Play()
+    end)
+    
+    local clickTween = tweenService:Create(
+        button,
+        TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {Size = UDim2.new(0, 55, 0, 55), BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
+    )
+    
+    local unclickTween = tweenService:Create(
+        button,
+        TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+        {Size = originalSize, BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
+    )
+    
+    button.MouseButton1Click:Connect(function()
+        clickTween:Play()
+        
+        pcall(function()
+            virtualInputManager:SendKeyEvent(true, Enum.KeyCode.LeftControl, false, game)
+            task.wait(0.05)
+            virtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
+        end)
+        
+        button.Text = "Erm"
+        task.wait(0.1)
+        button.Text = "Nuh"
+        
+        unclickTween:Play()
+    end)
+    
+    button.ZIndex = 999
+    shadow.ZIndex = 998
+    
+    return screenGui
+end
+
     initialize()
