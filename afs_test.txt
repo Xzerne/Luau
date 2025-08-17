@@ -3,7 +3,7 @@ if game.PlaceId ~= ANIME_FIGHTERS_PLACE_ID then
     return warn("Wrong game! This script is for Anime Fighters Simulator only.") 
 end
 
-local Services = {
+local fuckingasshelldammit = {
     ReplicatedStorage = game:GetService("ReplicatedStorage"),
     Players = game:GetService("Players"),
     RunService = game:GetService("RunService"),
@@ -15,18 +15,18 @@ local Services = {
     HttpService = game:GetService("HttpService")
 }
 
-local player = Services.Players.LocalPlayer
-local tweenService = Services.TweenService
-local virtualInputManager = Services.VirtualInputManager
+local player = fuckingasshelldammit.Players.LocalPlayer
+local tweenService = fuckingasshelldammit.TweenService
+local virtualInputManager = fuckingasshelldammit.VirtualInputManager
 
-local Player = Services.Players.LocalPlayer
+local Player = fuckingasshelldammit.Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 local PlayerGui = Player.PlayerGui
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
-local ScriptData = {
+local fuckingdata = {
     disabled = false,
     selectedWorld = nil,
     selectedMob = nil,
@@ -61,13 +61,13 @@ local Toggles = {
     hidePets = false
 }
 
--- Remote/Bindable References
+
 local RemoteEvents = {
-    Remote = Services.ReplicatedStorage:WaitForChild("Remote"),
-    Bindable = Services.ReplicatedStorage:WaitForChild("Bindable", 5)
+    Remote = fuckingasshelldammit.ReplicatedStorage:WaitForChild("Remote"),
+    Bindable = fuckingasshelldammit.ReplicatedStorage:WaitForChild("Bindable", 5)
 }
 
--- Module Requirements (with error handling)
+
 local Modules = {}
 local function safeRequire(path, name)
     local success, result = pcall(function()
@@ -80,9 +80,8 @@ local function safeRequire(path, name)
     end
 end
 
--- Load essential modules
-if Services.ReplicatedStorage:FindFirstChild("ModuleScripts") then
-    local moduleScripts = Services.ReplicatedStorage.ModuleScripts
+if fuckingasshelldammit.ReplicatedStorage:FindFirstChild("ModuleScripts") then
+    local moduleScripts = fuckingasshelldammit.ReplicatedStorage.ModuleScripts
     safeRequire(moduleScripts:FindFirstChild("StatCalc"), "StatCalc")
     safeRequire(moduleScripts:FindFirstChild("NumToString"), "NumToString")
     safeRequire(moduleScripts:FindFirstChild("PetStats"), "PetStats")
@@ -92,22 +91,22 @@ if Services.ReplicatedStorage:FindFirstChild("ModuleScripts") then
     safeRequire(moduleScripts:FindFirstChild("LocalDairebStore"), "LocalDairebStore")
 end
 
--- Utility Functions
+
 local Utils = {}
 
 function Utils.wait(duration)
     local startTime = tick()
-    while tick() - startTime < duration and Services.RunService.Heartbeat:Wait() do end
+    while tick() - startTime < duration and fuckingasshelldammit.RunService.Heartbeat:Wait() do end
 end
 
 function Utils.teleportToPosition(targetCFrame)
     if not targetCFrame then return false end
     
     local currentTime = tick()
-    if currentTime - ScriptData.lastAction < ScriptData.cooldownTime then 
+    if currentTime - fuckingdata.lastAction < fuckingdata.cooldownTime then 
         return false 
     end
-    ScriptData.lastAction = currentTime
+    fuckingdata.lastAction = currentTime
     
     local distance = (HumanoidRootPart.Position - targetCFrame.Position).Magnitude
     if distance < 10 then return true end
@@ -122,7 +121,7 @@ end
 
 function Utils.getWorlds()
     local worldList = {}
-    local worldsFolder = Services.Workspace:FindFirstChild("Worlds")
+    local worldsFolder = fuckingasshelldammit.Workspace:FindFirstChild("Worlds")
     if worldsFolder then
         for _, world in ipairs(worldsFolder:GetChildren()) do
             if world:IsA("Model") or world:IsA("Folder") then
@@ -138,7 +137,7 @@ function Utils.getMobs()
     local mobList = {}
     local currentWorld = Player.World and Player.World.Value
     if currentWorld then
-        local worldFolder = Services.Workspace.Worlds:FindFirstChild(currentWorld)
+        local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
         if worldFolder and worldFolder:FindFirstChild("Enemies") then
             for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
                 local displayName = enemy:FindFirstChild("DisplayName")
@@ -156,7 +155,7 @@ function Utils.getMobsInDistance(distance)
     local currentWorld = Player.World and Player.World.Value
     if not currentWorld or not HumanoidRootPart then return mobsInRange end
     
-    local worldFolder = Services.Workspace.Worlds:FindFirstChild(currentWorld)
+    local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
     if worldFolder and worldFolder:FindFirstChild("Enemies") then
         for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
             local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
@@ -218,20 +217,20 @@ function Utils.equipArtifact(artifactName)
     return success
 end
 
--- Core Functions
-local Core = {}
+-- fuckass Functions
+local fuckass = {}
 
-function Core.openEgg(eggName, teleport)
-    if ScriptData.disabled then return false end
+function fuckass.openEgg(eggName, teleport)
+    if fuckingdata.disabled then return false end
     
     local attempts = 0
     local success = false
     
-    while attempts < ScriptData.maxRetries and not success do
+    while attempts < fuckingdata.maxRetries and not success do
         local openSuccess, result = pcall(function()
             -- Find egg and teleport if needed
             if teleport and eggName then
-                local eggModel = Services.Workspace.Worlds:FindFirstChild(eggName .. "Egg")
+                local eggModel = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(eggName .. "Egg")
                 if eggModel and Utils.teleportToPosition(eggModel:GetPivot()) then
                     Utils.wait(0.3)
                 end
@@ -250,7 +249,7 @@ function Core.openEgg(eggName, teleport)
             success = true
         else
             attempts = attempts + 1
-            if attempts < ScriptData.maxRetries then
+            if attempts < fuckingdata.maxRetries then
                 Utils.wait(0.1)
             end
         end
@@ -259,13 +258,13 @@ function Core.openEgg(eggName, teleport)
     return success
 end
 
-function Core.farmMob(mobName)
-    if ScriptData.disabled then return false end
+function fuckass.fuckhomies(mobName)
+    if fuckingdata.disabled then return false end
     
     local currentWorld = Player.World and Player.World.Value
     if not currentWorld then return false end
     
-    local worldFolder = Services.Workspace.Worlds:FindFirstChild(currentWorld)
+    local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
     if not worldFolder then return false end
     
     local enemies = worldFolder:FindFirstChild("Enemies")
@@ -277,10 +276,8 @@ function Core.farmMob(mobName)
         local attackers = enemy:FindFirstChild("Attackers")
         
         if displayName and displayName.Value == mobName and humanoidRootPart and attackers then
-            -- Move to enemy
             Utils.teleportToPosition(humanoidRootPart.CFrame)
             
-            -- Send pets to attack
             local success, result = pcall(function()
                 if RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet") then
                     RemoteEvents.Bindable.SendPet:Fire(enemy, true)
@@ -294,13 +291,13 @@ function Core.farmMob(mobName)
     return false
 end
 
-function Core.farmAllMobsInDistance()
-    if ScriptData.disabled or not Toggles.autoFarmDistance then return end
+function fuckass.homiesshitarroundhere()
+    if fuckingdata.disabled or not Toggles.autoFarmDistance then return end
     
-    local mobsInRange = Utils.getMobsInDistance(ScriptData.farmDistance)
+    local mobsInRange = Utils.getMobsInDistance(fuckingdata.farmDistance)
     
     for _, mobData in ipairs(mobsInRange) do
-        if not Toggles.autoFarmDistance or ScriptData.disabled then break end
+        if not Toggles.autoFarmDistance or fuckingdata.disabled then break end
         
         local enemy = mobData.enemy
         local success, result = pcall(function()
@@ -311,17 +308,16 @@ function Core.farmAllMobsInDistance()
         end)
         
         if success then
-            -- Add to farming list for tracking
-            ScriptData.farmingMobs[enemy] = true
+            fuckingdata.farmingMobs[enemy] = true
         end
     end
 end
 
-function Core.collectDrops()
-    if ScriptData.disabled then return end
+function fuckass.collectDrops()
+    if fuckingdata.disabled then return end
     
     pcall(function()
-        local effects = Services.Workspace:FindFirstChild("Effects")
+        local effects = fuckingasshelldammit.Workspace:FindFirstChild("Effects")
         if effects then
             for _, effect in ipairs(effects:GetDescendants()) do
                 if effect.Name == "Base" and effect:IsA("BasePart") then
@@ -332,16 +328,15 @@ function Core.collectDrops()
     end)
 end
 
-function Core.autoFuse()
-    if ScriptData.disabled or not ScriptData.selectedFuse then return false end
+function fuckass.autoFuse()
+    if fuckingdata.disabled or not fuckingdata.selectedFuse then return false end
     
     local pets = Utils.getPets()
     local petToFuse = nil
     local fuseablePets = {}
     
-    -- Find the selected pet to fuse into
     for _, pet in pairs(pets) do
-        if tostring(pet.UID) == ScriptData.selectedFuse then
+        if tostring(pet.UID) == fuckingdata.selectedFuse then
             petToFuse = pet.UID
             break
         end
@@ -349,7 +344,6 @@ function Core.autoFuse()
     
     if not petToFuse then return false end
     
-    -- Get fuseable pets (exclude equipped pets and special rarities)
     local equippedPets = {}
     for _, petObj in ipairs(Player.Pets:GetChildren()) do
         if petObj.Value and petObj.Value.Data and petObj.Value.Data.UID then
@@ -359,7 +353,6 @@ function Core.autoFuse()
     
     for _, pet in pairs(pets) do
         if not equippedPets[pet.UID] and pet.UID ~= petToFuse then
-            -- Add logic to exclude special rarities if needed
             table.insert(fuseablePets, pet.UID)
         end
     end
@@ -376,23 +369,23 @@ function Core.autoFuse()
 end
 
 -- Anti-AFK
-function Core.initAntiAfk()
-    if ScriptData.connections.antiAfk then return end
+function fuckass.initAntiAfk()
+    if fuckingdata.connections.antiAfk then return end
     
-    ScriptData.connections.antiAfk = Player.Idled:Connect(function()
-        Services.VirtualUser:Button2Down(Vector2.new(0, 0), Services.Workspace.CurrentCamera.CFrame)
+    fuckingdata.connections.antiAfk = Player.Idled:Connect(function()
+        fuckingasshelldammit.VirtualUser:Button2Down(Vector2.new(0, 0), fuckingasshelldammit.Workspace.CurrentCamera.CFrame)
         task.wait(1)
-        Services.VirtualUser:Button2Up(Vector2.new(0, 0), Services.Workspace.CurrentCamera.CFrame)
+        fuckingasshelldammit.VirtualUser:Button2Up(Vector2.new(0, 0), fuckingasshelldammit.Workspace.CurrentCamera.CFrame)
     end)
 end
 
--- Additional Features from OTIMOS
+
 local Advanced = {}
 
 function Advanced.autoRaid()
-    if ScriptData.disabled or Player.World.Value ~= "Raid" then return end
+    if fuckingdata.disabled or Player.World.Value ~= "Raid" then return end
     
-    local enemies = Services.Workspace.Worlds.Raid.Enemies
+    local enemies = fuckingasshelldammit.Workspace.Worlds.Raid.Enemies
     
     for _, enemy in ipairs(enemies:GetChildren()) do
         if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
@@ -407,9 +400,9 @@ function Advanced.autoRaid()
 end
 
 function Advanced.autoTrial()
-    if ScriptData.disabled or Player.World.Value ~= "Tower" then return end
+    if fuckingdata.disabled or Player.World.Value ~= "Tower" then return end
     
-    local enemies = Services.Workspace.Worlds.Tower.Enemies
+    local enemies = fuckingasshelldammit.Workspace.Worlds.Tower.Enemies
     for _, enemy in ipairs(enemies:GetChildren()) do
         if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
             pcall(function()
@@ -423,12 +416,12 @@ function Advanced.autoTrial()
 end
 
 function Advanced.autoQuest()
-    if ScriptData.disabled then return end
+    if fuckingdata.disabled then return end
     
     local currentWorld = Player.World and Player.World.Value
     if currentWorld then
         pcall(function()
-            local npc = Services.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
+            local npc = fuckingasshelldammit.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
             if npc then
                 RemoteEvents.Remote:FindFirstChild("StartQuest"):FireServer(npc)
                 RemoteEvents.Remote:FindFirstChild("FinishQuest"):FireServer(npc)
@@ -459,10 +452,10 @@ local function createFluentUI()
         MinimizeKey = Enum.KeyCode.LeftControl
     })
     
-    -- Create Tabs
+    -- Tabs
     local Tabs = {
-        Main = Window:AddTab({ Title = "Main", Icon = "home" }),
         Farming = Window:AddTab({ Title = "Farming", Icon = "zap" }),
+        Main = Window:AddTab({ Title = "Eggs", Icon = "home" }),
         Advanced = Window:AddTab({ Title = "Advanced", Icon = "settings" }),
         Arte = Window:AddTab({ Title = "Artifacts", Icon = "star" }),
         Misc = Window:AddTab({ Title = "Misc", Icon = "more-horizontal" })
@@ -472,10 +465,7 @@ local function createFluentUI()
     
     -- Main Tab
     do
-        Tabs.Main:AddParagraph({
-            Title = "Status",
-            Content = "Script loaded successfully! Ready to farm."
-        })
+        
         
         local worldDropdown = Tabs.Main:AddDropdown("WorldSelect", {
             Title = "Select World",
@@ -485,7 +475,7 @@ local function createFluentUI()
         })
         
         worldDropdown:OnChanged(function(Value)
-            ScriptData.selectedWorld = Value
+            fuckingdata.selectedWorld = Value
         end)
         
         local autoEggToggle = Tabs.Main:AddToggle("AutoEgg", {
@@ -514,36 +504,24 @@ local function createFluentUI()
             end
         end)
         
-        Tabs.Main:AddButton({
-            Title = "Refresh Worlds",
-            Description = "Update world list",
-            Callback = function()
-                ScriptData.worlds = Utils.getWorlds()
-                Options.WorldSelect:SetValues(ScriptData.worlds)
-                Fluent:Notify({
-                    Title = "Updated",
-                    Content = "World list refreshed!",
-                    Duration = 3
-                })
-            end
-        })
+       
         
         Tabs.Main:AddButton({
             Title = "TP to Selected World",
             Description = "Teleport to selected world",
             Callback = function()
-                if ScriptData.selectedWorld and ScriptData.selectedWorld ~= "" then
+                if fuckingdata.selectedWorld and fuckingdata.selectedWorld ~= "" then
                     local success, result = pcall(function()
-                        RemoteEvents.Remote.AttemptTravel:InvokeServer(ScriptData.selectedWorld)
-                        if Services.Workspace.Worlds:FindFirstChild(ScriptData.selectedWorld) then
-                            local spawn = Services.Workspace.Worlds[ScriptData.selectedWorld].Spawns.SpawnLocation
+                        RemoteEvents.Remote.AttemptTravel:InvokeServer(fuckingdata.selectedWorld)
+                        if fuckingasshelldammit.Workspace.Worlds:FindFirstChild(fuckingdata.selectedWorld) then
+                            local spawn = fuckingasshelldammit.Workspace.Worlds[fuckingdata.selectedWorld].Spawns.SpawnLocation
                             HumanoidRootPart.CFrame = spawn.CFrame + Vector3.new(0, 5, 0)
                         end
                     end)
                     if success then
                         Fluent:Notify({
                             Title = "Success",
-                            Content = "Teleported to " .. ScriptData.selectedWorld,
+                            Content = "Teleported to " .. fuckingdata.selectedWorld,
                             Duration = 3
                         })
                     end
@@ -568,18 +546,18 @@ local function createFluentUI()
         })
         
         mobDropdown:OnChanged(function(Value)
-            ScriptData.selectedMob = Value
+            fuckingdata.selectedMob = Value
         end)
         
         Tabs.Farming:AddButton({
             Title = "Refresh Mobs",
             Description = "Update mob list for current world",
             Callback = function()
-                ScriptData.mobs = Utils.getMobs()
-                Options.MobSelect:SetValues(ScriptData.mobs)
+                fuckingdata.mobs = Utils.getMobs()
+                Options.MobSelect:SetValues(fuckingdata.mobs)
                 Fluent:Notify({
                     Title = "Updated",
-                    Content = string.format("Found %d mobs in current world", #ScriptData.mobs),
+                    Content = string.format("Found %d mobs in current world", #fuckingdata.mobs),
                     Duration = 3
                 })
             end
@@ -598,18 +576,17 @@ local function createFluentUI()
             end
         end)
         
-        -- New Distance Farm Feature
         local farmDistanceSlider = Tabs.Farming:AddSlider("FarmDistance", {
             Title = "Farm Distance",
             Description = "Distance to farm mobs around you",
-            Default = 100,
+            Default = 200,
             Min = 50,
             Max = 500,
             Rounding = 0
         })
         
         farmDistanceSlider:OnChanged(function(Value)
-            ScriptData.farmDistance = Value
+            fuckingdata.farmDistance = Value
         end)
         
         local autoFarmDistanceToggle = Tabs.Farming:AddToggle("AutoFarmDistance", {
@@ -684,11 +661,11 @@ local function createFluentUI()
         })
         
         loopSpeedSlider:OnChanged(function(Value)
-            ScriptData.loopSpeed = Value
+            fuckingdata.loopSpeed = Value
         end)
         
         Tabs.Advanced:AddButton({
-            Title = "Emergency Stop",
+            Title = "Stop all",
             Description = "Stop all farming activities",
             Callback = function()
                 for key, _ in pairs(Toggles) do
@@ -705,8 +682,8 @@ local function createFluentUI()
                 end
                 
                 Fluent:Notify({
-                    Title = "Emergency Stop",
-                    Content = "All activities stopped!",
+                    Title = "Stopped",
+                    Content = "All actions stopped",
                     Duration = 3
                 })
             end
@@ -725,24 +702,24 @@ local function createFluentUI()
         })
         
         ArtiDropdown:OnChanged(function(Value)
-            ScriptData.artiSelected = Value
+            fuckingdata.artiSelected = Value
         end)
         
         Tabs.Arte:AddButton({
             Title = "Equip",
             Description = "Equip selected artifact",
             Callback = function()
-                if ScriptData.artiSelected then
-                    EquipArtifact(ScriptData.artiSelected)
+                if fuckingdata.artiSelected then
+                    EquipArtifact(fuckingdata.artiSelected)
                     Fluent:Notify({
                         Title = "Success",
-                        Content = "Equipped " .. ScriptData.artiSelected,
+                        Content = "Equipped " .. fuckingdata.artiSelected,
                         Duration = 3
                     })
                 else
                     Fluent:Notify({
                         Title = "Error",
-                        Content = "No artifact selected!",
+                        Content = "No artifact selected",
                         Duration = 3
                     })
                 end
@@ -760,10 +737,10 @@ local function createFluentUI()
         antiAfkToggle:OnChanged(function(Value)
             Toggles.antiAfk = Value
             if Value then
-                Core.initAntiAfk()
-            elseif ScriptData.connections.antiAfk then
-                ScriptData.connections.antiAfk:Disconnect()
-                ScriptData.connections.antiAfk = nil
+                fuckass.initAntiAfk()
+            elseif fuckingdata.connections.antiAfk then
+                fuckingdata.connections.antiAfk:Disconnect()
+                fuckingdata.connections.antiAfk = nil
             end
         end)
         
@@ -772,16 +749,13 @@ local function createFluentUI()
             Description = "Optimize game performance",
             Callback = function()
                 pcall(function()
-                    -- Optimize rendering
                     settings().Rendering.QualityLevel = 1
                     
-                    -- Disable lighting effects
                     local lighting = game:GetService("Lighting")
                     lighting.GlobalShadows = false
                     lighting.FogEnd = math.huge
                     
-                    -- Optimize terrain
-                    local terrain = Services.Workspace:FindFirstChildOfClass('Terrain')
+                    local terrain = fuckingasshelldammit.Workspace:FindFirstChildOfClass('Terrain')
                     if terrain then
                         terrain.WaterWaveSize = 0
                         terrain.WaterWaveSpeed = 0
@@ -792,7 +766,7 @@ local function createFluentUI()
                 
                 Fluent:Notify({
                     Title = "FPS Boost",
-                    Content = "Performance optimizations applied!",
+                    Content = ".",
                     Duration = 3
                 })
             end
@@ -810,7 +784,6 @@ local function createFluentUI()
     return Window
 end
 
--- Toggle Button
 local function ToogleButtonV()
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "DraggableControlButton"
@@ -906,42 +879,42 @@ local function ToogleButtonV()
     return screenGui
 end
 
-local function initMainLoops()
-    ScriptData.connections.autoEgg = Services.RunService.Heartbeat:Connect(function()
-        if ScriptData.disabled then return end
+local function holdashit()
+    fuckingdata.connections.autoEgg = fuckingasshelldammit.RunService.Heartbeat:Connect(function()
+        if fuckingdata.disabled then return end
         
-        if Toggles.autoEgg and ScriptData.selectedWorld then
-            local eggName = ScriptData.selectedWorld .. "Egg"
-            Core.openEgg(eggName, false)
+        if Toggles.autoEgg and fuckingdata.selectedWorld then
+            local eggName = fuckingdata.selectedWorld .. "Egg"
+            fuckass.openEgg(eggName, false)
         elseif Toggles.autoEggCurrent then
             local currentWorld = Player.World and Player.World.Value
             if currentWorld then
                 local eggName = currentWorld .. "Egg"
-                Core.openEgg(eggName, false)
+                fuckass.openEgg(eggName, false)
             end
         end
         
-        Utils.wait(ScriptData.loopSpeed)
+        Utils.wait(fuckingdata.loopSpeed)
     end)
     
-    ScriptData.connections.autoFarm = Services.RunService.Heartbeat:Connect(function()
-        if ScriptData.disabled then return end
+    fuckingdata.connections.autoFarm = fuckingasshelldammit.RunService.Heartbeat:Connect(function()
+        if fuckingdata.disabled then return end
         
-        if Toggles.autoFarm and ScriptData.selectedMob then
-            Core.farmMob(ScriptData.selectedMob)
+        if Toggles.autoFarm and fuckingdata.selectedMob then
+            fuckass.fuckhomies(fuckingdata.selectedMob)
         elseif Toggles.autoFarmDistance then
-            Core.farmAllMobsInDistance()
+            fuckass.homiesshitarroundhere()
         end
         
         if Toggles.autoCollect then
-            Core.collectDrops()
+            fuckass.collectDrops()
         end
         
-        Utils.wait(ScriptData.loopSpeed)
+        Utils.wait(fuckingdata.loopSpeed)
     end)
     
-    ScriptData.connections.advanced = Services.RunService.Heartbeat:Connect(function()
-        if ScriptData.disabled then return end
+    fuckingdata.connections.advanced = fuckingasshelldammit.RunService.Heartbeat:Connect(function()
+        if fuckingdata.disabled then return end
         
         if Toggles.autoRaid then
             Advanced.autoRaid()
@@ -956,10 +929,10 @@ local function initMainLoops()
         end
         
         if Toggles.autoFuse then
-            Core.autoFuse()
+            fuckass.autoFuse()
         end
         
-        Utils.wait(ScriptData.loopSpeed * 2) -- Slower for advanced features
+        Utils.wait(fuckingdata.loopSpeed * 2)
     end)
 end
 
@@ -970,46 +943,45 @@ end
 
 Player.CharacterAdded:Connect(onCharacterAdded)
 
-local function cleanup()
-    ScriptData.disabled = true
-    for name, connection in pairs(ScriptData.connections) do
+local function clearthefuckup()
+    fuckingdata.disabled = true
+    for name, connection in pairs(fuckingdata.connections) do
         if connection then
             connection:Disconnect()
         end
     end
 end
 
-Services.Players.PlayerRemoving:Connect(function(player)
+fuckingasshelldammit.Players.PlayerRemoving:Connect(function(player)
     if player == Player then
-        cleanup()
+        clearthefuckup()
     end
 end)
 
--- Initialize
+-- Init 
 local function initialize()
-    print("🚀 Loading Enhanced AFS Script with Fluent UI...")
+    print("Loading")
     
-    ScriptData.worlds = Utils.getWorlds()
-    ScriptData.mobs = Utils.getMobs()
-    ScriptData.eggs = Utils.getEggs()
+    fuckingdata.worlds = Utils.getWorlds()
+    fuckingdata.mobs = Utils.getMobs()
+    fuckingdata.eggs = Utils.getEggs()
     
     local ui = createFluentUI()
     if not ui then
-        warn("❌ Failed to create UI")
+        warn("Failed to load UI")
         return
     end
     
-    initMainLoops()
+    holdashit()
     
-    -- Enable anti-afk by default
     Toggles.antiAfk = true
-    Core.initAntiAfk()
-    
-    -- Create toggle button
+    fuckass.initAntiAfk()
+   
     ToogleButtonV()
     
-    print("✅ Enhanced AFS Script loaded successfully!")
+    print("script loaded")
 end
 
--- Start the script
 initialize()
+
+-- fucking auto farm function at 261
