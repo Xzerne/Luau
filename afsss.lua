@@ -59,7 +59,7 @@ local Toggles = {
     autoFarm = false,
     autoFarmAll = false,
     autoFarmDistance = false,
-    autoCollect = false,
+    autoCollect = true,
     autoRaid = false,
     autoTrial = false,
     autoDefense = false,
@@ -986,6 +986,8 @@ local function createFluentUI()
             Toggles.autoCollect = Value
         end)
     end
+    
+   
     
     -- Advanced Tab
     do
