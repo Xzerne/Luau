@@ -446,26 +446,34 @@ end
 
 function QuestTracker.getCurrentQuestInfo()
     local success, result = pcall(function()
-        local questUI = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MainGui")
+        local questUI = PlayerGui:FindFirstChild("MainGui")
         if not questUI then return nil end
-        
+
         local quest = questUI:FindFirstChild("Quest")
         if not quest then return nil end
-        
+
         local objectives = quest:FindFirstChild("Objectives")
         if not objectives then return nil end
-        
+
         local questText = objectives:FindFirstChild("QuestText")
         if not questText then return nil end
-        
-        local contentText = questText:FindFirstChild("ContentText")
-        if not contentText then return nil end
-        
-        return contentText.Text
-    end)
+
     
+        if questText:IsA("TextLabel") and questText.ContentText then
+            return questText.ContentText
+        end
+
+        local contentText = questText:FindFirstChild("ContentText")
+        if contentText and contentText:IsA("TextLabel") then
+            return contentText.ContentText
+        end
+
+        return nil
+    end)
+
     return success and result or nil
 end
+
 
 function QuestTracker.findTargetMob(mobName)
     if not mobName then return nil end
