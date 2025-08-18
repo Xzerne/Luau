@@ -586,10 +586,15 @@ function Advanced.autoTrial()
     local towerWorld = fuckingasshelldammit and fuckingasshelldammit.Workspace:FindFirstChild("Worlds") and fuckingasshelldammit.Workspace.Worlds:FindFirstChild("Tower")
     if not towerWorld then return end
 
+    local char = Players.LocalPlayer.Character or Players.LocalPlayer.CharacterAdded:Wait()
+    local hrp = char:WaitForChild("HumanoidRootPart")
+
     while Player.World.Value == "Tower" and not fuckingdata.disabled do
         local enemies = towerWorld:FindFirstChild("Enemies")
-        if enemies and #enemies:GetChildren() > 0 then
-            for _, enemy in ipairs(enemies:GetChildren()) do
+        local enemyList = enemies and enemies:GetChildren() or {}
+
+        if #enemyList > 0 then
+            for _, enemy in ipairs(enemyList) do
                 if enemy and enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
                     pcall(function()
                         if Utils and Utils.teleportToPosition then
@@ -606,16 +611,33 @@ function Advanced.autoTrial()
         else
             local map = towerWorld:FindFirstChild("Map")
             if map then
-                local confirmPart = map:FindFirstChild("ConfirmPart")
-                if confirmPart and confirmPart:FindFirstChildOfClass("ProximityPrompt") then
-                    local prompt = confirmPart:FindFirstChildOfClass("ProximityPrompt")
+                local nearestConfirmPart = nil
+                local shortestDistance = math.huge
+
+                for _, part in ipairs(map:GetChildren()) do
+                    local confirmPart = part:FindFirstChild("ConfirmPart", true)
+                    if confirmPart and confirmPart:IsA("BasePart") then
+                        local dist = (confirmPart.Position - hrp.Position).Magnitude
+                        if dist < shortestDistance then
+                            shortestDistance = dist
+                            nearestConfirmPart = confirmPart
+                        end
+                    end
+                end
+                if nearestConfirmPart and nearestConfirmPart:FindFirstChildOfClass("ProximityPrompt") then
+                    local prompt = nearestConfirmPart:FindFirstChildOfClass("ProximityPrompt")
                     pcall(function()
-                        local FirePrompt = fireproximityprompt or (prompt and function(p) p:InputHoldBegin(); task.wait(p.HoldDuration); p:InputHoldEnd() end)
+                        local FirePrompt = fireproximityprompt or (prompt and function(p)
+                            p:InputHoldBegin()
+                            task.wait(p.HoldDuration)
+                            p:InputHoldEnd()
+                        end)
                         FirePrompt(prompt)
                     end)
                 end
             end
         end
+
         task.wait(0.1)
     end
 end
