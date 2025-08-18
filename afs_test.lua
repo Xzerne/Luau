@@ -438,7 +438,7 @@ function QuestTracker.parseQuestText(questText)
     local killed, required, mobName = string.match(questText, pattern)
     
     if killed and required and mobName then
-        return mobName:trim(), tonumber(killed), tonumber(required)
+        return trim(mobName), tonumber(killed), tonumber(required)        
     end
     
     return nil, 0, 0
@@ -679,10 +679,9 @@ function Advanced.enhancedAutoQuest()
     end
 end
 
-if not string.trim then
-    function string.trim(s)
-        return s:match'^()%s*$' and '' or s:match'^%s*(.*%S)'
-    end
+
+local function trim(s)
+    return s:match("^()%s*$") and "" or s:match("^%s*(.-)%s*$")
 end
 
 
