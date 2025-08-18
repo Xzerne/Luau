@@ -1,0 +1,1332 @@
+-- Advanced Anti-Debug Protection System
+local _anti_debug_key = "4wyiu014znp"
+local _start_time = tick()
+local _check_interval = 2.91624689812485
+
+local _que43254_0 = 880
+local _a045sx8o_1 = 526
+local _eg6tlcfm_2 = 714
+local _n2kl6u45_3 = "1ilr08mq8u"
+local _f0ywecm2_4 = "hpmjifslfo"
+local _oq9e8xfz_5 = "979n4l6i5q"
+local _j4pzngxf_6 = "ngudzo5h2u"
+local _ijyc7uww_7 = 106
+local _9mls0p89_8 = 313
+local _qsodx351_9 = 792
+local _4cv9iio0_10 = 128
+local _9x0a5lyt_11 = 143
+local _ejx7mqo5_12 = 105
+local _ujeiowbd_13 = 129
+local _10ij626e_14 = 754
+local function _func_gj3syg(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _que43254_0 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 48
+end
+local function _func_b949uc(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _a045sx8o_1 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 58
+end
+local function _func_lcomvf(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _eg6tlcfm_2 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 82
+end
+local function _func_3lpnvi(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _n2kl6u45_3 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 13
+end
+local function _func_jmlke7(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _f0ywecm2_4 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 92
+end
+local function _func_g2b257(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _oq9e8xfz_5 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 46
+end
+local function _func_xgl3cy(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _j4pzngxf_6 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 29
+end
+local function _func_3xc7jm(_que43254_0, _a045sx8o_1, _eg6tlcfm_2)
+    local _temp = _ijyc7uww_7 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 57
+end
+if _que43254_0 == 847 then
+    local _dummy = "la6ab7mbkd"
+    -- r4fzt3k6om8
+end
+if _a045sx8o_1 == 987 then
+    local _dummy = "qy8oxkc1lc"
+    -- ajumg0myfdi
+end
+if _eg6tlcfm_2 == 322 then
+    local _dummy = "f5mgyargxqj"
+    -- i078noh7alk
+end
+if _n2kl6u45_3 == 259 then
+    local _dummy = "roksxirobsg"
+    -- ctar2duur14
+end
+if _f0ywecm2_4 == 718 then
+    local _dummy = "hvy1e02pvma"
+    -- 1482cwnc3ry
+end
+
+local function _anti_debug_n86282()
+    local current_time = tick()
+    local elapsed = current_time - _start_time
+    
+    if elapsed > _check_interval * 2 then
+        error("Timing anomaly: " .. elapsed)
+    end
+    
+    local level = 1
+    local stack_depth = 0
+    while debug.getinfo(level) do
+        stack_depth = stack_depth + 1
+        level = level + 1
+        if stack_depth > 50 then
+            error("Stack depth anomaly: " .. stack_depth)
+        end
+    end
+    
+    local original_print = print
+    if print ~= original_print then
+        error("Function hook detected")
+    end
+    
+    local env_check = {
+        game = game,
+        workspace = workspace,
+        script = script
+    }
+    
+    for name, value in pairs(env_check) do
+        if not value then
+            error("Environment tampering: " .. name)
+        end
+    end
+    
+    local memory_pattern = {}
+    for i = 1, 10 do
+        memory_pattern[i] = math.random(1000000)
+    end
+    
+    local pattern_sum = 0
+    for i = 1, #memory_pattern do
+        pattern_sum = pattern_sum + memory_pattern[i]
+    end
+    
+    if pattern_sum == 0 then
+        error("Memory pattern corrupted")
+    end
+    
+    return true
+end
+
+_anti_debug_m46tnu()
+
+spawn(function()
+    while true do
+        wait(_check_interval)
+        _anti_debug_bspzwu()
+        _check_interval = math.random() * 3 + 0.5
+    end
+end)
+
+-- Advanced Roblox VM Protection System v2.0
+local _vm_key_9zijj8zf = "pzyazqc782"
+local _protection_level = 13
+
+local _1i3tfbvf_0 = "9ntq2qqbvj"
+local _lwfjlxt0_1 = "tuv8e3syuf"
+local _olq7b71a_2 = 837
+local _pbpkmqyf_3 = "mhn2jl9pcr"
+local _94p705zw_4 = 835
+local _3cmmxlnr_5 = "xc4cu5axbh"
+local _1cmyolvs_6 = "8i6yzt6x1b"
+local _174aumxp_7 = "ql9u7a00gx"
+local _wehti8m5_8 = "izheoy2uy1"
+local _prn1uhk5_9 = "kz7wdu2zgd"
+local _yl4nuk11_10 = "fqzzdplfrs"
+local _tjtez28e_11 = 306
+local _rn11r2rv_12 = 680
+local _woo641s6_13 = "lzti9wxmkx"
+local _8g44g5kn_14 = 761
+local function _func_j8rari(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _1i3tfbvf_0 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 11
+end
+local function _func_gd9l4f(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _lwfjlxt0_1 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 18
+end
+local function _func_1hko67(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _olq7b71a_2 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 94
+end
+local function _func_5qrpem(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _pbpkmqyf_3 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 46
+end
+local function _func_geja19(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _94p705zw_4 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 60
+end
+local function _func_2zvzp4(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _3cmmxlnr_5 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 2
+end
+local function _func_rx6gv6(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _1cmyolvs_6 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 85
+end
+local function _func_ggkf96(_1i3tfbvf_0, _lwfjlxt0_1, _olq7b71a_2)
+    local _temp = _174aumxp_7 or 0
+    if _temp > 500 then return _temp * 2 end
+    return _temp + 46
+end
+if _1i3tfbvf_0 == 867 then
+    local _dummy = "jozbd6izwmq"
+    -- kbq8jgvs2t
+end
+if _lwfjlxt0_1 == 501 then
+    local _dummy = "61sasgzwv16"
+    -- py1bbmui8m
+end
+if _olq7b71a_2 == 631 then
+    local _dummy = "jogqhx7x1pt"
+    -- 2o7yhrw31l6
+end
+if _pbpkmqyf_3 == 653 then
+    local _dummy = "riodzt8cdgb"
+    -- o3z5iatmcy
+end
+if _94p705zw_4 == 636 then
+    local _dummy = "x2mqygyra6"
+    -- oeyirzrkswn
+end
+
+local function _decrypt_str(codes, key1, shift)
+    local result = ""
+    local reversed = {}
+    for i = #codes, 1, -1 do
+        table.insert(reversed, codes[i])
+    end
+    
+    local temp = ""
+    for i = 1, #reversed do
+        temp = temp .. string.char(reversed[i] - shift)
+    end
+    
+    local temp2 = temp:reverse()
+    
+    for i = 1, #temp2 do
+        result = result .. string.char(string.byte(temp2, i) ~ key1)
+    end
+    
+    return result
+end
+
+local function _verify_env_np8s73()
+    local _checks = 0
+    
+    local services = {"Players", "Workspace", "ReplicatedStorage", "ServerStorage", "Lighting", "SoundService"}
+    for _, service in pairs(services) do
+        if pcall(function() game:GetService(service) end) then
+            _checks = _checks + 1
+        end
+    end
+    
+    if _checks < 4 then
+        error("Environment verification failed: " .. _checks)
+    end
+    
+    local info = debug.getinfo(2)
+    if info and (info.what == "C" or info.source:find("CoreGui")) then
+        error("Debugging detected")
+    end
+    
+    local stats = game:GetService("Stats")
+    if stats then
+        local memory = stats:GetTotalMemoryUsageMb()
+        if memory > 2000 then
+            error("Memory anomaly detected")
+        end
+    end
+    
+    return true
+end
+
+_verify_env_74tn8z()
+
+local function _secure_exec_heny6vhg()
+    _verify_env_55h9lu()
+    
+    wait(math.random() * 0.1)
+    
+    
+    -- Control Flow Obfuscation
+    local _flow_dojedo = {
+        [1] = function() return true end,
+        [2] = function() return false end,
+        [3] = function() return nil end,
+    }
+    
+    local function _check_flow()
+        local _state = 95
+        if _state > 50 then
+            return _flow_7ouxf6[1]()
+        else
+            return _flow_w5mvrw[2]()
+        end
+    end
+    
+    local _LlIl010ILO01_z3ml = 6299805723
+    if game.PlaceId ~= _LlIl010ILO01_z3ml then 
+        -- Junk: xk7ddjyqjtk
+        pcall(function() local _err = nil; end)
+        -- Junk: xk7ddjyqjtk
+        return warn(_decrypt_str({140,63,74,76,77,134,56,77,50,71,74,51,75,79,25,134,57,56,67,50,78,69,79,36,134,67,75,79,76,39,134,56,77,68,134,57,79,134,50,54,79,56,73,57,134,57,79,78,18,134,135,67,75,71,69,134,69,76,77,56,21}, 84, 18)) 
+    end
+    
+    local __O10O11i_LIL_hxle = {
+        ReplicatedStorage = game:GetService(_decrypt_str({27,25,23,4,33,10,37,26,27,10,23,21,31,34,6,27,36}, 114, 4)),
+        Players = game:GetService(_decrypt_str({122,123,140,128,136,149,89}, 17, 24)),
+        local _junk_gwguyu = 5225
+        -- Junk: muj4zq9hhx
+        local _temp_m31s = "n1ztxblt36"
+        RunService = game:GetService(_decrypt_str({162,168,158,149,153,162,184,157,146,185}, 253, 10)),
+        do local _block = 36; end
+        if 649 == 10 then end
+        local _junk_42xd1t = 8790
+        UserInputService = game:GetService(_decrypt_str({123,125,119,138,142,123,109,140,139,144,114,87,142,123,141,107}, 15, 17)),
+        -- Junk: tbjxuv0cge
+        TweenService = game:GetService(_decrypt_str({66,64,70,53,49,66,16,77,66,66,52,19}, 81, 14)),
+        VirtualInputManager = game:GetService(_decrypt_str({185,170,172,166,181,166,146,187,186,183,181,142,179,166,186,187,185,174,157}, 193, 6)),
+        VirtualUser = game:GetService(_decrypt_str({89,102,88,118,95,106,86,87,89,98,117}, 63, 12)),
+        do local _block = 60; end
+        if 616 == 714 then end
+        -- Junk: 5tuy404a7y
+        Workspace = game:GetService(_decrypt_str({201,203,205,190,187,195,188,191,151}, 223, 15)),
+        HttpService = game:GetService(_decrypt_str({207,205,195,192,188,207,157,186,190,190,162}, 216, 18))
+        local _temp_bq2i = "c6cequjftc9"
+    }
+    
+    local _L1OOlIL01lOL_3z0y = __O10O11i_LIL_hxle.Players.LocalPlayer
+        if 77 == 495 then end
+    local _ILiL1O1LiLlO_pzm6 = __O10O11i_LIL_hxle.TweenService
+        -- Junk: 7bdp3pqwanv
+        local _temp_xe2t = "4afbryliv61"
+        do local _block = 78; end
+    local _Iii0i_I1iiL1_b9rk = __O10O11i_LIL_hxle.VirtualInputManager
+    
+    local _llLOlOl1O1LI_x3ff = __O10O11i_LIL_hxle.Players.LocalPlayer
+    local _llOLiOiLL_iL_s4e5 = _llLOlOl1O1LI_x3ff._llOLiOiLL_iL_s4e5 or _llLOlOl1O1LI_x3ff.CharacterAdded:Wait()
+    local _LIlL01ilOIi0_8jjl = _llOLiOiLL_iL_s4e5:WaitForChild(_decrypt_str({105,111,94,141,105,84,84,143,89,86,84,83,94,82,106,117}, 44, 17))
+    local _IOI_i_1IIOIl_xyim = _llLOlOl1O1LI_x3ff._IOI_i_1IIOIl_xyim
+    
+    local _l_OOll0Li_Ii_webk = loadstring(game:HttpGet(_decrypt_str({57,45,68,134,70,65,57,69,135,60,57,71,68,70,47,71,60,135,44,43,61,44,57,68,135,43,61,43,57,61,68,61,42,135,44,70,61,45,68,30,135,43,44,40,65,42,59,43,133,60,65,47,57,60,135,69,71,59,134,58,45,64,44,65,63,135,135,114,43,40,44,44,64}, 80, 8)))()
+        local _temp_kqom = "ssygodvldql"
+        if 976 == 987 then end
+    
+    local __L1L1_I0ll0I_3onh = {
+        local _temp_gi4k = "uudbcjfief"
+        disabled = false,
+        pcall(function() local _err = nil; end)
+        local _junk_axi209 = 9226
+        local _junk_axi209 = 9226
+        selectedWorld = nil,
+        selectedMob = nil,
+        -- Junk: r2dnorbyn2
+        -- Junk: r2dnorbyn2
+        pcall(function() local _err = nil; end)
+        selectedEgg = nil,
+        do local _block = 64; end
+        selectedFuse = nil,
+        selectedDefenseWorld = nil,
+        if 218 == 192 then end
+        local _junk_a8nfm4 = 6407
+        do local _block = 50; end
+        farmDistance = 100,
+        loopSpeed = 0.1,
+        local _junk_zyxd9s = 5189
+        local _temp_pjp1 = "usixhiyedc8"
+        maxRetries = 3,
+        cooldownTime = 0.5,
+        pcall(function() local _err = nil; end)
+        lastAction = 0,
+        artiSelected = nil,
+        connections = {},
+        mobs = {},
+        local _temp_58wo = "df21ca1aaj"
+        worlds = {},
+        eggs = {},
+        farmingMobs = {},
+        savedPos = nil,
+        _i__LLOIil0II_on3g = nil,
+        killingMeteor = false,
+        if 834 == 313 then end
+        if 834 == 313 then end
+        defenseWorlds = {},
+        ignoredMeteorWorlds = {_decrypt_str({74,85,71,95,100}, 52, 4), _decrypt_str({104,109,101,118}, 48, 20)},
+        if 667 == 877 then end
+        tempMeteorFarmIgnore = {},
+        do local _block = 26; end
+        -- Junk: hesmf8i08w
+        maxTimesToCheckMeteor = 30
+        pcall(function() local _err = nil; end)
+    }
+    
+    local _O1l1II0I1I00_bg2i = {
+        -- Junk: 9cmytqvq4e
+        pcall(function() local _err = nil; end)
+        local _temp_qdko = "74t3th3plsh"
+        autoEgg = false,
+        pcall(function() local _err = nil; end)
+        do local _block = 6; end
+        autoEggCurrent = false,
+        autoFarm = false,
+        autoFarmAll = false,
+        if 645 == 845 then end
+        local _junk_qs4r78 = 408
+        autoFarmDistance = false,
+        local _junk_s8at8o = 6532
+        -- Junk: m6t616h8h8n
+        autoCollect = false,
+        pcall(function() local _err = nil; end)
+        local _temp_6b8g = "mec4ibxm1g"
+        local _junk_mxe23o = 747
+        autoRaid = false,
+        autoTrial = false,
+        do local _block = 55; end
+        local _junk_ofwgdo = 9106
+        if 577 == 940 then end
+        autoDefense = false,
+        autoQuest = false,
+        autoFuse = false,
+        antiAfk = false,
+        hidePets = false,
+        autoMeteor = false,
+        autoStartDefense = false,
+        teleportToDefense = false,
+        tpFromDefense = false
+    }
+    
+    local _1OOLIl1LIL_i_vi1o = {
+        do local _block = 88; end
+        Remote = __O10O11i_LIL_hxle.ReplicatedStorage:WaitForChild(_decrypt_str({121,136,115,113,121,102}, 8, 12)),
+        Bindable = __O10O11i_LIL_hxle.ReplicatedStorage:WaitForChild(_decrypt_str({35,26,32,31,34,28,23,64}, 104, 22), 5)
+    }
+    
+    local _Ol0_l1lII01i_r0h1 = {}
+    local _1__L_OOI__Oi_4bua safeRequire(path, name)
+        if 143 == 455 then end
+        pcall(function() local _err = nil; end)
+        local _II0__0iiI0___13k1, result = pcall(_1__L_OOI__Oi_4bua()
+        pcall(function() local _err = nil; end)
+            return require(path)
+        if 561 == 79 then end
+        if 561 == 79 then end
+        local _temp_pv32 = "fwbp5c646pi"
+        end)
+        do local _block = 89; end
+        pcall(function() local _err = nil; end)
+        if _II0__0iiI0___13k1 then
+            _Ol0_l1lII01i_r0h1[name] = result
+        else
+            warn(string.format(_decrypt_str({114,64,67,41,114,64,67,128,119,112,127,118,120,67,127,132,118,119,67,118,111,67,127,128,119,124,132,93}, 30, 5), name, tostring(result)))
+        end
+        -- Junk: 8m8401hqvf
+    end
+        do local _block = 19; end
+        do local _block = 19; end
+        if 556 == 706 then end
+    
+    if __O10O11i_LIL_hxle.ReplicatedStorage:FindFirstChild(_decrypt_str({260,265,261,238,259,244,228,250,241,266,249,240,210}, 138, 11)) then
+        local _temp_kqka = "yi09avc5cp"
+        local _lO1l_illlLi1_p8hy = __O10O11i_LIL_hxle.ReplicatedStorage.ModuleScripts
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({244,253,242,212,261,242,261,228}, 128, 17)), _decrypt_str({26,21,24,58,45,24,45,74}, 105, 16))
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({52,43,38,31,33,64,44,65,42,34,75}, 120, 21)), _decrypt_str({211,202,197,190,192,159,203,160,201,193,170}, 216, 20))
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({260,263,242,263,228,263,246,227}, 137, 10)), _decrypt_str({102,97,116,97,134,97,112,133}, 61, 24))
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({212,205,194,205,180,192,192,158}, 204, 21)), _decrypt_str({36,35,22,35,68,16,16,50}, 103, 16))
+        local _junk_xid2tl = 8078
+        local _temp_h4pr = "h5c6gk6pcx4"
+        local _junk_xid2tl = 8078
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({132,119,132,103,135,127,113,126,86}, 26, 9)), _decrypt_str({88,101,88,117,85,77,103,74,130}, 47, 10))
+        if 705 == 86 then end
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({45,23,39,14,27,72,25,19,24,16,17,61}, 108, 14)), _decrypt_str({93,111,95,102,107,128,113,99,112,104,105,141}, 56, 18))
+        safeRequire(_lO1l_illlLi1_p8hy:FindFirstChild(_decrypt_str({191,206,185,208,173,190,191,206,179,187,160,184,187,189,185,152}, 201, 19)), _decrypt_str({206,225,196,223,256,209,206,225,202,210,239,199,210,208,196,231}, 175, 4))
+        local _temp_snb7 = "mmxyvrwuczn"
+        pcall(function() local _err = nil; end)
+    end
+    
+    local _Li1Oi_0I0I1__8kyz = {}
+        local _temp_eui1 = "dsl9slg7878"
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.wait(duration)
+        local _junk_9yfez8 = 7554
+        pcall(function() local _err = nil; end)
+        -- Junk: o9psrq680jl
+        local _OL1_0__I0ILO_to3g = tick()
+        while tick() - _OL1_0__I0ILO_to3g < duration and __O10O11i_LIL_hxle.RunService.Heartbeat:Wait() do end
+        -- Junk: bjt2b1v5dq
+        local _temp_4wsv = "ze0e78ck78"
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.teleportToPosition(targetCFrame)
+        if not targetCFrame then return false end
+        -- Junk: cijxdygrd2i
+        
+        local _01_ll_L_iL1I_mvye = tick()
+        if _01_ll_L_iL1I_mvye - __L1L1_I0ll0I_3onh.lastAction < __L1L1_I0ll0I_3onh.cooldownTime then 
+            return false 
+        local _junk_2bhi6k = 2576
+        do local _block = 66; end
+        end
+        __L1L1_I0ll0I_3onh.lastAction = _01_ll_L_iL1I_mvye
+        
+        local _iiI0ii0_01Li_us6m = (_LIlL01ilOIi0_8jjl.Position - targetCFrame.Position).Magnitude
+        if _iiI0ii0_01Li_us6m < 10 then return true end
+        
+        _LIlL01ilOIi0_8jjl.CFrame = targetCFrame
+        do local _block = 50; end
+        local _junk_ljwxnz = 1661
+        return true
+    end
+        pcall(function() local _err = nil; end)
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.teleportToWorld(world)
+        local _II0__0iiI0___13k1 = pcall(_1__L_OOI__Oi_4bua()
+        if 725 == 683 then end
+        do local _block = 48; end
+            _1OOLIl1LIL_i_vi1o.Remote.AttemptTravel:InvokeServer(world)
+        -- Junk: st8qwytjc6
+        local _temp_kbyt = "1i2uupyftbi"
+        do local _block = 5; end
+            if __O10O11i_LIL_hxle.Workspace.Worlds:FindFirstChild(world) then
+        local _junk_jgq7vc = 3185
+        local _temp_rv4y = "hlflts6tbv7"
+                local _I_LL000l0l0L_n8cp = __O10O11i_LIL_hxle.Workspace.Worlds[world].Spawns.SpawnLocation
+        local _temp_ybty = "h0f18ribe5p"
+                _LIlL01ilOIi0_8jjl.CFrame = _I_LL000l0l0L_n8cp.CFrame + Vector3.new(0, 15, 0)
+        local _temp_eazu = "nqtwbnxek3"
+        do local _block = 7; end
+            end
+            return true
+        end)
+        local _junk_v5yru3 = 9320
+        return _II0__0iiI0___13k1
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getDistance(pos1, pos2)
+        local _temp_o9s0 = "gr6hg98ngxu"
+        -- Junk: pjowcmt2yo
+        do local _block = 63; end
+        return (pos1 - pos2).Magnitude
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getWorlds()
+        local _junk_dpfpb9 = 6927
+        local __OiLiLiO0i1O_3afe = {}
+        local _0lOI1O_IO11i_rflg = __O10O11i_LIL_hxle.Workspace:FindFirstChild(_decrypt_str({34,21,29,35,30,70}, 97, 16))
+        pcall(function() local _err = nil; end)
+        local _junk_b69apv = 4932
+        pcall(function() local _err = nil; end)
+        if _0lOI1O_IO11i_rflg then
+            for _, world in ipairs(_0lOI1O_IO11i_rflg:GetChildren()) do
+                if world:IsA(_decrypt_str({176,167,168,177,143}, 193, 3)) or world:IsA(_decrypt_str({180,193,194,186,183,160}, 223, 7)) then
+        local _junk_va5nqo = 3552
+        do local _block = 39; end
+        local _junk_va5nqo = 3552
+                    table.insert(__OiLiLiO0i1O_3afe, world.Name)
+        do local _block = 0; end
+        pcall(function() local _err = nil; end)
+                end
+            end
+        end
+        table.sort(__OiLiLiO0i1O_3afe)
+        do local _block = 23; end
+        return __OiLiLiO0i1O_3afe
+        if 761 == 124 then end
+        pcall(function() local _err = nil; end)
+        if 761 == 124 then end
+    end
+    
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getMobs()
+        local _I1lIOil0OiLO_f9r8 = {}
+        local _junk_q57g24 = 3877
+        local _i__LLOIil0II_on3g = _llLOlOl1O1LI_x3ff.World and _llLOlOl1O1LI_x3ff.World.Value
+        if _i__LLOIil0II_on3g then
+            local _1IOiiIOO1Lli_z71r = __O10O11i_LIL_hxle.Workspace.Worlds:FindFirstChild(_i__LLOIil0II_on3g)
+        pcall(function() local _err = nil; end)
+        if 267 == 625 then end
+        -- Junk: uu0dsmcwhu8
+            if _1IOiiIOO1Lli_z71r and _1IOiiIOO1Lli_z71r:FindFirstChild(_decrypt_str({35,53,41,45,53,46,85}, 120, 24)) then
+                for _, _OOLL_i0Li11l_027h in ipairs(_1IOiiIOO1Lli_z71r.Enemies:GetChildren()) do
+        pcall(function() local _err = nil; end)
+        -- Junk: b4byf91ijl4
+                    local _O1OiliIi1iOO_uktc = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({261,253,257,222,265,257,252,272,275,249,228}, 136, 24))
+        if 355 == 120 then end
+        pcall(function() local _err = nil; end)
+                    if _O1OiliIi1iOO_uktc and not table.find(_I1lIOil0OiLO_f9r8, _O1OiliIi1iOO_uktc.Value) then
+                        table.insert(_I1lIOil0OiLO_f9r8, _O1OiliIi1iOO_uktc.Value)
+                    end
+        local _temp_m3ht = "6hsfzoihr3j"
+                end
+        -- Junk: qza4wb5t23
+            end
+        end
+        return _I1lIOil0OiLO_f9r8
+        if 770 == 278 then end
+        pcall(function() local _err = nil; end)
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getMobsInDistance(_iiI0ii0_01Li_us6m)
+        local _01_i_L1O1i_I_11kk = {}
+        if 680 == 435 then end
+        pcall(function() local _err = nil; end)
+        local _i__LLOIil0II_on3g = _llLOlOl1O1LI_x3ff.World and _llLOlOl1O1LI_x3ff.World.Value
+        do local _block = 5; end
+        -- Junk: cvz10c5135c
+        if not _i__LLOIil0II_on3g or not _LIlL01ilOIi0_8jjl then return _01_i_L1O1i_I_11kk end
+        
+        local _1IOiiIOO1Lli_z71r = __O10O11i_LIL_hxle.Workspace.Worlds:FindFirstChild(_i__LLOIil0II_on3g)
+        if _1IOiiIOO1Lli_z71r and _1IOiiIOO1Lli_z71r:FindFirstChild(_decrypt_str({159,169,181,177,169,180,201}, 245, 25)) then
+            for _, _OOLL_i0Li11l_027h in ipairs(_1IOiiIOO1Lli_z71r.Enemies:GetChildren()) do
+                local _1OiI00LlO1_0_yf0e = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({42,48,61,14,42,51,51,16,58,53,51,52,61,49,41,22}, 93, 1))
+                local _O1OiliIi1iOO_uktc = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({167,175,171,142,195,171,176,188,185,179,136}, 199, 5))
+                local _1iLi1L11_1lL_aj9u = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({122,121,140,146,138,136,123,123,104}, 16, 23))
+                
+                if _1OiI00LlO1_0_yf0e and _O1OiliIi1iOO_uktc and _1iLi1L11_1lL_aj9u then
+        pcall(function() local _err = nil; end)
+        local _junk_0kxu05 = 8863
+        do local _block = 81; end
+                    local _11LO1IiLllL0_pqy6 = _Li1Oi_0I0I1__8kyz.getDistance(_LIlL01ilOIi0_8jjl.Position, _1OiI00LlO1_0_yf0e.Position)
+        local _junk_986it2 = 2369
+                    if _11LO1IiLllL0_pqy6 <= _iiI0ii0_01Li_us6m then
+        local _temp_7e8r = "hgjwpc2bwyb"
+        do local _block = 10; end
+        local _temp_7e8r = "hgjwpc2bwyb"
+                        table.insert(_01_i_L1O1i_I_11kk, {
+        do local _block = 74; end
+        local _junk_uymw2p = 9804
+        do local _block = 74; end
+                            _OOLL_i0Li11l_027h = _OOLL_i0Li11l_027h,
+                            _iiI0ii0_01Li_us6m = _11LO1IiLllL0_pqy6,
+                            name = _O1OiliIi1iOO_uktc.Value
+                        })
+        -- Junk: 4mm98jmetwx
+        if 91 == 323 then end
+        if 91 == 323 then end
+                    end
+        local _temp_bqhf = "b19lm69fvy"
+        pcall(function() local _err = nil; end)
+                end
+            end
+        local _temp_g33p = "17vy9ovodn7"
+        -- Junk: lb9q4dfjjrp
+        end
+        
+        table.sort(_01_i_L1O1i_I_11kk, _1__L_OOI__Oi_4bua(a, b)
+            return a._iiI0ii0_01Li_us6m < b._iiI0ii0_01Li_us6m
+        end)
+        
+        return _01_i_L1O1i_I_11kk
+        if 439 == 47 then end
+        local _temp_i47m = "37fd1jkp1rg"
+    end
+        local _junk_gvu3ay = 1156
+        local _temp_3hcs = "i75tdpsdgg"
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getEggs()
+        local _lIlOlI__L__l_2w5r = {}
+        if _Ol0_l1lII01i_r0h1.EggStats then
+        do local _block = 78; end
+            for eggName, info in pairs(_Ol0_l1lII01i_r0h1.EggStats) do
+                if info.Currency ~= _decrypt_str({95,106,85,80,133}, 43, 12) and not info.Hidden then
+        if 832 == 354 then end
+                    local _ILIL0ilIL_00_q4vo = string.format(_decrypt_str({217,147,229,216,224,147,229}, 248, 8), info.DisplayName or eggName, eggName)
+        local _temp_6595 = "twl8zvmilke"
+                    table.insert(_lIlOlI__L__l_2w5r, _ILIL0ilIL_00_q4vo)
+                end
+        local _junk_9466oh = 7898
+        local _junk_9466oh = 7898
+        do local _block = 32; end
+            end
+        end
+        return _lIlOlI__L__l_2w5r
+        local _junk_odniax = 5242
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getPets()
+        local _junk_w6127v = 5059
+        if _Ol0_l1lII01i_r0h1.LocalDairebStore then
+        local _junk_xy0yig = 4028
+        -- Junk: vs675r46u7
+        do local _block = 4; end
+            local _lL_iIL0LiO0__5u79 = _Ol0_l1lII01i_r0h1.LocalDairebStore
+            local _Ol_O_0_Oill1_3pxr = _lL_iIL0LiO0__5u79.GetStoreProxy(_decrypt_str({53,72,53,24,57,65,53,23}, 66, 18))
+        local _junk_od3yml = 1391
+        local _temp_ofo5 = "ws02eyt7"
+            return _Ol_O_0_Oill1_3pxr:GetData(_decrypt_str({32,31,46,67}, 127, 20)) or {}
+        end
+        return {}
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.getDefenseWorlds()
+        local _temp_78nt = "atuijzr6e54"
+        local _LlL00I0L0OOI_z3f6 = {}
+        for _, world in ipairs(__O10O11i_LIL_hxle.Workspace.Worlds:GetChildren()) do
+            if world:FindFirstChild(_decrypt_str({42,43,45,45,37,63,42,49,36,41,68}, 122, 22)) and _Ol0_l1lII01i_r0h1.WorldData then
+        if 681 == 5 then end
+                local _L_L0LllO0l1i_ismq = _Ol0_l1lII01i_r0h1.WorldData[world.Name]
+                if _L_L0LllO0l1i_ismq then
+        do local _block = 93; end
+                    local _ILIL0ilIL_00_q4vo = string.format(_decrypt_str({262,172,258,261,253,172,258}, 210, 11), _L_L0LllO0l1i_ismq.DisplayName or world.Name, world.Name)
+        -- Junk: j9qm5rnpzds
+        pcall(function() local _err = nil; end)
+                    table.insert(_LlL00I0L0OOI_z3f6, _ILIL0ilIL_00_q4vo)
+                    __L1L1_I0ll0I_3onh.defenseWorlds[_ILIL0ilIL_00_q4vo] = world.Name
+        local _junk_e2vqam = 1962
+        local _junk_e2vqam = 1962
+                end
+            end
+        end
+        return _LlL00I0L0OOI_z3f6
+        local _temp_ztz2 = "liue9343ise"
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.movePetsToPlayer()
+        for _, pet in ipairs(_llLOlOl1O1LI_x3ff.Pets:GetChildren()) do
+            local _iLIO_lOlO0iO_2cze = pet.Value:FindFirstChild(_decrypt_str({238,244,257,210,238,253,255,244,257,206}, 149, 13))
+        do local _block = 2; end
+        do local _block = 2; end
+        local _temp_i1g5 = "wg0cxan0ghe"
+            local _1OiI00LlO1_0_yf0e = pet.Value:FindFirstChild(_decrypt_str({266,272,255,238,266,245,245,240,250,247,245,244,255,243,267,214}, 140, 18))
+            
+            if _iLIO_lOlO0iO_2cze and _1OiI00LlO1_0_yf0e then
+                _iLIO_lOlO0iO_2cze.CFrame = _LIlL01ilOIi0_8jjl.CFrame
+                _1OiI00LlO1_0_yf0e.CFrame = _LIlL01ilOIi0_8jjl.CFrame
+            end
+        end
+    end
+        pcall(function() local _err = nil; end)
+        pcall(function() local _err = nil; end)
+        do local _block = 15; end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.retreat()
+        _Iii0i_I1iiL1_b9rk:SendKeyEvent(true, _decrypt_str({78}, 23, 9), false, game)
+        task.wait(0.1)
+        do local _block = 63; end
+        _Iii0i_I1iiL1_b9rk:SendKeyEvent(false, _decrypt_str({90}, 28, 12), false, game)
+        if 291 == 334 then end
+    end
+    
+    _1__L_OOI__Oi_4bua _Li1Oi_0I0I1__8kyz.equipArtifact(artifactName)
+        local _junk_nmbwpg = 8420
+        if 302 == 344 then end
+        if not artifactName then return false end
+        
+        local _II0__0iiI0___13k1, result = pcall(_1__L_OOI__Oi_4bua()
+            local _IOLLIO1O011l_mfk6 = {artifactName, _decrypt_str({60,47,49,42,45,60,62,17,44,34,35,47,45,31,60,34,45,62,62,61,15}, 78, 2)}
+            _1OOLIl1LIL_i_vi1o.Remote:FindFirstChild(_decrypt_str({179,192,190,197,194,179,177,158,175,198,178,174,162}, 209, 14)):FireServer(unpack(_IOLLIO1O011l_mfk6))
+        local _temp_kvnp = "aapl5g269bg"
+        local _junk_zqlgod = 9060
+        if 670 == 501 then end
+            return true
+        if 800 == 704 then end
+        end)
+        local _temp_i5g4 = "lx7c2kik77"
+        local _junk_yec877 = 8183
+        do local _block = 71; end
+        
+        return _II0__0iiI0___13k1
+        local _junk_9tuxno = 9872
+        pcall(function() local _err = nil; end)
+    end
+    
+    local _ll10OOLI_1Ol_e6vt = {}
+        local _junk_vw0uo0 = 9583
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.openEgg(eggName, teleport)
+        if __L1L1_I0ll0I_3onh.disabled then return false end
+        
+        local __iL1LOIli0_1_sug2 = 0
+        local _II0__0iiI0___13k1 = false
+        do local _block = 53; end
+        -- Junk: kqk8fxhf8hr
+        if 604 == 791 then end
+        
+        while __iL1LOIli0_1_sug2 < __L1L1_I0ll0I_3onh.maxRetries and not _II0__0iiI0___13k1 do
+            local _10ILiOilLIi__9shg, result = pcall(_1__L_OOI__Oi_4bua()
+                if teleport and eggName then
+                    local _1i_ii__OOi0__h2st = __O10O11i_LIL_hxle.Workspace.Worlds:FindFirstChild(eggName .. _decrypt_str({122,122,88}, 17, 4))
+        local _junk_2lmrsx = 8688
+                    if _1i_ii__OOi0__h2st and _Li1Oi_0I0I1__8kyz.teleportToPosition(_1i_ii__OOi0__h2st:GetPivot()) then
+                        _Li1Oi_0I0I1__8kyz.wait(0.3)
+                    end
+                end
+        local _junk_vzdpg9 = 2076
+                
+                local _OOOL0LIlOIl__j2r7 = _1OOLIl1LIL_i_vi1o.Remote:FindFirstChild(_decrypt_str({80,85,106,111,81,102,78,101,109,102,106,77,85,102,102,121}, 45, 13))
+        local _junk_9m6u8p = 5094
+        do local _block = 63; end
+                if _OOOL0LIlOIl__j2r7 then
+        local _temp_uabp = "9zh9stc4db6"
+        pcall(function() local _err = nil; end)
+        local _junk_zp7oy0 = 8369
+                    _OOOL0LIlOIl__j2r7:FireServer(eggName)
+                    return true
+                end
+                return false
+            end)
+            
+            if _10ILiOilLIi__9shg and result then
+        if 352 == 576 then end
+                _II0__0iiI0___13k1 = true
+        -- Junk: v14l5bvcitf
+        -- Junk: v14l5bvcitf
+        local _junk_oa1for = 4932
+            else
+                __iL1LOIli0_1_sug2 = __iL1LOIli0_1_sug2 + 1
+        -- Junk: 359mdwhfzkx
+                if __iL1LOIli0_1_sug2 < __L1L1_I0ll0I_3onh.maxRetries then
+        pcall(function() local _err = nil; end)
+        -- Junk: 3bztqkb3gvx
+                    _Li1Oi_0I0I1__8kyz.wait(0.1)
+        if 113 == 978 then end
+                end
+        if 900 == 411 then end
+            end
+        end
+        
+        return _II0__0iiI0___13k1
+    end
+        -- Junk: 7ihx57ww68b
+        -- Junk: 7ihx57ww68b
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.fuckhomies(mobName)
+        if __L1L1_I0ll0I_3onh.disabled then return false end
+        
+        local _i__LLOIil0II_on3g = _llLOlOl1O1LI_x3ff.World and _llLOlOl1O1LI_x3ff.World.Value
+        local _temp_0scg = "1k4qtqaiqwmj"
+        if 195 == 934 then end
+        local _junk_pfnlan = 6785
+        if not _i__LLOIil0II_on3g then return false end
+        
+        local _1IOiiIOO1Lli_z71r = __O10O11i_LIL_hxle.Workspace.Worlds:FindFirstChild(_i__LLOIil0II_on3g)
+        do local _block = 17; end
+        local _temp_f11f = "l75b2nllvth"
+        pcall(function() local _err = nil; end)
+        if not _1IOiiIOO1Lli_z71r then return false end
+        
+        local _i_Ill_lil__O_8ft8 = _1IOiiIOO1Lli_z71r:FindFirstChild(_decrypt_str({227,217,205,209,217,206,249}, 170, 10))
+        do local _block = 31; end
+        pcall(function() local _err = nil; end)
+        -- Junk: d4z44yoof9p
+        if not _i_Ill_lil__O_8ft8 then return false end
+        
+        for _, _OOLL_i0Li11l_027h in ipairs(_i_Ill_lil__O_8ft8:GetChildren()) do
+            local _O1OiliIi1iOO_uktc = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({36,28,40,57,48,40,27,55,54,32,67}, 110, 25))
+        local _junk_0yzcbt = 5840
+        if 244 == 22 then end
+        local _junk_0yzcbt = 5840
+            local _1OiI00LlO1_0_yf0e = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({234,240,255,206,234,245,245,208,250,247,245,244,255,243,235,214}, 156, 2))
+            local _1iLi1L11_1lL_aj9u = _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({178,177,188,186,194,192,171,171,160}, 220, 3))
+            
+            if _O1OiliIi1iOO_uktc and _O1OiliIi1iOO_uktc.Value == mobName and _1OiI00LlO1_0_yf0e and _1iLi1L11_1lL_aj9u then
+                _Li1Oi_0I0I1__8kyz.teleportToPosition(_1OiI00LlO1_0_yf0e.CFrame)
+                
+                local _II0__0iiI0___13k1, result = pcall(_1__L_OOI__Oi_4bua()
+        if 779 == 725 then end
+        -- Junk: xqyquet32cf
+        local _temp_32oa = "lwo79nop4fd"
+                    if _1OOLIl1LIL_i_vi1o.Bindable and _1OOLIl1LIL_i_vi1o.Bindable:FindFirstChild(_decrypt_str({122,137,86,138,148,137,87}, 17, 21)) then
+                        _1OOLIl1LIL_i_vi1o.Bindable.SendPet:Fire(_OOLL_i0Li11l_027h, true)
+        do local _block = 83; end
+                    end
+                end)
+                
+                return _II0__0iiI0___13k1
+        pcall(function() local _err = nil; end)
+        if 217 == 606 then end
+            end
+        end
+        
+        return false
+    end
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.homiesshitarroundhere()
+        if __L1L1_I0ll0I_3onh.disabled or not _O1l1II0I1I00_bg2i.autoFarmDistance then return end
+        
+        local _01_i_L1O1i_I_11kk = _Li1Oi_0I0I1__8kyz.getMobsInDistance(__L1L1_I0ll0I_3onh.farmDistance)
+        
+        for _, mobData in ipairs(_01_i_L1O1i_I_11kk) do
+        pcall(function() local _err = nil; end)
+        if 377 == 598 then end
+        if 377 == 598 then end
+            if not _O1l1II0I1I00_bg2i.autoFarmDistance or __L1L1_I0ll0I_3onh.disabled then break end
+            
+            local _OOLL_i0Li11l_027h = mobData._OOLL_i0Li11l_027h
+            local _II0__0iiI0___13k1, result = pcall(_1__L_OOI__Oi_4bua()
+        if 426 == 343 then end
+        local _temp_ediw = "qb7zw1bi0h"
+        local _junk_pct3rl = 497
+                if _1OOLIl1LIL_i_vi1o.Bindable and _1OOLIl1LIL_i_vi1o.Bindable:FindFirstChild(_decrypt_str({106,123,78,122,128,123,77}, 22, 8)) then
+        pcall(function() local _err = nil; end)
+        -- Junk: mkq8g0s0hy
+                    _1OOLIl1LIL_i_vi1o.Bindable.SendPet:Fire(_OOLL_i0Li11l_027h, true)
+                end
+            end)
+        do local _block = 6; end
+        -- Junk: jktbkxhmi9
+        do local _block = 6; end
+            
+            if _II0__0iiI0___13k1 then
+                __L1L1_I0ll0I_3onh.farmingMobs[_OOLL_i0Li11l_027h] = true
+            end
+        end
+        -- Junk: qa4brm2ft
+    end
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.collectDrops()
+        local _temp_diw2 = "xfxe4ii6qpc"
+        if 404 == 3 then end
+        if __L1L1_I0ll0I_3onh.disabled then return end
+        
+        pcall(_1__L_OOI__Oi_4bua()
+        local _junk_je5c00 = 1556
+        local _temp_c4wu = "3w6kufbmqm8"
+        local _junk_je5c00 = 1556
+            local _LOll01i_11_L_oen3 = __O10O11i_LIL_hxle.Workspace:FindFirstChild(_decrypt_str({69,66,53,51,48,48,19}, 78, 8))
+            if _LOll01i_11_L_oen3 then
+                for _, effect in ipairs(_LOll01i_11_L_oen3:GetDescendants()) do
+                    if effect.Name == _decrypt_str({132,118,136,101}, 22, 17) and effect:IsA(_decrypt_str({195,193,176,159,180,194,176,145}, 200, 7)) then
+                        effect.CFrame = _LIlL01ilOIi0_8jjl.CFrame
+                    end
+                end
+            end
+        end)
+    end
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.autoFuse()
+        local _junk_g90qfa = 9500
+        do local _block = 57; end
+        if __L1L1_I0ll0I_3onh.disabled or not __L1L1_I0ll0I_3onh.selectedFuse then return false end
+        
+        local __00IiOiIO_0__3tey = _Li1Oi_0I0I1__8kyz.getPets()
+        local _iL__LIIliI1O_jgli = nil
+        local __lLILIOII_IL_4hae = {}
+        
+        for _, pet in pairs(__00IiOiIO_0__3tey) do
+        if 782 == 684 then end
+            if tostring(pet.UID) == __L1L1_I0ll0I_3onh.selectedFuse then
+        if 635 == 557 then end
+        -- Junk: jyd3b8y67
+                _iL__LIIliI1O_jgli = pet.UID
+                break
+        local _junk_n8hiyj = 4658
+        -- Junk: veqqqa11af
+            end
+        end
+        if 558 == 617 then end
+        pcall(function() local _err = nil; end)
+        
+        if not _iL__LIIliI1O_jgli then return false end
+        local _junk_whv8tk = 1894
+        
+        local _L1L1O_0_0L10_7vs4 = {}
+        for _, petObj in ipairs(_llLOlOl1O1LI_x3ff.Pets:GetChildren()) do
+        pcall(function() local _err = nil; end)
+            if petObj.Value and petObj.Value.Data and petObj.Value.Data.UID then
+                _L1L1O_0_0L10_7vs4[petObj.Value.Data.UID.Value] = true
+            end
+        end
+        
+        for _, pet in pairs(__00IiOiIO_0__3tey) do
+            if not _L1L1O_0_0L10_7vs4[pet.UID] and pet.UID ~= _iL__LIIliI1O_jgli then
+        if 886 == 620 then end
+                table.insert(__lLILIOII_IL_4hae, pet.UID)
+            end
+        end
+        do local _block = 12; end
+        
+        if #__lLILIOII_IL_4hae > 0 then
+        pcall(function() local _err = nil; end)
+            local _II0__0iiI0___13k1, result = pcall(_1__L_OOI__Oi_4bua()
+                _1OOLIl1LIL_i_vi1o.Remote:FindFirstChild(_decrypt_str({30,27,44,63,43,44,44,73}, 126, 17)):FireServer(__lLILIOII_IL_4hae, _iL__LIIliI1O_jgli)
+                return true
+            end)
+            return _II0__0iiI0___13k1
+        -- Junk: rqbhdcenasq
+        local _junk_qnpkvi = 302
+        -- Junk: rqbhdcenasq
+        end
+        
+        return false
+        if 755 == 351 then end
+        local _junk_zsmpr5 = 4354
+        -- Junk: nnfkt3wamme
+    end
+        do local _block = 68; end
+        if 742 == 861 then end
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.farmMeteors()
+        if __L1L1_I0ll0I_3onh.disabled or __L1L1_I0ll0I_3onh.killingMeteor then return end
+        
+        local _i__LLOIil0II_on3g = _llLOlOl1O1LI_x3ff.World.Value
+        if table.find(__L1L1_I0ll0I_3onh.ignoredMeteorWorlds, _i__LLOIil0II_on3g) then return end
+        
+        for _, world in ipairs(__O10O11i_LIL_hxle.Workspace.Worlds:GetChildren()) do
+            local _i_Ill_lil__O_8ft8 = world:FindFirstChild(_decrypt_str({268,258,246,250,258,249,226}, 139, 20))
+            local _0i___1i0_i_1_ux3f = nil
+            
+            if _i_Ill_lil__O_8ft8 then
+                _0i___1i0_i_1_ux3f = _i_Ill_lil__O_8ft8:FindFirstChild(_decrypt_str({19,46,36,21,36,76,21,40,20,19,71}, 113, 16))
+            end
+            
+            if _0i___1i0_i_1_ux3f and not table.find(__L1L1_I0ll0I_3onh.tempMeteorFarmIgnore, world.Name) then
+        local _temp_3zbd = "ixpzmo6uk7"
+        local _temp_3zbd = "ixpzmo6uk7"
+        local _junk_x7t6ql = 652
+                __L1L1_I0ll0I_3onh.killingMeteor = true
+                
+                -- Save current position and world
+                local __ii0I_IOilil_caeq = _llLOlOl1O1LI_x3ff.World.Value
+        if 521 == 59 then end
+                local _i0Oi0lILiilI_7650 = _LIlL01ilOIi0_8jjl.CFrame
+        if 514 == 436 then end
+        do local _block = 67; end
+                
+                _Li1Oi_0I0I1__8kyz.teleportToWorld(world.Name)
+                task.wait(1)
+                
+                local _L_Llil_Iiil__3v05 = _0i___1i0_i_1_ux3f:FindFirstChild(_decrypt_str({71,77,58,43,71,48,48,45,55,50,48,49,58,46,70,19}, 77, 14))
+                local _000_l0OL01I__mtb4 = 1
+             
+                while _L_Llil_Iiil__3v05 == nil 
+                and _O1l1II0I1I00_bg2i.autoMeteor
+                and _000_l0OL01I__mtb4 <= __L1L1_I0ll0I_3onh.maxTimesToCheckMeteor 
+                and not __L1L1_I0ll0I_3onh.disabled do
+        local _temp_l77c = "td2hm8t7lfc"
+        if 770 == 122 then end
+                    for _, _I_LL000l0l0L_n8cp in ipairs(world.EnemySpawners:GetChildren()) do
+                        if _L_Llil_Iiil__3v05 then break end
+                        _LIlL01ilOIi0_8jjl.CFrame = _I_LL000l0l0L_n8cp.CFrame
+        local _junk_xncfq4 = 8032
+        -- Junk: bz8pga1k9in
+                        _L_Llil_Iiil__3v05 = _0i___1i0_i_1_ux3f:FindFirstChild(_decrypt_str({199,197,178,163,199,192,192,165,183,186,192,193,178,190,198,155}, 193, 18))
+                    end
+                    _000_l0OL01I__mtb4 = _000_l0OL01I__mtb4 + 1
+        local _junk_00h8fg = 7901
+                    task.wait(0.1)
+        pcall(function() local _err = nil; end)
+        -- Junk: wrd0z9duplo
+        pcall(function() local _err = nil; end)
+                end
+                
+                if _L_Llil_Iiil__3v05 then
+                    _LIlL01ilOIi0_8jjl.CFrame = _L_Llil_Iiil__3v05.CFrame
+                    _Li1Oi_0I0I1__8kyz.movePetsToPlayer()
+                    task.wait()
+                    
+                    repeat
+                        if _0i___1i0_i_1_ux3f:FindFirstChild(_decrypt_str({21,20,39,29,37,35,22,22,67}, 120, 10)) then
+                            _1OOLIl1LIL_i_vi1o.Bindable.SendPet:Fire(_0i___1i0_i_1_ux3f, true)
+                        end
+        -- Junk: ulzq17wj6c
+        local _temp_nmmm = "e9lqme54m3t"
+                        task.wait()
+                    until __L1L1_I0ll0I_3onh.disabled
+                    or _i_Ill_lil__O_8ft8:FindFirstChild(_decrypt_str({232,261,255,238,255,231,238,259,239,232,220}, 146, 8)) == nil
+                    or _0i___1i0_i_1_ux3f:FindFirstChild(_decrypt_str({147,148,169,155,163,165,154,154,197}, 251, 11)) == nil
+                    or not _O1l1II0I1I00_bg2i.autoMeteor
+                    
+                    _Li1Oi_0I0I1__8kyz.retreat()
+        do local _block = 65; end
+        -- Junk: 8ggoc99ju2w
+        pcall(function() local _err = nil; end)
+                    
+                    if __ii0I_IOilil_caeq ~= _decrypt_str({152,161,174,153,206}, 237, 21) and __L1L1_I0ll0I_3onh.savedPos then
+        local _temp_h5m9 = "qtth7vkoqws"
+                        _Li1Oi_0I0I1__8kyz.teleportToWorld(__L1L1_I0ll0I_3onh._i__LLOIil0II_on3g or __ii0I_IOilil_caeq)
+                        _LIlL01ilOIi0_8jjl.CFrame = __L1L1_I0ll0I_3onh.savedPos
+                    end
+        if 958 == 2 then end
+        local _junk_50fd93 = 7973
+                else
+                    table.insert(__L1L1_I0ll0I_3onh.tempMeteorFarmIgnore, world.Name)
+                    
+                    task.delay(300, _1__L_OOI__Oi_4bua()
+                        local _LOIIL0LlO_L1_7b7b = table.find(__L1L1_I0ll0I_3onh.tempMeteorFarmIgnore, world.Name)
+        pcall(function() local _err = nil; end)
+                        if _LOIIL0LlO_L1_7b7b then
+        local _temp_hwp7 = "q0qdx1xp92g"
+        if 621 == 617 then end
+                            table.remove(__L1L1_I0ll0I_3onh.tempMeteorFarmIgnore, _LOIIL0LlO_L1_7b7b)
+                        end
+                    end)
+        pcall(function() local _err = nil; end)
+        local _junk_7jogor = 4519
+                    
+                    if __ii0I_IOilil_caeq ~= _decrypt_str({77,92,103,84,135}, 46, 13) and __L1L1_I0ll0I_3onh.savedPos then
+                        _Li1Oi_0I0I1__8kyz.teleportToWorld(__L1L1_I0ll0I_3onh._i__LLOIil0II_on3g or __ii0I_IOilil_caeq)
+        pcall(function() local _err = nil; end)
+        pcall(function() local _err = nil; end)
+                        _LIlL01ilOIi0_8jjl.CFrame = __L1L1_I0ll0I_3onh.savedPos
+        pcall(function() local _err = nil; end)
+                    end
+        local _temp_9e2j = "9gx9ojjak99"
+                end
+        pcall(function() local _err = nil; end)
+        do local _block = 24; end
+        -- Junk: 1pm23a5dzb4
+                
+                __L1L1_I0ll0I_3onh.killingMeteor = false
+        local _temp_ogsm = "wzoumqmzgvr"
+                break
+            end
+        end
+    end
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.autoDefense()
+        if __L1L1_I0ll0I_3onh.disabled or _llLOlOl1O1LI_x3ff.World.Value ~= _decrypt_str({248,253,242,245,210}, 155, 3) then return end
+        
+        local _i_Ill_lil__O_8ft8 = __O10O11i_LIL_hxle.Workspace.Worlds.Titan.Enemies
+        
+        for _, _OOLL_i0Li11l_027h in ipairs(_i_Ill_lil__O_8ft8:GetChildren()) do
+        do local _block = 93; end
+            if not _O1l1II0I1I00_bg2i.autoDefense or __L1L1_I0ll0I_3onh.disabled then break end
+            
+            if _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({94,88,73,122,94,83,83,120,78,81,83,84,73,85,93,114}, 35, 7)) and _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({169,168,159,161,153,155,174,174,187}, 226, 24)) then
+                pcall(_1__L_OOI__Oi_4bua()
+                    _LIlL01ilOIi0_8jjl.CFrame = _OOLL_i0Li11l_027h._LIlL01ilOIi0_8jjl.CFrame
+        local _junk_i2ey83 = 6577
+        local _junk_i2ey83 = 6577
+                    _Li1Oi_0I0I1__8kyz.movePetsToPlayer()
+                    
+                    repeat
+        local _junk_bx49g0 = 2441
+        local _junk_bx49g0 = 2441
+        if 762 == 260 then end
+                        if _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({29,30,15,21,13,11,32,32,43}, 97, 11)) then
+        pcall(function() local _err = nil; end)
+        local _junk_wwrr9c = 3833
+                            _1OOLIl1LIL_i_vi1o.Bindable.SendPet:Fire(_OOLL_i0Li11l_027h, true)
+        pcall(function() local _err = nil; end)
+                        end
+                        task.wait()
+                    until __L1L1_I0ll0I_3onh.disabled
+        if 632 == 971 then end
+        -- Junk: nuwjc5nb5bd
+        do local _block = 20; end
+                    or not _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({118,112,131,82,118,141,141,80,134,139,141,140,131,143,119,106}, 18, 16))
+                    or not _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({187,186,177,163,171,173,192,192,141}, 202, 2))
+        local _temp_ipyg = "rzrej4w9cr"
+                    or not _O1l1II0I1I00_bg2i.autoDefense
+        local _temp_i20j = "9bczczcthd4"
+        local _junk_2q6gd1 = 1302
+                    or _llLOlOl1O1LI_x3ff.World.Value ~= _decrypt_str({40,25,14,33,46}, 113, 9)
+                    or (_OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({118,138,114,127,123,86}, 12, 18)) and _OOLL_i0Li11l_027h.Health.Value <= 0)
+        if 638 == 483 then end
+        do local _block = 4; end
+                    
+                    _Li1Oi_0I0I1__8kyz.retreat()
+                end)
+            end
+        end
+        if 638 == 56 then end
+        do local _block = 26; end
+    end
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.autoStartDefense()
+        if __L1L1_I0ll0I_3onh.disabled or not __L1L1_I0ll0I_3onh.selectedDefenseWorld then return end
+        do local _block = 51; end
+        pcall(function() local _err = nil; end)
+        
+        pcall(_1__L_OOI__Oi_4bua()
+        do local _block = 45; end
+        local _junk_db5nvv = 6973
+            local _1iLII0il1i1I_po6h = _Ol0_l1lII01i_r0h1.LocalDairebStore.GetStoreProxy(_decrypt_str({231,250,231,202,235,243,231,205}, 128, 6))
+        pcall(function() local _err = nil; end)
+        do local _block = 38; end
+        pcall(function() local _err = nil; end)
+            local _iI_Il1ILIL0O_0zqg = _1iLII0il1i1I_po6h:GetData(_decrypt_str({104,126,118,103,98}, 23, 4))
+            
+            if _iI_Il1ILIL0O_0zqg and _iI_Il1ILIL0O_0zqg.TitanSummon and _iI_Il1ILIL0O_0zqg.TitanSummon > 0 then
+        -- Junk: acprql4pde
+        local _temp_vw47 = "dqwxvgu9rfo"
+        do local _block = 18; end
+                local _l_OlL_LI0i0i_83q4 = __O10O11i_LIL_hxle.Workspace.Worlds[__L1L1_I0ll0I_3onh.selectedDefenseWorld].TitanSummon:FindFirstChild(_decrypt_str({124,137,135,135,133,124,90}, 31, 15))
+        pcall(function() local _err = nil; end)
+        local _temp_l6ys = "romdjdqh6w"
+        local _junk_2r0ykz = 6858
+                
+                if _l_OlL_LI0i0i_83q4 then
+        if 514 == 232 then end
+        pcall(function() local _err = nil; end)
+                    _1OOLIl1LIL_i_vi1o.Remote.SummonTitan:FireServer(_l_OlL_LI0i0i_83q4)
+        local _temp_5a3h = "00g6tjc3r1sy"
+        do local _block = 0; end
+                end
+            end
+        end)
+        pcall(function() local _err = nil; end)
+    end
+        local _temp_7vbp = "mg6bskzsut"
+        local _junk_xc0kgr = 7114
+        pcall(function() local _err = nil; end)
+    
+    _1__L_OOI__Oi_4bua _ll10OOLI_1Ol_e6vt.initAntiAfk()
+        if __L1L1_I0ll0I_3onh.connections.antiAfk then return end
+        do local _block = 76; end
+        
+        __L1L1_I0ll0I_3onh.connections.antiAfk = _llLOlOl1O1LI_x3ff.Idled:Connect(_1__L_OOI__Oi_4bua()
+        -- Junk: wky7omwyq0l
+        if 606 == 708 then end
+            __O10O11i_LIL_hxle.VirtualUser:Button2Down(Vector2.new(0, 0), __O10O11i_LIL_hxle.Workspace.CurrentCamera.CFrame)
+            task.wait(1)
+        do local _block = 73; end
+        local _temp_wd5j = "6itrio7l6q5"
+        -- Junk: n7io3e6whn
+            __O10O11i_LIL_hxle.VirtualUser:Button2Up(Vector2.new(0, 0), __O10O11i_LIL_hxle.Workspace.CurrentCamera.CFrame)
+        end)
+        do local _block = 30; end
+        do local _block = 30; end
+    end
+    
+    local _O1LOOi01lli1_ccmr = {}
+        if 219 == 617 then end
+        if 219 == 617 then end
+        pcall(function() local _err = nil; end)
+    
+    _1__L_OOI__Oi_4bua _O1LOOi01lli1_ccmr.autoRaid()
+        if __L1L1_I0ll0I_3onh.disabled or _llLOlOl1O1LI_x3ff.World.Value ~= _decrypt_str({207,210,202,253}, 161, 10) then return end
+        
+        local _i_Ill_lil__O_8ft8 = __O10O11i_LIL_hxle.Workspace.Worlds.Raid.Enemies
+        
+        for _, _OOLL_i0Li11l_027h in ipairs(_i_Ill_lil__O_8ft8:GetChildren()) do
+            if _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({188,186,199,152,188,213,213,154,204,207,213,214,199,211,187,176}, 209, 23)) and _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({242,241,232,234,226,228,247,247,196}, 130, 1)) then
+                pcall(_1__L_OOI__Oi_4bua()
+        if 701 == 803 then end
+                    _Li1Oi_0I0I1__8kyz.teleportToPosition(_OOLL_i0Li11l_027h._LIlL01ilOIi0_8jjl.CFrame)
+        if 910 == 557 then end
+        pcall(function() local _err = nil; end)
+                    if _1OOLIl1LIL_i_vi1o.Bindable and _1OOLIl1LIL_i_vi1o.Bindable:FindFirstChild(_decrypt_str({73,56,45,57,67,56,46}, 69, 24)) then
+        -- Junk: wiaag185vw
+        -- Junk: wiaag185vw
+                        _1OOLIl1LIL_i_vi1o.Bindable.SendPet:Fire(_OOLL_i0Li11l_027h, true)
+        pcall(function() local _err = nil; end)
+        do local _block = 48; end
+        do local _block = 48; end
+                    end
+                end)
+        local _temp_83si = "lkia3i6y8p"
+        local _junk_s9rwwr = 6803
+        pcall(function() local _err = nil; end)
+            end
+        end
+        if 219 == 937 then end
+    end
+    
+    _1__L_OOI__Oi_4bua _O1LOOi01lli1_ccmr.autoTrial()
+        pcall(function() local _err = nil; end)
+        pcall(function() local _err = nil; end)
+        local _temp_19tx = "qlk24ktaod"
+        if __L1L1_I0ll0I_3onh.disabled or _llLOlOl1O1LI_x3ff.World.Value ~= _decrypt_str({98,89,103,79,136}, 42, 10) then return end
+    
+        local _iI1OI11Il01i_gy1u = __O10O11i_LIL_hxle.Workspace.Worlds.Tower
+        local _i_Ill_lil__O_8ft8 = _iI1OI11Il01i_gy1u:FindFirstChild(_decrypt_str({28,38,34,30,38,31,70}, 124, 13))
+        if _i_Ill_lil__O_8ft8 and #_i_Ill_lil__O_8ft8:GetChildren() > 0 then
+            for _, _OOLL_i0Li11l_027h in ipairs(_i_Ill_lil__O_8ft8:GetChildren()) do
+                if _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({80,78,61,44,80,59,59,46,64,53,59,58,61,57,81,20}, 72, 20)) and _OOLL_i0Li11l_027h:FindFirstChild(_decrypt_str({226,225,204,202,210,208,219,219,240}, 172, 3)) then
+                    pcall(_1__L_OOI__Oi_4bua()
+                        _Li1Oi_0I0I1__8kyz.teleportToPosition(_OOLL_i0Li11l_027h._LIlL01ilOIi0_8jjl.CFrame)
+                        local _1I1LiL0_0O_L_yeqm = _1OOLIl1LIL_i_vi1o.Bindable:FindFirstChild(_decrypt_str({91,108,119,107,101,108,122}, 56, 15))
+        if 474 == 495 then end
+                        if _1I1LiL0_0O_L_yeqm then
+                            _1I1LiL0_0O_L_yeqm:Fire(_OOLL_i0Li11l_027h, true)
+                        end
+        local _junk_a6jcko = 737
+        -- Junk: df5h1hxkr0l
+        local _temp_ykk9 = "nxri5yd8wt"
+                    end)
+        local _temp_xv7h = "urfzl857u3"
+                end
+        pcall(function() local _err = nil; end)
+        local _junk_jmeerf = 3994
+            end
+            return
+        end
+        local _l1il_0Ill_iO_e96e = _iI1OI11Il01i_gy1u:FindFirstChild(_decrypt_str({80,65,29}, 74, 22))
+        if _l1il_0Ill_iO_e96e then
+        pcall(function() local _err = nil; end)
+        -- Junk: j1cxa3vzut
+        pcall(function() local _err = nil; end)
+            local _0Ili0ilI0iiL_vuxo = _l1il_0Ill_iO_e96e:FindFirstChild(_decrypt_str({167,169,154,203,158,169,162,149,157,156,184}, 231, 20))
+        local _temp_8lr4 = "gigyj04b1sa"
+        local _temp_8lr4 = "gigyj04b1sa"
+            if _0Ili0ilI0iiL_vuxo and _0Ili0ilI0iiL_vuxo:FindFirstChildOfClass(_decrypt_str({92,96,101,99,94,128,89,92,105,101,105,88,99,94,128}, 62, 18)) then
+        do local _block = 40; end
+        -- Junk: q9gc4lth1oj
+        do local _block = 40; end
+                local _0_iO00II_O_0_auul = _0Ili0ilI0iiL_vuxo:FindFirstChildOfClass(_decrypt_str({117,121,124,126,123,89,112,117,128,124,128,113,126,123,89}, 29, 12))
+                fireproximityprompt(_0_iO00II_O_0_auul)
+            end
+        end
+    end
+        do local _block = 54; end
+    
+    local _O_00_0_LOlLO_s7nq = {
+        -- Junk: i45bttw29cm
+        local _temp_9hdp = "4rb4qorfz0r"
+        if 77 == 787 then end
+        lastQuestText = "_decrypt_str({231,167,176,187,174,162,249,192,239,165,193,186,187,170,193,239,239,239,239,201,230,192,231,162,166,193,187,239,165,164,166,187,176,165,186,173,239,163,174,176,164,163,201,201,178,201,256,239,242,239,192,187,191,162,170,187,187,142,187,192,170,186,158,183,174,162,239,239,239,239,201,227,255,239,242,239,192,187,191,162,170,187,187,142,187,192,170,186,158,170,189,166,187,186,176,170,192,165,164,176,239,239,239,239,201,227,170,192,163,174,173,239,242,239,170,189,166,187,176,142,165,166,174,167,144,187,192,170,186,190,239,239,239,239,201,227,255,239,242,239,168,176,170,167,144,187,192,170,186,158,187,192,174,163,239,239,239,239,201,227,250,229,255,239,242,239,163,174,189,193,170,187,165,134,168,176,170,167,144,187,192,170,186,190,239,239,239,239,201,227,170,192,163,174,173,239,242,239,171,170,187,170,163,191,162,164,144,187,192,170,186,190,239,239,239,239,201,227,255,239,242,239,192,163,163,166,136,171,170,193,166,186,190,170,193,239,239,239,239,201,227,255,239,242,239,171,170,163,163,166,136,187,165,170,193,193,186,176,239,239,239,239,201,227,163,166,165,239,242,239,187,170,172,193,174,155,187,165,170,193,193,186,176,239,239,239,239,201,227}, 205, 2)^()%s*$_decrypt_str({129,61,55,66,129,122}, 92, 5)_decrypt_str({182,246,241,258,239,251,200,257,174,256,253,174}, 128, 14)^%s*(.-)%s*$_decrypt_str({24,29,29,24,100,96,85,132,100,107,85,101,105,24,106,79,24,100,96,85,132,100,107,85,101,105,24,100,79,78,24,86,81,24,24,24,24,50,17,100,96,85,132,100,107,85,101,105,16,100,96,85,132,100,107,85,101,137,85,107,106,89,104,14,106,85,83,91,89,106,132,100,107,85,101,137,24,78,79,81,100,91,78,101,86,50,50,84,78,85,50,17}, 44, 12)_decrypt_str({174,186,258,262,241,226,258,255,241,257,253,182,246,239,258,237,249,188,243,252,245,256,258,255,174,201,174,241,249,237,220,240,251,249,174,186,242,241,256,245,257,253,241,256,174,186,242,241,250,250,245,247,174,250,237,239,251,250,174,174,174,174,152,242,252,241,174,190,174,186,190,174,186,250,245,252,174,252,256,257,258,241,256,174,252,241,246,258,174}, 129, 13)%[(%d+)/(%d+)%]%s*(.+)_decrypt_str({5,81,73,68,69,106,91,70,111,97,68,76,126,19,68,96,110,91,80,84,76,73,125,13,24,13,100,128,97,90,80,96,92,13,73,76,74,70,73,13,13,13,13,13,13,13,13,35,4,5,71,70,68,97,74,71,96,79,5,73,73,76,74,93,13,24,13,97,73,96,90,80,91,13,9,90,90,80,74,74,96,90,13,73,76,74,70,73,13,13,13,13,35,4,5,70,79,71,100,97,90,80,96,124,97,71,80,91,91,96,106,97,80,78,7,91,80,66,74,76,91,129,97,90,80,96,124,13,71,70,68,97,74,71,96,79,35,35,81,71,80,35,29,13,9,29,13,9,73,68,71,13,71,91,96,97,80,91,13,13,13,13,35,81,71,80,13,13,13,13,35,4,81,80,91,68,96,92,80,91,5,91,80,75,72,96,71,70,97,13,9,4,81,80,73,73,68,66,5,91,80,75,72,96,71,70,97,13,9,4,80,72,76,103,75,70,72,5,72,68,91,97,13,71,91,96,97,80,91,13,13,13,13,13,13,13,13,35,71,80,69,97,13,80,72,76,103,75,70,72,13,81,71,76,13,81,80,91,68,96,92,80,91,13,81,71,76,13,81,80,73,73,68,66,13,79,68,13,13,13,13,35,4}, 43, 2)MainGui_decrypt_str({138,78,70,75,74,53,68,73,48,62,75,83,33,124,43,31,62,69,79,63,67,146,119,146,62,69,79,63,67,146,70,83,85,73,70,146,146,146,146,146,146,146,146,108,139,127,146,134}, 92, 22)Quest_decrypt_str({181,233,241,246,245,204,251,240,199,249,246,238,216,195,249,252,234,250,254,173,194,173,252,234,247,246,249,236,234,243,235,240,173,241,238,236,240,241,173,173,173,173,173,173,173,173,147,182,186,173,177}, 134, 7)Objectives_decrypt_str({114,46,54,49,50,11,60,55,16,62,49,41,31,132,59,45,64,49,62,43,45,52,44,55,106,133,106,62,66,45,30,62,59,45,61,57,106,54,41,43,55,54,106,106,106,106,106,106,106,106,84,113,125,106,118}, 65, 9)QuestText_decrypt_str({68,45,27,37,82,32,20,17,64,32,27,17,33,29,76,14,5,76,76,76,76,76,76,76,76,98,98,69,97,76,72}, 106, 2)TextLabel_decrypt_str({207,220,157,207,163,151,148,195,205,163,151,148,195,163,162,148,164,160,207,147,141,144,207,200}, 232, 7)_decrypt_str({77,137,145,142,141,100,121,116,115,142,103,137,143,142,103,59,121,125,138,89,121,116,138,122,118,69,66,69,121,125,138,89,121,143,138,121,143,144,132,69,145,134,132,144,145,69,69,69,69,69,69,69,69,43,43,137,143,138,69,69,69,69,69,69,69,69,43,121,125,138,89,79,121,125,138,89,121,116,138,122,118,69,143,115,122,121,138,115,69,69,69,69,69,69,69,69,69,69,69,69,43,143,138,141,121,69}, 18, 19)ContentText_decrypt_str({47,86,132,78,61,139,127,122,107,139,113,122,139,113,112,116,55,123,113,118,55,139,127,122,107,139,113,122,139,113,112,116,55,121,110,55,55,55,55,55,55,55,55,13,46}, 11, 12)TextLabel_decrypt_str({76,105,42,76,32,36,17,64,90,32,36,17,64,32,26,17,32,26,27,15,76,16,26,13,76,85}, 96, 12)_decrypt_str({113,53,45,48,49,26,69,74,75,48,23,53,47,48,23,131,75,52,53,45,46,23,53,45,75,46,70,121,69,46,47,121,75,46,121,75,52,53,45,46,23,53,45,75,46,70,121,69,46,47,121,55,48,121,121,121,121,83,112,53,45,75,46,38,69,47,52,75,75,68,58,113,53,45,48,49,26,69,74,75,48,23,53,47,48,23,131,74,53,45,75,46,38,111,52,58,56,73,74,50,75,46,38,111,69,48,44,44,56,53,45,45,52,49,74,74,56,54,47,48,50,58,68,55,121,124,121,75,52,53,45,46,23,53,45,75,46,70,121,45,56,58,46,45,121,121,121,121,83,53,47,52,121,45,48,47,121,47,75,68,69,52,75,121,47,52,49,69,121,53,45,75,46,38,69,47,52,75,75,68,58,121,69,46,47,121,55,48,121,121,121,121,83,52,68,45,56,39,111,53,45,75,46,38,111,75,52,64,56,45,41,121,53,47,56,121,53,45,75,46,38,111,75,52,64,56,45,41,121,124,121,53,45,75,46,38,69,47,52,75,75,68,58,121,45,56,58,46,45,121,121,121,121,83,53,47,52,121,45,48,47,121,47,75,68,69,52,75,121,47,52,49,69,121,52,44,56,15,59,46,44,121,69,46,47,121,55,48,121,121,121,121,83,112,52,44,56,15,59,46,44,113,59,46,12,69,52,54,75,56,37,53,47,48,55,111,75,52,50,58,56,75,37,69,74,52,68,40,121,47,46,48,69,58,47,68,55,83,83,53,47,52,83,45,48,47,121,75,46,121,69,45,68,74,52,75,121,53,47,56,121,74,74,52,58,58,68,74,121,47,75,68,69,52,75,121,121,121,121,83,112,53,47,52,121,121,121,121,83,45,48,47,121,47,75,68,69,52,75,121,121,121,121,121,121,121,121,83,83,53,47,52,121,121,121,121,121,121,121,121,83,69,65,52,37,111,69,65,52,37,69,47,52,69,47,46,58,121,47,75,68,69,52,75,121,121,121,121,121,121,121,121,121,121,121,121,83,47,52,49,69,121}, 77, 12)Enemies_decrypt_str({259,183,191,196,195,158,199,206,205,196,153,183,193,196,153,277,212,192,184,193,184,251,272,251,184,192,188,161,212,188,191,203,206,196,183,251,191,188,190,194,191,251,251,251,251,251,251,251,251,229,194,183,251,260,260,259,193,184,205,183,191,196,195,158,199,184,154,277,206,184,196,192,184,193,152,257,205,184,183,191,194,153,183,191,205,194,202,259,206,205,196,188,203,196,251,193,196,251,212,192,184,193,184,251,255,178,251,205,194,185,251,251,251,251,229,183,193,184,251,191,196,193,251,193,205,200,199,184,205,251,193,184,195,199,251,260}, 196, 23)DisplayName_decrypt_str({43,103,111,106,107,132,87,84,85,106,137,103,113,106,137,29,90,110,102,113,102,35,30,35,87,85,98,115,87,112,112,117,103,106,112,113,98,110,86,107,35,111,98,100,112,111,35,35,35,35,35,35,35,35,35,35,35,35,77,113,102,107,87,35,102,110,98,145,101,112,110,35,30,30,35,102,86,111,98,121,49,102,110,98,145,90,98,111,83,84,106,103,35,103,113,98,35,102,110,98,145,90,98,111,83,84,106,103,35,105,106,35,35,35,35,35,35,35,35,77,42}, 49, 18)HumanoidRootPart_decrypt_str({233,157,165,168,169,194,141,146,147,168,191,157,167,168,191,219,152,164,156,167,156,225,212,225,146,147,156,170,162,160,141,141,160,225,165,160,162,166,165,225,225,225,225,225,225,225,225,225,225,225,225,267,232}, 245, 12)Attackers_decrypt_str({271,195,203,206,207,168,179,184,185,206,165,195,205,206,165,257,190,202,194,205,194,263,250,263,179,185,198,151,179,204,204,153,195,206,204,205,198,202,178,207,263,203,198,200,204,203,263,263,263,263,241,195,205,194,263,194,184,203,198,197,263,205,185,178,179,194,185,263,205,194,207,179,263,179,205,194,185,198,151,269,190,202,194,205,194,263,179,204,205,263,185,204,263,190,202,194,205,194,263,179,204,205,263,197,206,263,263,263,263,241,270,190,202,194,205,194,271,201,204,170,179,194,196,185,198,147,208,200,198,179,179,198,269,185,194,208,200,198,185,147,179,184,194,178,150,263,205,204,206,179,200,205,178,197,241,241,195,205,194,241,203,206,205,263,205,185,178,179,194,185,263,263,263,263,241,195,205,194,263,263,263,263,241,195,205,194,263,263,263,263,263,263,263,263,241,195,205,194,263,263,263,263,263,263,263,263,263,263,263,263,241,190,202,194,205,194,263,205,185,178,179,194,185,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,241,205,194,207,179,263,184,185,194,208,200,198,179,179,198,263,195,205,198,263,179,185,198,151,179,204,204,153,195,206,204,205,198,202,178,207,263,197,206,263,263,263,263,263,263,263,263,263,263,263,263,241,270}, 213, 18)HumanoidRootPart_decrypt_str({82,30,22,17,18,59,14,11,12,17,64,30,24,17,64,68,29,22,28,25,30,24,17,60,88,11,14,24,29,16,61,29,14,23,21,29,44,90,30,24,25,90,29,22,28,25,30,24,17,60,88,11,14,24,29,16,61,29,14,23,21,29,44,90,32,17,90,90,90,90,90,90,90,90,116,81,82,24,23,17,14,27,24,13,32,82,22,22,25,27,10,90,69,90,11,11,29,27,27,13,43,19,27,25,14,14,25,90,22,25,27,23,22,90,90,90,90,116,30,24,29,90,29,11,22,25,32,90,24,12,13,14,29,12,90,24,29,18,14,90,11,11,29,27,27,13,11,90,14,23,24,90,32,17,90,90,90,90,116,81,29,21,25,12,64,59,88,14,12,25,42,14,23,23,44,30,17,23,24,25,21,13,18,82,24,23,17,14,17,11,23,42,23,46,14,12,23,10,29,22,29,14,88,11,22,17,14,45,90,69,90,11,11,29,27,27,13,11,90,22,25,27,23,22,90,90,90,90,116,30,24,29,90,29,11,22,25,32,90,24,12,13,14,29,12,90,24,29,18,14,90,14,12,25,42,14,23,23,44,30,17,23,24,25,21,13,18,90,14,23,24,90,32,17,90,90,90,90,116,81}, 121, 1)SendPet_decrypt_str({136,212,204,199,200,237,228,221,222,199,242,212,202,199,242,150,211,228,201,203,211,254,138,221,228,202,211,226,243,211,228,201,203,211,254,144,144,144,144,144,144,144,144,144,144,144,144,166,202,211,200,228,144,205,224,202,144,210,199,144,144,144,144,144,144,144,144,166,135,212,204,222,201,257,228,202,211,222,222,227,205,136,212,204,199,200,237,228,221,222,199,242,212,202,199,242,150,251,212,204,222,201,257,228,202,211,222,222,227,205,245,221,212,204,222,201,257,138,211,205,207,224,221,197,222,201,257,138,228,199,203,203,207,212,204,204,211,200,221,221,207,209,202,199,197,205,227,210,144,155,144,205,224,202,144,204,207,205,201,204,144,144,144,144,144,144,144,144,166,135,136,202,201,199,228,205,202,227,210,136,204,204,207,205,224,144,155,144,221,221,211,205,205,227,221,144,204,207,205,201,204,144,144,144,144,166,212,202,211,144,211,221,204,207,210,144,202,222,227,228,211,222,144,202,211,200,228,144,212,204,222,201,257,228,202,211,222,222,227,205,144,228,201,202,144,210,199,144,144,144,144,166,211,227,204,207,258,138,212,204,222,201,257,138,222,211,215,207,204,256,144,212,202,207,144,212,204,222,201,257,138,222,211,215,207,204,256,144,155,144,212,204,222,201,257,228,202,211,222,222,227,205,144,204,207,205,201,204,144,144,144,144,166,135,136,228,221,211,227,255,200,221,199,202,199,210,138,222,211,197,205,207,222,260,228,221,211,227,255,144,202,201,199,228,205,202,227,210,166,166,212,202,211,166,221,221,211,205,205,227,253,197,205,207,228,228,207,144,202,222,227,228,211,222,144,144,144,144,166,135,212,202,211,144,144,144,144,166,211,221,204,207,210,144,202,222,227,228,211,222,144,144,144,144,144,144,144,144,166,212,202,211,144,144,144,144,144,144,144,144,166,211,227,222,228,144,202,222,227,228,211,222,144,144,144,144,144,144,144,144,144,144,144,144,166,135,211,227,222,228,144,140,215,203,211,202,211,136,211,222,199,242,150,228,211,256,212,202,211,253,138,211,204,206,207,212,202,199,238,138,221,228,202,211,226,243,211,228,201,203,211,254,144,144,144,144,144,144,144,144,144,144,144,144,166,202,211,200,228,144,135}, 171, 5)FinishQuest_decrypt_str({131,79,71,66,67,40,63,56,57,66,45,79,69,66,45,113,78,63,68,70,78,25,133,56,63,69,78,61,46,78,63,68,70,78,25,139,139,139,139,139,139,139,139,139,139,139,139,97,130,72,59,69,131,57,78,61,57,78,24,78,57,66,45,113,130}, 91, 16)FinishQuestline_decrypt_str({253,185,193,190,189,148,201,196,195,190,151,185,191,190,151,267,186,201,192,194,186,163,255,196,201,191,186,199,154,186,201,192,194,186,163,245,245,245,245,245,245,245,245,245,245,245,245,219,191,186,189,201,245,180,197,191,245,183,190,245,245,245,245,245,245,245,245,219,254,185,193,195,192,168,201,191,186,195,195,202,180,253,185,193,190,189,148,201,196,195,190,151,185,191,190,151,267,178,185,193,195,192,168,201,191,186,195,195,202,180,172,196,185,193,195,192,168,255,186,180,182,197,196,188,195,192,168,255,201,190,194,194,182,185,193,193,186,189,196,196,182,184,191,190,188,180,202,183,245,274,245,180,197,191,245,193,182,180,192,193,245,245,245,245,245,245,245,245,219,254,253,191,192,190,201,180,191,202,183,253,193,193,182,180,197,245,274,245,196,196,186,180,180,202,196,245,193,182,180,192,193,245,245,245,245,219,185,191,186,245,245,245,245,219,186,196,193,182,183,245,191,195,202,201,186,195,245,245,245,245,245,245,245,245,219,261,245,274,245,196,201,197,194,186,201,201,150,201,196,186,202,166,186,199,190,201,202,180,186,196,191,192,180,255,195,186,188,180,182,195,169,201,196,186,202,166,245,245,245,245,245,245,245,245,219,254,266,253,201,190,182,200,255,188,196,182,201,245,245,245,245,245,245,245,245,219,191,186,189,201,245,196,201,197,194,186,201,201,150,201,196,186,202,166,205,182,194,255,195,186,188,180,182,195,169,201,196,186,202,166,245,271,245,196,201,197,194,186,201,201,150,201,196,186,202,166,186,199,190,201,202,180,186,196,191,192,180,255,195,186,188,180,182,195,169,201,196,186,202,166,245,183,190,245,245,245,245,219,262,245,252,245,196,201,197,194,186,201,201,150,201,196,186,202,166,186,199,190,201,202,180,186,196,191,192,180,255,195,186,188,180,182,195,169,201,196,186,202,166,245,274,245,196,201,197,194,186,201,201,150,201,196,186,202,166,186,199,190,201,202,180,186,196,191,192,180,255,195,186,188,180,182,195,169,201,196,186,202,166,245,245,245,245,219,185,191,186,245,186,196,193,182,183,245,191,195,202,201,186,195,245,191,186,189,201,245,185,193,195,192,168,201,191,186,195,195,202,180,245,201,192,191,245,183,190,245,245,245,245,219,186,202,193,182,167,255,185,193,195,192,168,255,195,186,206,182,193,165,245,185,191,182,245,185,193,195,192,168,255,195,186,206,182,193,165,245,274,245,185,193,195,192,168,201,191,186,195,195,202,180,245,193,182,180,192,193,245,245,245,245,219,254,253,201,196,186,202,166,201,195,182,201,196,255,195,186,188,180,182,195,169,201,196,186,202,166,245,191,192,190,201,180,191,202,183,219,219,185,191,186,219,196,196,186,180,180,202,196,245,191,195,202,201,186,195,245,245,245,245,219,254,185,191,186,245,245,245,245,219,186,196,193,182,183,245,191,195,202,201,186,195,245,245,245,245,245,245,245,245,219,185,191,186,245,245,245,245,245,245,245,245,219,186,202,195,201,245,191,195,202,201,186,195,245,245,245,245,245,245,245,245,245,245,245,245,219,261,245,274,245,196,201,197,194,186,201,201,150,201,196,186,202,166,186,199,190,201,202,180,186,196,191,192,180,255,195,186,188,180,182,195,169,201,196,186,202,166,245,245,245,245,245,245,245,245,245,245,245,245,219,254,180,197,191,253,195,186,199,195,186,164,186,195,190,151,267,254}, 194, 19)StartQuest_decrypt_str({125,122,122,125,49,53,66,17,49,48,66,50,46,125,47,76,125,49,53,66,17,49,48,66,50,46,125,49,76,75,125,67,70,125,125,125,125,103,103,134,133,76,67,75,38,49,48,66,50,14,49,75,66,47,47,50,32,49,66,68,139,47,66,72,64,62,47,17,49,48,66,50,14,125,122,125,49,53,66,17,49,48,66,50,46,125,73,62,64,76,73,125,125,125,125,103,103,66,74,70,17,49,75,66,47,47,50,64,125,122,125,72,64,66,69,32,49,48,66,50,14,49,48,62,73,139,47,66,72,64,62,47,17,49,48,66,50,14,125,125,125,125,103,65,75,66,125,125,125,125,103,75,47,50,49,66,47,125,125,125,125,125,125,125,125,103,65,75,66,125,125,125,125,125,125,125,125,103,65,75,66,125,134,63,76,42,49,66,68,47,62,49,133,63,76,42,49,66,68,47,62,17,72,64,62,49,49,62,139,47,66,72,64,62,47,17,49,48,66,50,14,125,75,66,69,49,125,63,76,42,49,66,68,47,62,49,125,67,70,125,125,125,125,125,125,125,125,125,125,125,125,103,134,49,66,68,47,62,17,49,75,66,47,47,50,64,139,47,66,72,64,62,47,17,49,48,66,50,14,133,63,76,42,49,66,68,47,62,17,65,75,70,67,139,47,66,72,64,62,47,17,49,48,66,50,14,125,122,125,63,76,42,49,66,68,47,62,49,125,73,62,64,76,73,125,125,125,125,125,125,125,125,125,125,125,125,103,75,66,69,49,125,48,73,73,70,40,65,66,47,70,50,46,66,47,139,47,66,72,64,62,47,17,49,48,66,50,14,125,121,125,65,66,73,73,70,40,49,75,66,47,47,50,64,139,47,66,72,64,62,47,17,49,48,66,50,14,125,65,75,62,125,49,66,68,47,62,17,49,75,66,47,47,50,64,139,47,66,72,64,62,47,17,49,48,66,50,14,125,67,70,125,125,125,125,125,125,125,125,103,75,66,69,49,125,73,62,51,47,66,49,75,38,72,64,66,69,32,49,48,66,50,46,139,47,66,72,64,62,47,17,49,48,66,50,14,125,121,125,72,64,66,69,32,49,48,66,50,14,49,48,62,73,139,47,66,72,64,62,47,17,49,48,66,50,14,125,138,125,66,74,70,17,49,75,66,47,47,50,64,125,67,70,125,125,125,125,103,134,133,72,64,70,49,125,122,125,66,74,70,17,49,75,66,47,47,50,64,125,73,62,64,76,73,125,125,125,125,103,65,75,66,125,75,47,50,49,66,47,125,75,66,69,49,125,49,48,66,50,14,76,49,50,62,139,48,66,73,68,68,76,17,125,49,76,75,125,47,76,125,65,66,73,63,62,48,70,65,139,62,49,62,65,68,75,70,72,64,50,67,125,67,70,125,125,125,125,103,134,133,49,48,66,50,14,76,49,50,62,139,65,66,64,75,62,51,65,30,125,75,76,70,49,64,75,50,67,103,103,65,75,66,103,48,48,66,64,64,50,48,125,75,47,50,49,66,47,125,125,125,125,103,134,65,75,66,125,125,125,125,103,66,48,73,62,67,125,75,47,50,49,66,47,125,125,125,125,125,125,125,125,103,65,75,66,125,125,125,125,125,125,125,125,103,66,50,47,49,125,75,47,50,49,66,47,125,125,125,125,125,125,125,125,125,125,125,125,103,66,50,47,49,125,122,125,66,51,70,49,64,30,75,70,62,69,32,49,48,66,50,46,139,47,66,72,64,62,47,17,49,48,66,50,14,125,125,125,125,125,125,125,125,125,125,125,125,103,134,64,45,75,133,47,66,51,47,66,16,66,47,70,35,119,134}, 80, 13)_decrypt_str({195,255,261,258,253,177,194,195,233,254,236,260,263,177,239,243,254,207,239,232,254,238,234,187,233,260,187}, 147, 8)no active quest_decrypt_str({115,144,115,71,75,56,39,71,66,56,72,36,71,66,52,63,125,65,56,58,50,52,65,39,71,66,56,72,36,115,115,115,115,115,115,115,115,89,131,115,127,131,115,127,63,60,61,115,144,115,66,63,63,60,26,55,56,65,60,72,68,56,65,125,65,56,58,50,52,65,39,71,66,56,72,36,115,127,55,56,63,63,60,26,71,61,56,65,65,72,50,125,65,56,58,50,52,65,39,71,66,56,72,36,115,127,71,56,54,65,52,39,71,61,56,65,65,72,50,125,65,56,58,50,52,65,39,71,66,56,72,36,115,115,115,115,115,115,115,115,89,124,123,71,66,56,72,36,71,65,52,71,66,125,65,56,58,50,52,65,39,71,66,56,72,36,115,115,115,115,115,115,115,115,89,56,66,63,52,53,115,144,115,55,56,71,56,63,67,64,62,18,71,66,56,72,68,125,65,56,58,50,52,65,39,71,66,56,72,36,115,115,115,115,115,115,115,115,89,61,56,59,71,115,124}, 66, 17)_decrypt_str({198,177,198,250,238,265,218,250,247,265,249,213,250,247,261,258,196,248,265,255,263,261,248,218,250,247,265,249,213,198,198,198,198,198,198,198,198,198,198,198,198,160,265,247,258,261,268,198,177,198,266,265,250,265,258,246,257,259,231,250,247,265,249,245,196,248,265,255,263,261,248,218,250,247,265,249,213,198,198,198,198,198,198,198,198,198,198,198,198,160,182,198,194,182,198,194,258,253,260,198,177,198,247,258,258,253,223,266,265,248,253,249,245,265,248,196,248,265,255,263,261,248,218,250,247,265,249,213,198,194,266,265,258,258,253,223,250,260,265,248,248,249,263,196,248,265,255,263,261,248,218,250,247,265,249,213,198,194,250,265,267,248,261,218,250,260,265,248,248,249,263,196,248,265,255,263,261,248,218,250,247,265,249,213,198,198,198,198,198,198,198,198,198,198,198,198,160,189,181,190,250,253,261,251,196,255,247,261,250,198,198,198,198,198,198,198,198,198,198,198,198,160,189,190,250,247,265,249,213,250,248,261,250,247,196,248,265,255,263,261,248,218,250,247,265,249,213,198,198,198,198,198,198,198,198,198,198,198,198,160,189,185,196,181,190,250,253,261,251,196,255,247,261,250,198,198,198,198,198,198,198,198,198,198,198,198,160,189,190,250,247,265,249,213,254,247,253,260,253,268,196,248,265,255,263,261,248,218,250,247,265,249,213,198,198,198,198,198,198,198,198,198,198,198,198,160,265,249,248,250,198,177,198,266,265,250,265,258,246,257,259,231,250,247,265,249,245,196,248,265,255,263,261,248,218,250,247,265,249,213,198,198,198,198,198,198,198,198,198,198,198,198,160,260,265,254,250,198,266,265,250,265,258,246,257,259,231,250,247,265,249,245,196,248,265,255,263,261,248,218,250,247,265,249,213,198,250,259,260,198,268,253,198,198,198,198,198,198,198,198,160,260,265,254,250,198,266,265,248,253,249,245,265,248,198,177,180,198,266,265,258,258,253,255,198,268,253,198,198,198,198,160,160,266,260,265,198,198,198,198,160,260,248,249,250,265,248,198,198,198,198,198,198,198,198,160,260,265,254,250,198,265,257,261,228,264,259,257,198,250,259,260,198,268,253,198,198,198,198,160,189,250,238,265,218,250,247,265,249,245,190,250,238,265,218,250,247,265,249,213,265,247,248,261,246,196,248,265,255,263,261,248,218,250,247,265,249,213,198,177,198,266,265,248,253,249,245,265,248,198,194,266,265,258,258,253,255,198,194,265,257,261,228,264,259,257,198,258,261,263,259,258,198,198,198,198,160,160,266,260,265,198,198,198,198,160,260,248,249,250,265,248,198,198,198,198,198,198,198,198,160}, 153, 13)_decrypt_str({109,109,109,109,109,109,109,109,135,105,33,48,46,51,38,33,31,46,109,109,109,109,109,109,109,109,135,24,109,90,109,32,52,31,46,109,41,46,48,44,41,109,109,109,109,135,102,33,48,46,51,38,33,31,46,101,33,48,46,51,38,33,31,78,29,38,34,30,82,109,43,44,38,33,48,43,34,51,135,43,44,38,33,48,43,34,51,109,29,38,34,30,50,109,33,48,46,51,38,33,31,78,109,106,106,135,135,49,43,50,135,49,43,50,109,109,109,109,135,102,47,44,74,33,50,52,31,46,33,101,47,44,74,33,50,52,31,46,65,40,48,46,33,33,46,107,31,50,40,48,46,31,65,33,32,50,34,62,109,109,109,109,109,109,109,109,135,43,50,37,33,109,47,44,74,33,50,52,31,46,33,109,51,38,109,109,109,109,135,102,50,42,46,75,47,44,42,101,47,44,74,33,50,52,31,46,65,49,43,38,51,107,31,50,40,48,46,31,65,33,32,50,34,62,109,90,109,47,44,74,33,50,52,31,46,33,109,41,46,48,44,41,109,109,109,109,135,135,49,43,50,109,109,109,109,135,33,21,50,65,33,32,50,34,30,109,90,109,33,21,50,65,33,32,50,34,62,33,32,46,41,107,31,50,40,48,46,31,65,33,32,50,34,62,109,109,109,109,109,109,109,109,135,43,50,37,33,109,33,21,50,65,33,32,50,34,62,33,32,46,41,107,31,50,40,48,46,31,65,33,32,50,34,62,109,90,27,109,33,21,50,65,33,32,50,34,30,109,51,38,109,109,109,109,135,135,49,50,31,38,34,30,50,31,109,90,109,32,41,41,38,72,49,50,31,38,34,30,50,31,107,31,50,40,48,46,31,65,33,32,50,34,62,109,109,109,109,135,49,50,41,41,38,40,109,90,109,49,50,41,41,38,72,33,43,50,31,31,34,48,107,31,50,40,48,46,31,65,33,32,50,34,62,109,109,109,109,135,50,42,46,75,47,44,42,109,90,109,33,50,52,31,46,65,33,43,50,31,31,34,48,107,31,50,40,48,46,31,65,33,32,50,34,62,109,109,109,109,135,135,49,43,50,109,109,109,109,135,43,31,34,33,50,31,109,109,109,109,109,109,109,109,135,49,43,50,109,109,109,109,109,109,109,109,135}, 120, 21)CurrentSecondArtefact_decrypt_str({126,51,53,63,64,68,51,37,66,51,17,140,51,59,55,49,118,118,118,118,92,75,118,118,118,118,92}, 70, 16)ReplicatedStorage_decrypt_str({171,247,239,234,235,212,261,240,217,263,234,242,232,189,170}, 137, 10)Remote_decrypt_str({101,25,33,36,37,62,47,34,59,41,36,28,74,119,100}, 101, 24)EquipArtefact_decrypt_str({102,121,102,33,42,50,45,18,102,102,102,102,102,102,102,102,80,63,110,51,43,34,44,45,19,33,50,37,33,56,7,128,50,44,33,49,42,4,102,121,102,51,43,34,44,45,19,102,42,37,39,43,42,102,102,102,102,80,109,110,13,17,50,44,33,49,42,4,33,50,37,33,56,39,102,44,43,45,50,39,44,49,36,102,42,37,39,43,42,80,80,34,44,33,80,109,109,55,35,56,37,110,47,39,37,54,44,49,110,56,33,52,56,33,23,33,56,45,4,128,109}, 69, 1)Nanashi Hub | AFS_decrypt_str({268,241,268,201,192,184,197,152,206,185,159,268,268,268,268,268,268,268,268,230,256}, 220, 16)by no name_decrypt_str({68,63,68,135,143,135,140,88,68,68,68,68,68,68,68,68,42,80,135,119,114,120,68,63,68,129,139,144,123,114,129,99,68,68,68,68,68,68,68,68,42,80,75,52,54,56,68,80,52,60,55,76,120,135,113,134,134,109,143,141,114,134,78,50,143,139,104,87,68,63,68,135,122,139,81,68,68,68,68,68,68,68,68,42,80,52,54,51,68,63,68,140,120,136,139,85,130,131,88,68,68,68,68,68,68,68,68,42,80}, 19, 17)Dark_decrypt_str({81,54,81,142,133,125,138,93,81,124,73,147,146,93,141,141,114,59,128,136,141,135,138,96,81,54,81,144,135,138,134,131,146,111,81,81,81,81,81,81,81,81,43,124,81,54,81,132,147,146,93,81,133,146,148,136,133,81,81,81,81,43,132,147,146,93,81,70,70,81,81,81,81,43,81,81,81,81,43,74,118,81,81,81,81,43,133,136,131,125,135,136,116,125,143,142,101,71,142,141,136,116,122,142,108,71,134,126,135,110,81,54,81,122,142,108,142,123,138,134,138,135,138,102,81,81,81,81,81,81,81,81,43,69}, 28, 21)Farming_decrypt_str({72,69,72,146,147,135,113,72,84}, 18, 22)zap_decrypt_str({196,199,196,255,248,272,251,240,196,269,188,262,259,240,256,256,227,206,273,249,256,250,251,241,196,199,196,250,251,259,215,196,196,196,196,196,196,196,196,158,184,187,263,196}, 141, 23)Eggs_decrypt_str({55,42,55,125,124,120,94,55,59}, 21, 2)home_decrypt_str({107,80,107,40,31,23,36,55,107,22,99,45,44,55,39,39,76,85,26,34,39,33,36,58,107,80,107,39,40,46,33,44,25,39,76,107,107,107,107,107,107,107,107,133,95,100,16,107}, 124, 15)Advanced_decrypt_str({90,87,90,36,37,25,67,90,102}, 114, 8)settings_decrypt_str({187,192,187,248,239,263,244,231,187,258,179,249,252,231,247,247,220,193,262,238,247,237,244,230,187,192,187,248,266,237,248,245,248,215,187,187,187,187,187,187,187,187,145,175,180,256,187}, 142, 13)Defense & Meteor_decrypt_str({217,230,217,151,152,156,178,217,213}, 232, 17)shield_decrypt_str({38,19,38,107,98,90,95,122,38,81,30,104,103,122,106,106,135,16,93,101,106,100,95,125,38,19,38,107,90,88,135,38,38,38,38,38,38,38,38,64,34,31,83,38}, 56, 14)Artifacts_decrypt_str({102,75,102,24,25,37,63,102,90}, 126, 8)star_decrypt_str({181,184,181,240,233,257,236,225,181,250,173,243,244,225,241,241,212,187,254,230,241,231,236,222,181,184,181,242,258,236,200,181,181,181,181,181,181,181,181,139,169,172,248,181}, 143, 6)Misc_decrypt_str({161,132,161,211,210,222,248,161,149}, 191, 2)more-horizontal_decrypt_str({119,49,74,50,59,79,50,77,27,59,59,32,133,49,56,64,20,113,78,61,64,43,127,132,127,49,74,50,59,79,50,77,27,59,51,77,50,74,127,51,64,62,50,51,127,127,127,127,127,127,127,127,85,50,59,127,127,127,127,85,61,64,43,127,49,56,64,20,127,116,116,127,127,127,127,85,127,127,127,127,85,78,49,50,56,75,79,18,113,75,49,60,76,51,25,127,132,127,78,49,50,56,75,79,18,127,51,64,62,50,51,127,127,127,127,85,127,127,127,127,85,68,127,127,127,127,85,120,68,127}, 78, 17)WorldSelect_decrypt_str({116,129,116,57,48,72,45,40,116,116,116,116,116,116,116,116,116,116,116,116,74,59,116,112}, 74, 10)Select World_decrypt_str({76,89,76,32,8,33,13,14,17,48,76,76,76,76,76,76,76,76,76,76,76,76,98,72,17,27,8,13,14,76,89,76,5,32,8,33,41,76,76,76,76,76,76,76,76,76,76,76,76,98,72,69,68,27,16,8,26,7,63,32,17,15,70,27,8,5,32,65,76,89,76,27,17,33,8,13,62,76,76,76,76,76,76,76,76,76,76,76,76,98,72}, 106, 2)_decrypt_str({79,10,19,8,8,16,59,11,11,38,93,17,14,6,50,81,20,5,6,59,71,98,71,10,19,8,8,16,59,8,8,42,16,27,26,6,71,19,6,4,16,19,71,71,71,71,71,71,71,71,109,71,71,71,71,71,71,71,71,109,78,11,17,10,71,71,71,71,71,71,71,71,109,10,26,19,6,57,71,98,71,11,19,21,16,56,11,10,27,4,10,19,10,20,81,6,27,6,11,8,17,14,12,4,26,9,71,71,71,71,71,71,71,71,71,71,71,71,109,78,10,26,19,6,57,79,17,16,14,27,4,17,26,9,79,11,10,8,17,6,15,36,17,48,93,17,24,16,11,23,16,21,43,11,19,21,16,24,71,71,71,71,71,71,71,71,109,71,71,71,71,71,71,71,71,109,78,34,71,71,71,71,71,71,71,71,109}, 99, 4)AutoEgg_decrypt_str({85,112,85,24,33,41,28,73,85,85,85,85,85,85,85,85,85,85,85,85,127,46,85,97}, 97, 20)Auto Open Egg_decrypt_str({257,180,189,182,182,190,133,181,181,152,243,191,192,184,156,255,170,187,184,133,249,236,249,180,189,182,182,190,133,165,191,180,171,171,164,154,182,182,148,190,165,164,184,249,189,184,186,190,189,249,249,249,249,249,249,249,249,227,249,249,249,249,249,249,249,249,227,256,181,191,180,249,249,249,249,249,249,249,249,227,181,191,180,249,249,249,249,249,249,249,249,249,249,249,249,227,256,180,170,189,184,183,257,180,164,189,184,135,165,180,138,243,165,191,180,171,171,164,154,182,182,148,190,165,164,152,255,170,191,190,192,165,169,158,249,249,249,249,249,249,249,249,249,249,249,249,249,249,249,249,227,180,170,189,184,183,249,236,249,165,191,180,171,171,164,154,182,182,148,190,165,164,184,255,170,180,189,182,182,190,133,249,249,249,249,249,249,249,249,249,249,249,249,249,249,249,249,227,191,180,193,165,249,180,164,189,184,135,249,183,192,249,249,249,249,249,249,249,249,249,249,249,249,227,180,164,189,184,135,249,236,249,182,182,148,190,165,164,184,255,170,180,189,182,182,190,133,249,249,249,249,249,249,249,249,249,249,249,249,227,256,180,164,189,184,135,257,191,190,192,165,186,191,164,183,257,181,180,182,191,184,193,154,191,158,243,180,189,182,182,190,133,182,182,148,190,165,164,184,249,249,249,249,249,249,249,249,227,249,249,249,249,249,249,249,249,227,256,172,249,249,249,249,249,249,249,249,227,180,170,189,184,183,249,236,249,165,189,164,184,183,180,149,249,249,249,249,249,249,249,249,249,249,249,249,227,253}, 213, 4)AutoEggCurrent_decrypt_str({59,70,59,126,119,143,114,111,59,59,59,59,59,59,59,59,59,59,59,59,21,132,59,55}, 9, 18)Auto Open Egg (Current World)_decrypt_str({53,64,53,120,113,137,108,105,53,53,53,53,53,53,53,53,53,53,53,53,15,126,45,115,114,137,137,136,87,121,121,84,63,115,108,116,80,51,134,119,116,105,53,53,53,53,53,53,53,53,15,53,53,53,53,53,53,53,53,15,44,121,115,120,53,53,53,53,53,53,53,53,15,121,115,120,53,53,53,53,53,53,53,53,53,53,53,53,15,120,134,113,116,123,53,64,53,122,122,88,114,137,136,116,51,134,120,113,122,122,114,105,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,15,115,120,109,137,53,120,136,113,116,107,53,123,108,53,53,53,53,53,53,53,53,53,53,53,53,15,120,136,113,116,107,53,64,53,137,115,120,135,135,136,86,122,122,88,114,137,136,116,51,134,120,113,122,122,114,105,53,53,53,53,53,53,53,53,53,53,53,53,15,44,120,136,113,116,107,45,115,114,108,137,118,115,136,123,45,121,120,122,115,116,109,86,115,82,63,120,113,122,122,114,105,137,115,120,135,135,136,86,122,122,88,114,137,136,116,53,53,53,53,53,53,53,53,15,53,53,53,53,53,53,53,53,15,44,128,53,53,53,53,53,53,53,53,15,120,134,113,116,123,53,64,53,137,113,136,116,123,120,89,53,53,53,53,53,53,53,53,53,53,53,53,15,49}, 9, 12)TP to Selected World_decrypt_str({128,139,128,58,57,55,84,80,55,78,61,77,67,36,128,128,128,128,128,128,128,128,128,128,128,128,86,124}, 75, 21)Teleport to selected world_decrypt_str({72,67,130,72,140,148,118,145,89,140,139,124,133,139,148,139,117,82,135,124,135,140,137,146,143,141,133,123,138,72,140,146,135,72,140,148,118,145,89,140,139,124,133,139,148,139,117,82,135,124,135,140,137,146,143,141,133,123,138,72,138,143,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,72,46,79,80,146,145,143,124,133,146,123,138,72,67,72,141,133,135,134,148,148,135,101,72,72,72,72,72,72,72,72,72,72,72,72,46,84}, 19, 21)_decrypt_str({246,267,246,179,186,194,191,162,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,220,205,254,207,176,191,194,185,152,268,194,184,179,195,186,144,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,220,184,179,190,194,246,197,197,179,181,181,195,197,246,176,191,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,220,255,178,186,196,185,161,178,179,194,181,179,186,179,197,248,183,194,183,178,177,184,191,189,181,195,176,254,178,186,196,185,161,185,162,194,196,185,198,179,186,179,194,248,197,186,191,194,163,246,267,246,197,197,179,181,181,195,197,246,186,183,181,185,186,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,246,220,184,179,190,194,246}, 198, 16)Success_decrypt_str({263,244,263,187,193,204,187,193,194,166,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,263,221,259}, 218, 13)Teleported to _decrypt_str({34,39,34,95,86,110,91,142,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,60,109,26,107,96,91,110,89,120,44,110,88,95,111,86,128,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,60,95,117,86,95,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,60,94,88,95,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,60,27,103,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,60,53,34,39,34,88,89,91,110,99,116,111,126,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,60,22,94,86,116,89,145,94,95,110,101,95,86,95,117,24,99,110,99,94,97,88,91,93,101,111,96,34,24,24,34}, 44, 22)Error_decrypt_str({26,37,26,110,88,93,110,88,87,123,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,52,22}, 41, 17)No world selected!_decrypt_str({120,58,51,59,68,48,59,46,36,68,68,33,102,67,58,57,61,46,65,34,122,47,62,65,20,128,109,128,58,51,59,68,48,59,46,36,62,59,61,128,60,65,63,59,60,128,128,128,128,128,128,128,128,86,59,68,128,128,128,128,86,62,65,20,128,67,58,57,61,46,65,34,128,125,125,128,128,128,128,86,128,128,128,128,86,68,58,69,128,128,128,128,86,121,45,128,128,128,128,128,128,128,128,86,68,58,69,128,128,128,128,128,128,128,128,128,128,128,128,86,68,58,69,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,86,121,45,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,86,111,128,109,128,58,59,57,52,65,46,53,36,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,86,124}, 90, 6)MobSelect_decrypt_str({113,84,113,44,37,29,40,61,113,113,113,113,113,113,113,113,113,113,113,113,139,26,113,101}, 125, 20)Select Mob_decrypt_str({80,67,80,124,148,123,143,138,139,108,80,80,80,80,80,80,80,80,80,80,80,80,54,84,139,125,148,143,138,80,67,80,151,124,148,123,115,80,80,80,80,80,80,80,80,80,80,80,80,54,84,87,88,125,142,145,115,124,139,137,82,125,148,151,124,91,80,67,80,125,139,123,148,143,90,80,80,80,80,80,80,80,80,80,80,80,80,54,84}, 23, 25)_decrypt_str({253,274,253,186,193,201,198,169,253,253,253,253,253,253,253,253,253,253,253,253,227,212,261,191,192,201,201,202,155,185,185,158,275,184,191,198,194,203,190,151,255,204,187,190,169,253,253,253,253,253,253,253,253,227,253,253,253,253,253,253,253,253,227,262,185,191,186,253,253,253,253,253,253,253,253,227,186,202,193,190,167,253,274,253,187,192,162,185,186,201,188,186,193,186,204,255,190,201,190,185,184,191,198,196,188,202,183,253,253,253,253,253,253,253,253,253,253,253,253,227,262,186,202,193,190,167,261,191,192,198,201,188,191,202,183,261,185,186,184,191,190,197,156,191,160,275,191,200,192,185,205,192,203,153,187,192,194,253,253,253,253,253,253,253,253,227,253,253,253,253,253,253,253,253,227,262,210,253,253,253,253,253,253,253,253,227}, 198, 23)Refresh Mobs_decrypt_str({62,41,62,120,119,117,114,110,117,108,123,107,129,98,62,62,62,62,62,62,62,62,62,62,62,62,20,58}, 27, 3)Update mob list for current world_decrypt_str({223,236,223,164,155,179,152,211,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,249,170,215,168,165,152,179,158,189,233,179,157,164,180,155,197,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,249,216,178,161,158,156,221,160,179,160,163,166,157,152,154,162,180,165,215,178,164,180,155,160,213,179,164,210,233,179,162,164,155,164,210,161,158,188,221,178,157,158,152,179,175,190,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,249,216,215,178,161,158,188,179,164,166,221,178,155,152,179,212,223,236,223,178,161,158,156,221,160,179,160,163,166,157,152,154,162,180,165,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,223,249,216,215,157,158,152,179,162,157,180,165,223,236,223,154,162,160,161,155,155,160,194,223,223,223,223,223,223,223,223,223,223,223,223,249,219}, 232, 23)Updated_decrypt_str({33,77,90,102,71,100,91,35,92,99,98,71,77,72,25,22,25,77,99,94,77,99,100,120,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,63,37}, 50, 7)Found %d mobs in current world_decrypt_str({71,146,139,144,144,136,99,147,147,110,53,144,137,134,138,125,142,113,73,124,141,142,99,79,58,79,146,139,144,144,136,99,138,125,142,113,136,131,130,142,79,139,142,140,136,139,79,79,79,79,79,79,79,79,37,79,79,79,79,79,79,79,79,37,70,122,79,79,79,79,79,79,79,79,37,147,137,146,79,79,79,79,79,79,79,79,79,79,79,79,37,70,122,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,37,60,79,58,79,137,136,134,131,142,125,130,115,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,37,75,70,124,141,136,138,73,142,131,142,147,144,137,134,132,140,130,145,76,79,75}, 27, 20)AutoFarm_decrypt_str({250,269,250,181,190,198,193,166,250,250,250,250,250,250,250,250,250,250,250,250,224,207,250,254}, 199, 19)Auto Farm Selected Mob_decrypt_str({70,32,9,10,5,2,63,10,10,45,88,11,4,5,1,32,13,44,68,31,16,13,58,78,81,78,32,9,10,5,2,63,9,15,4,13,26,31,5,42,1,32,13,12,78,2,13,15,3,2,78,78,78,78,78,78,78,78,104,78,78,78,78,78,78,78,78,104,69,10,4,9,78,78,78,78,78,78,78,78,104,10,4,9,78,78,78,78,78,78,78,78,78,78,78,78,104,9,31,2,13,12,78,81,78,9,15,4,13,26,31,5,42,1,32,13,44,3,26,25,13,68,31,9,2,11,11,3,58,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,104,4,9,6,26,78,9,25,2,13,60,78,12,5,78,78,78,78,78,78,78,78,78,78,78,78,104,9,25,2,13,60,78,81,78,1,32,13,44,3,26,25,13,68,31,9,2,11,11,3,58,78,78,78,78,78,78,78,78,78,78,78,78,104,69,9,25,2,13,60,70,4,3,5,26,15,4,25,12,70,10,9,11,4,13,6,47,4,35,88,9,2,11,11,3,58,1,32,13,44,3,26,25,13,78,78,78,78,78,78,78,78,104,78,78,78,78,78,78,78,78,104,69,17,78,78,78,78,78,78,78,78,104,9,31,2,13,12,78,81,78,26,2,25,13,12,9,42,78,78,78,78,78,78,78,78,78,78,78,78,104,66}, 109, 1)FarmDistance_decrypt_str({9,30,9,70,77,85,82,117,9,9,9,9,9,9,9,9,9,9,9,9,51,100,9,13}, 36, 5)Farm Distance_decrypt_str({85,98,85,19,20,14,41,37,14,39,24,40,26,57,85,85,85,85,85,85,85,85,85,85,85,85,111,81}, 104, 13)Distance to farm mobs around you_decrypt_str({235,166,175,168,168,176,151,167,167,130,253,168,177,170,174,181,162,137,241,180,165,162,151,227,254,227,166,175,168,168,176,151,166,164,177,162,183,180,170,135,174,181,162,137,176,183,182,162,227,175,162,164,176,175,227,227,227,227,227,227,227,227,205,227,227,227,227,227,227,227,227,205,234,167,177,166,227,227,227,227,227,227,227,227,205,166,182,175,162,153,227,254,227,166,164,177,162,183,180,170,135,174,181,162,169,241,162,183,162,167,168,177,170,172,164,182,169,227,227,227,227,227,227,227,227,227,227,227,227,205,234,166,182,175,162,153,235,177,176,170,183,164,177,182,169,235,167,166,168,177,162,171,132,177,144,253,181,166,167,170,175,148,166,164,177,162,183,180,170,135,174,181,162,169,227,227,227,227,227,227,227,227,205,227,227,227,227,227,227,227,227,205,234,190,227,227,227,227,227,227,227,227,205,243,227,254,227,168,177,170,167,177,182,176,149,227,227,227,227,227,227,227,227,227,227,227,227,205,239,243,243,246,227,254,227,187,162,142,227,227,227,227,227,227,227,227,227,227,227,227,205,239,243,246,227,254,227,177,170,142,227,227,227,227,227,227,227,227,227,227,227,227,205,239,243,243,245,227,254,227,183,175,182,162,169,166,135,227,227,227,227,227,227,227,227,227,227,227,227,205,239}, 193, 2)AutoFarmDistance_decrypt_str({106,103,106,47,54,30,51,62,106,106,106,106,106,106,106,106,106,106,106,106,144,33,106,118}, 114, 24)Farm All Mobs in Distance_decrypt_str({95,82,95,33,32,38,11,15,38,13,28,12,26,59,95,95,95,95,95,95,95,95,95,95,95,95,133,99}, 119, 8)Farm all mobs within the specified distance_decrypt_str({65,116,125,118,118,126,101,117,117,88,83,118,127,128,124,139,120,87,63,138,123,120,101,57,76,57,116,125,118,118,126,101,133,122,116,125,125,126,90,126,133,132,120,57,125,120,122,126,125,57,57,57,57,57,57,57,57,35,57,57,57,57,57,57,57,57,35,64,117,127,116,57,57,57,57,57,57,57,57,35,117,127,116,57,57,57,57,57,57,57,57,57,57,57,57,35,64,116,138,125,120,119,65,116,132,125,120,103,133,116,106,83,124,139,120,87,126,133,132,88,63,138,127,126,128,133,137,94,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,35,116,138,125,120,119,57,76,57,124,139,120,87,126,133,132,120,63,138,116,125,118,118,126,101,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,35,127,116,129,133,57,116,132,125,120,103,57,119,128,57,57,57,57,57,57,57,57,57,57,57,57,35,116,132,125,120,103,57,76,57,116,122,127,120,133,138,128,85,124,139,120,87,126,133,132,120,63,138,116,125,118,118,126,101,57,57,57,57,57,57,57,57,57,57,57,57,35,64,116,132,125,120,103,65,127,126,128,133,122,127,132,119,65,117,116,118,127,120,129,90,127,94,83,116,125,118,118,126,101,116,122,127,120,133,138,128,85,124,139,120,87,126,133,132,120,57,57,57,57,57,57,57,57,35,57,57,57,57,57,57,57,57,35,64,140,57,57,57,57,57,57,57,57,35,116,138,125,120,119,57,76,57,133,125,132,120,119,116,85,57,57,57,57,57,57,57,57,57,57,57,57,35,61}, 5, 20)AutoCollect_decrypt_str({38,27,38,99,106,82,111,114,38,38,38,38,38,38,38,38,38,38,38,38,76,93,38,42}, 54, 16)Auto Collect Drops_decrypt_str({258,181,190,183,183,191,134,182,182,153,244,182,181,187,192,185,168,182,153,256,171,188,185,134,250,237,250,181,190,183,183,191,134,182,193,185,140,191,166,165,185,250,190,185,187,191,190,250,250,250,250,250,250,250,250,228,191,182,250,250,250,250,228,188,185,134,250,182,181,187,192,185,168,182,153,250,253,253,250,250,250,250,228,250,250,250,250,228,182,192,181,250,250,250,250,228,257,182,192,181,250,250,250,250,250,250,250,250,228,181,165,190,185,136,250,237,250,166,187,181,190,190,191,155,191,166,165,185,256,171,181,190,183,183,191,134,250,250,250,250,250,250,250,250,250,250,250,250,228,257,181,165,190,185,136,258,192,191,193,166,187,192,165,184,258,182,181,183,192,185,194,155,192,159,244,181,190,183,183,191,134,166,187,181,190,190,191,155,191,166,165,185,250,250,250,250,250,250,250,250,228,250,250,250,250,250,250,250,250,228,257,173,250,250,250,250,250,250,250,250,228,181,165,172,166,250,237,250,166,190,165,185,184,181,150,250,250,250,250,250,250,250,250,250,250,250,250,228,254}, 213, 5)AutoRaid_decrypt_str({143,154,143,210,203,227,198,259,143,143,143,143,143,143,143,143,143,143,143,143,169,216,143,139}, 169, 6)Auto Raid_decrypt_str({214,265,274,263,263,271,218,266,266,237,196,266,265,267,272,269,248,266,237,208,251,268,269,218,206,193,206,265,274,263,263,271,218,274,269,277,252,218,271,250,249,269,206,274,269,267,271,274,206,206,206,206,206,206,206,206,180,206,206,206,206,206,206,206,206,180,213,266,272,265,206,206,206,206,206,206,206,206,180,265,249,274,269,216,206,193,206,266,277,269,220,271,250,249,269,208,251,265,274,263,263,271,218,206,206,206,206,206,206,206,206,206,206,206,206,180,213,265,249,274,269,216,214,272,271,277,250,267,272,249,264,214,266,265,263,272,269,278,235,272,239,196,265,274,263,263,271,218,266,277,269,220,271,250,249,269,206,206,206,206,206,206,206,206,180,206,206,206,206,206,206,206,206,180,213,257,206,206,206,206,206,206,206,206,180,265,251,274,269,264,206,193,206,250,274,249,269,264,265,234,206,206,206,206,206,206,206,206,206,206,206,206,180,210}, 151, 23)AutoTrial_decrypt_str({162,167,162,223,214,238,219,270,162,162,162,162,162,162,162,162,162,162,162,162,188,237,162,150}, 172, 22)Auto Trial_decrypt_str({240,189,180,187,187,179,172,188,188,153,254,188,189,183,178,185,202,188,153,242,199,182,185,172,248,261,248,189,180,187,187,179,172,204,199,189,205,169,179,204,205,185,248,180,185,183,179,180,248,248,248,248,248,248,248,248,206,248,248,248,248,248,248,248,248,206,241,188,178,189,248,248,248,248,248,248,248,248,206,189,205,180,185,170,248,261,248,180,185,177,198,172,179,204,205,185,242,199,189,180,187,187,179,172,248,248,248,248,248,248,248,248,248,248,248,248,206,241,189,205,180,185,170,240,178,179,177,204,183,178,205,186,240,188,189,187,178,185,176,151,178,147,254,189,180,187,187,179,172,180,185,177,198,172,179,204,205,185,248,248,248,248,248,248,248,248,206,248,248,248,248,248,248,248,248,206,241,197,248,248,248,248,248,248,248,248,206,189,199,180,185,186,248,261,248,204,180,205,185,186,189,156,248,248,248,248,248,248,248,248,248,248,248,248,206,244}, 202, 14)AutoQuest_decrypt_str({179,192,179,248,239,263,236,231,179,179,179,179,179,179,179,179,179,179,179,179,137,250,179,175}, 138, 9)Auto Quest_decrypt_str({75,144,135,146,146,138,95,143,143,116,61,143,144,150,137,148,129,143,116,73,134,149,148,95,83,56,83,144,135,146,146,138,95,144,134,128,113,138,127,128,148,83,135,148,150,138,135,83,83,83,83,83,83,83,83,45,83,83,83,83,83,83,83,83,45,76,143,137,144,83,83,83,83,83,83,83,83,45,144,128,135,148,97,83,56,83,127,134,144,128,100,138,127,128,148,73,134,144,135,146,146,138,95,83,83,83,83,83,83,83,83,83,83,83,83,45,76,144,128,135,148,97,75,137,138,140,127,150,137,128,145,75,143,144,146,137,148,139,118,137,106,61,144,135,146,146,138,95,127,134,144,128,100,138,127,128,148,83,83,83,83,83,83,83,83,45,83,83,83,83,83,83,83,83,45,76,120,83,83,83,83,83,83,83,83,45,144,134,135,148,145,83,56,83,127,135,128,148,145,144,111,83,83,83,83,83,83,83,83,83,83,83,83,45,71}, 28, 23)AutoFuse_decrypt_str({245,266,245,178,185,193,190,161,245,245,245,245,245,245,245,245,245,245,245,245,219,204,245,249}, 198, 15)Auto Fuse Pets_decrypt_str({197,271,250,249,262,257,240,249,249,222,215,249,250,256,259,254,267,249,222,195,272,255,254,233,189,210,189,271,250,249,262,257,240,249,250,250,269,240,269,260,260,257,189,257,254,256,260,257,189,189,189,189,189,189,189,189,167,189,189,189,189,189,189,189,189,167,198,249,259,250,189,189,189,189,189,189,189,189,167,250,266,257,254,235,189,210,189,250,272,266,219,260,265,266,254,195,272,250,257,252,252,260,233,189,189,189,189,189,189,189,189,189,189,189,189,167,198,250,266,257,254,235,197,259,260,262,265,256,259,266,251,197,249,250,252,259,254,261,224,259,228,215,250,257,252,252,260,233,250,272,266,219,260,265,266,254,189,189,189,189,189,189,189,189,167,189,189,189,189,189,189,189,189,167,198,274,189,189,189,189,189,189,189,189,167,250,272,257,254,251,189,210,189,265,257,266,254,251,250,217,189,189,189,189,189,189,189,189,189,189,189,189,167,193}, 132, 25)LoopSpeed_decrypt_str({90,87,90,31,38,14,35,46,90,90,90,90,90,90,90,90,90,90,90,90,132,21,90,102}, 112, 10)Loop Speed_decrypt_str({120,149,120,70,71,65,76,72,65,74,59,75,61,28,120,120,120,120,120,120,120,120,120,120,120,120,98,132}, 64, 24)Adjust script loop speed (seconds)_decrypt_str({99,102,99,30,23,47,26,79,99,99,99,99,99,99,99,99,99,99,99,99,125,44,91,25,24,47,47,46,69,31,31,66,109,31,30,36,25,34,49,31,66,89,52,37,34,79,99,99,99,99,99,99,99,99,125,99,99,99,99,99,99,99,99,125,90,31,25,30,99,99,99,99,99,99,99,99,125,30,46,23,34,81,99,102,99,31,30,30,51,84,51,24,24,23,89,34,47,34,31,32,25,26,28,36,46,33,99,99,99,99,99,99,99,99,99,99,99,99,125,90,30,46,23,34,81,91,25,24,26,47,36,25,46,33,91,31,30,32,25,34,27,68,25,56,109,53,30,31,26,23,84,31,30,30,51,84,51,24,24,23,99,99,99,99,99,99,99,99,125,99,99,99,99,99,99,99,99,125,90,38,99,99,99,99,99,99,99,99,125,117,99,102,99,32,25,26,31,25,46,24,85,99,99,99,99,99,99,99,99,99,99,99,99,125,87,117,99,102,99,43,34,54,99,99,99,99,99,99,99,99,99,99,99,99,125,87,110,115,89,115,99,102,99,25,26,54,99,99,99,99,99,99,99,99,99,99,99,99,125,87,114,89,115,99,102,99,47,23,46,34,33,30,63,99,99,99,99,99,99,99,99,99,99,99,99,125,87}, 109, 22)Stop all_decrypt_str({28,55,28,102,101,99,112,108,99,106,89,105,95,128,28,28,28,28,28,28,28,28,28,28,28,28,66,40}, 35, 25)Stop all farming activities_decrypt_str({35,62,129,35,122,102,108,35,105,106,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,13,112,103,35,42,116,102,111,104,104,112,87,43,116,117,106,98,115,35,113,106,35,96,35,47,122,102,108,35,117,112,105,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,13,42,43,113,112,106,119,100,113,118,105,35,62,35,108,100,98,101,111,111,98,68,35,35,35,35,35,35,35,35,35,35,35,35,13,47}, 1, 2)antiAfk_decrypt_str({204,223,162,204,135,143,139,178,146,145,147,152,156,145,204,136,146,139,204,135,151,144,139,186,152,135,189,210,146,145,147,152,156,145,204,138,147,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,246,145,136,204,211,157,146,145,147,152,156,177,212,157,158,147,139,156,204,146,147,204,146,145,147,152,156,145,204,208,135,143,139,178,146,145,147,152,156,145,204,158,145,138,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,246,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,246,136,146,135,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,246,136,146,135,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,246,135,157,144,139,138,204,223,204,191,163,135,149,197,157,135,144,137,137,145,184,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,246,146,135,148,152,204}, 229, 7)AntiAfk_decrypt_str({40,59,40,99,108,116,111,84,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,18,129,48,127,102,111,116,109,78,66,116,110,99,115,108,70,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,18,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,18,100,110,99,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,18,100,110,99,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,18,47,99,121,108,103,102,48,99,115,108,103,86,116,99,89,66,110,109,111,116,120,109,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,18,110,99,112,116,40}, 5, 3)Stopped_decrypt_str({5,34,5,89,83,74,89,83,84,104,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,47,17}, 32, 5)All actions stopped_decrypt_str({187,214,187,254,263,271,258,239,187,187,187,187,187,187,187,187,187,187,187,187,161,272,195,261,260,271,271,270,217,255,255,218,209,254,264,261,254,253,254,223,197,264,249,250,239,187,187,187,187,187,187,187,187,161,261,260,258,271,248,254,232,187,252,261,258,262,265,250,221,187,265,260,254,271,254,230,187,198,198,187,187,187,187,187,187,187,187,161,260,255,187,187,187,187,161,217,218,239,187,233,228,222,239,222,230,187,189,187,222,232,229,222,221,222,223,187,236,222,229,187,198,198,187,187,187,187,161,187,187,187,187,161,255,261,254,187,187,187,187,161,194,278,187,187,187,187,187,187,187,187,161,255,261,254,187,187,187,187,187,187,187,187,187,187,187,187,161,194,278,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,161,200,187,214,187,261,260,258,271,250,265,270,223,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,187,161,199}, 131, 24)Set Spawn for Auto Farm/Summon_decrypt_str({156,169,156,218,219,213,240,236,213,238,223,239,225,256,156,156,156,156,156,156,156,156,156,156,156,156,182,152}, 168, 20)Save current position as _I_LL000l0l0L_n8cp point_decrypt_str({193,166,193,254,245,237,250,205,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,155,236,185,234,255,250,237,248,215,171,237,247,254,238,245,223,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,155,254,238,245,258,207,183,253,245,243,248,208,183,243,254,234,258,245,209,193,166,193,253,245,243,248,208,237,247,254,243,243,238,260,183,258,237,258,253,256,247,250,252,260,238,255,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,155,254,246,258,243,223,228,183,237,243,258,209,237,248,248,211,253,250,248,247,258,246,238,217,193,166,193,244,248,209,253,254,239,258,244,183,258,237,258,253,256,247,250,252,260,238,255,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,193,155,186,185,247,248,250,237,260,247,238,255,193,166,193,252,260,258,259,245,245,258,228,193,193,193,193,193,193,193,193,193,193,193,193,155,181}, 156, 5)Spawn Set_decrypt_str({58,71,58,142,116,127,142,116,117,89,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,58,16,54}, 10, 16)Location saved for _decrypt_str({152,219,212,217,217,209,236,220,220,255,134,219,205,210,219,218,219,252,146,205,222,223,236,160,131,160,219,212,217,217,209,236,206,209,219,204,219,243,209,204,203,223,160,212,223,221,209,212,160,160,160,160,160,160,160,160,182,160,160,160,160,160,160,160,160,182,151,195,160,160,160,160,160,160,160,160,182,220,210,219,160,160,160,160,160,160,160,160,160,160,160,160,182,151,195,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,182,141,160,131,160,210,209,215,204,223,206,203,252,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,182,148,220,212,206,209,233,204,210,219,206,206,203,221,146,223,204,223,220,217,210,215,213,221,203,218,160,146,146,160}, 191, 1)AutoMeteor_decrypt_str({176,149,176,237,228,220,233,252,176,176,176,176,176,176,176,176,176,176,176,176,202,219,176,164}, 188, 20)Auto Farm Meteors_decrypt_str({121,116,121,67,66,64,45,41,64,39,54,38,60,29,121,121,121,121,121,121,121,121,121,121,121,121,95,133}, 83, 6)Automatically farm meteors across all worlds_decrypt_str({16,78,85,77,68,88,77,90,100,68,68,103,34,67,89,78,67,70,67,100,14,89,74,71,116,8,27,8,78,85,77,68,88,77,90,100,68,76,90,77,117,67,89,78,67,70,67,68,8,76,71,73,77,76,8,8,8,8,8,8,8,8,50,78,77,79,84,73,67,121,8,67,68,77,107,8,67,89,78,67,70,67,100,8,11,11,8,8,8,8,8,8,8,8,50,8,8,8,8,8,8,8,8,50,15,68,78,67,8,8,8,8,8,8,8,8,50,67,83,76,71,118,8,27,8,90,77,67,84,67,107,77,84,83,71,14,89,67,76,69,69,77,116,8,8,8,8,8,8,8,8,8,8,8,8,50,15,67,83,76,71,118,16,78,77,79,84,73,78,83,70,16,68,67,69,78,71,80,105,78,109,34,67,76,69,69,77,116,90,77,67,84,67,107,77,84,83,71,8,8,8,8,8,8,8,8,50,8,8,8,8,8,8,8,8,50,15,91,8,8,8,8,8,8,8,8,50,67,89,76,71,70,8,27,8,84,76,83,71,70,67,100,8,8,8,8,8,8,8,8,8,8,8,8,50,12}, 37, 3)DefenseWorldSelect_decrypt_str({22,27,22,83,74,98,79,130,22,22,22,22,22,22,22,22,22,22,22,22,48,97,22,10}, 44, 10)Select Defense World_decrypt_str({253,266,253,209,185,210,190,191,194,161,253,253,253,253,253,253,253,253,253,253,253,253,211,249,194,204,185,190,191,253,266,253,182,209,185,210,154,253,253,253,253,253,253,253,253,253,253,253,253,211,249,246,245,204,193,185,203,184,176,194,204,183,194,191,194,161,209,194,192,247,204,185,182,209,178,253,266,253,204,194,210,185,190,175,253,253,253,253,253,253,253,253,253,253,253,253,211,249}, 202, 19)_decrypt_str({173,226,233,224,224,232,241,225,225,262,155,226,212,231,226,223,226,257,167,212,227,230,241,165,154,165,226,233,224,224,232,241,226,212,231,226,223,226,257,232,209,210,230,165,233,230,228,232,233,165,165,165,165,165,165,165,165,203,165,165,165,165,165,165,165,165,203,174,225,231,226,165,165,165,165,165,165,165,165,203,250,226,210,233,230,239,252,212,225,233,211,232,240,226,212,231,226,223,226,225,167,230,209,230,225,224,231,238,236,228,210,223,165,154,165,225,233,211,232,240,226,212,231,226,223,226,257,225,226,209,228,226,233,226,212,167,230,209,230,225,224,231,238,236,228,210,223,165,165,165,165,165,165,165,165,165,165,165,165,203,174,226,210,233,230,239,173,231,232,238,209,228,231,210,223,173,225,226,224,231,230,237,260,231,264,155,231,208,232,225,213,232,211,257,225,233,211,232,240,226,212,231,226,223,226,225,165,165,165,165,165,165,165,165,203,165,165,165,165,165,165,165,165,203,174,218,165,165,165,165,165,165,165,165,203}, 182, 15)AutoDefense_decrypt_str({187,184,187,256,263,239,260,207,187,187,187,187,187,187,187,187,187,187,187,187,161,242,187,199}, 146, 9)Auto Defense Mode_decrypt_str({159,172,159,221,222,216,243,239,216,241,226,242,228,259,159,159,159,159,159,159,159,159,159,159,159,159,185,155}, 168, 23)Automatically attack _i_Ill_lil__O_8ft8 in Titan world_decrypt_str({217,156,149,158,158,150,173,157,157,192,203,156,146,151,156,159,156,189,215,146,163,160,173,225,196,225,156,149,158,158,150,173,156,146,151,156,159,156,189,141,147,160,141,178,150,141,140,160,225,149,160,162,150,149,225,225,225,225,225,225,225,225,251,225,225,225,225,225,225,225,225,251,216,157,151,156,225,225,225,225,225,225,225,225,251,156,140,149,160,175,225,196,225,156,146,151,156,159,156,189,150,141,140,160,215,146,156,149,158,158,150,173,225,225,225,225,225,225,225,225,225,225,225,225,251,216,156,140,149,160,175,217,151,150,152,141,162,151,140,159,217,157,156,158,151,160,153,194,151,182,203,156,149,158,158,150,173,156,146,151,156,159,156,189,150,141,140,160,225,225,225,225,225,225,225,225,251,225,225,225,225,225,225,225,225,251,216,132,225,225,225,225,225,225,225,225,251,156,146,149,160,159,225,196,225,141,149,140,160,159,156,189,225,225,225,225,225,225,225,225,225,225,225,225,251,213}, 253, 4)AutoStartDefense_decrypt_str({124,119,124,63,72,48,67,16,124,124,124,124,124,124,124,124,124,124,124,124,98,49,124,136}, 83, 9)Auto Start Defense_decrypt_str({81,84,81,7,6,8,29,33,8,35,18,34,12,45,81,81,81,81,81,81,81,81,81,81,81,81,107,69}, 109, 4)Automatically start defense mode when you have tokens_decrypt_str({33,110,101,108,108,100,125,109,109,138,15,110,88,99,110,107,110,141,35,88,103,106,125,41,22,41,110,101,108,108,100,125,110,88,99,110,107,110,141,100,125,93,87,100,89,110,101,110,93,41,101,106,104,100,101,41,41,41,41,41,41,41,41,63,41,41,41,41,41,41,41,41,63,34,109,99,110,41,41,41,41,41,41,41,41,63,110,94,101,106,123,41,22,41,110,88,99,110,107,110,141,93,87,106,93,120,100,93,94,106,35,88,110,101,108,108,100,125,41,41,41,41,41,41,41,41,41,41,41,41,63,34,110,94,101,106,123,33,99,100,98,93,104,99,94,107,33,109,110,108,99,106,97,136,99,132,15,110,101,108,108,100,125,110,88,99,110,107,110,141,93,87,106,93,120,100,93,94,106,41,41,41,41,41,41,41,41,63,41,41,41,41,41,41,41,41,63,34,86,41,41,41,41,41,41,41,41,63,110,88,101,106,107,41,22,41,93,101,94,106,107,110,141,41,41,41,41,41,41,41,41,41,41,41,41,63,37}, 58, 15)TeleportToDefense_decrypt_str({180,201,180,241,248,256,253,224,180,180,180,180,180,180,180,180,180,180,180,180,158,271,180,184}, 132, 16)Auto TP to Defense Mode_decrypt_str({195,176,195,253,254,252,247,243,252,241,258,242,264,231,195,195,195,195,195,195,195,195,195,195,195,195,153,191}, 154, 9)Automatically teleport to defense mode_decrypt_str({191,268,259,270,270,262,219,267,267,232,177,268,250,261,268,269,268,235,197,250,265,264,219,199,180,199,268,259,270,270,262,219,268,250,261,268,269,268,235,260,262,249,237,247,251,199,259,264,266,262,259,199,199,199,199,199,199,199,199,161,199,199,199,199,199,199,199,199,161,192,267,261,268,199,199,199,199,199,199,199,199,161,268,252,259,264,221,199,180,199,268,250,261,268,269,268,235,262,219,251,249,262,247,268,259,268,251,197,250,268,259,270,270,262,219,199,199,199,199,199,199,199,199,199,199,199,199,161,192,268,252,259,264,221,191,261,262,256,251,266,261,252,269,191,267,268,270,261,264,255,234,261,230,177,268,259,270,270,262,219,268,250,261,268,269,268,235,262,219,251,249,262,247,268,259,268,251,199,199,199,199,199,199,199,199,161,199,199,199,199,199,199,199,199,161,192,244,199,199,199,199,199,199,199,199,161,268,250,259,264,269,199,180,199,251,259,252,264,269,268,235,199,199,199,199,199,199,199,199,199,199,199,199,161,195}, 152, 15)TpFromDefense_decrypt_str({217,236,217,148,157,165,160,197,217,217,217,217,217,217,217,217,217,217,217,217,255,174,217,221}, 231, 18)Auto Return from Defense_decrypt_str({220,247,220,166,165,163,176,172,163,170,153,169,159,192,220,220,220,220,220,220,220,220,220,220,220,220,258,232}, 227, 25)Return to saved position after defense_decrypt_str({70,57,70,129,138,114,141,82,70,70,70,70,70,70,70,70,70,70,70,70,44,123,78,136,135,114,114,113,100,130,130,101,60,129,115,136,129,128,129,98,72,115,132,133,82,70,70,70,70,70,70,70,70,44,70,70,70,70,70,70,70,70,44,77,130,136,129,70,70,70,70,70,70,70,70,44,129,113,138,133,80,70,57,70,129,115,136,129,128,129,98,137,135,116,96,118,114,72,115,129,138,127,127,135,82,70,70,70,70,70,70,70,70,70,70,70,70,44,77,129,113,138,133,80,78,136,135,141,114,131,136,113,128,78,130,129,127,136,133,142,99,136,103,60,129,138,127,127,135,82,129,115,136,129,128,129,98,137,135,116,96,118,114,70,70,70,70,70,70,70,70,44,70,70,70,70,70,70,70,70,44,77,121,70,70,70,70,70,70,70,70,44,129,115,138,133,128,70,57,70,114,138,113,133,128,129,98,70,70,70,70,70,70,70,70,70,70,70,70,44,74}, 23, 15)TP to Defense World_decrypt_str({178,181,178,228,227,233,254,258,233,256,239,255,237,206,178,178,178,178,178,178,178,178,178,178,178,178,136,166}, 143, 3)Manually teleport to selected defense world_decrypt_str({60,112,120,130,119,95,119,96,128,130,119,132,113,120,113,128,54,131,120,125,128,97,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,26,118,113,124,128,52,112,120,130,119,95,113,131,118,113,110,113,80,112,113,128,115,113,120,113,131,54,117,128,117,112,111,118,125,123,115,129,110,52,110,125,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,26,61,60,118,119,125,128,115,118,129,110,52,73,52,123,115,117,114,120,120,117,83,52,52,52,52,52,52,52,52,52,52,52,52,26,56}, 6, 14)Titan_decrypt_str({32,84,92,97,96,123,100,107,106,97,118,84,94,97,118,50,107,94,103,89,104,139,30,94,89,100,97,132,30,107,84,92,106,95,135,30,85,91,89,104,107,99,106,95,135,30,100,97,93,93,89,84,92,92,85,96,107,107,89,87,94,97,99,91,101,86,24,45,24,94,103,89,104,107,24,92,89,91,95,92,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,66,33,37,30,40,32,100,97,89,103,30,99,107,89,100,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,66,33}, 36, 20)Spawn_decrypt_str({151,138,151,210,219,195,222,227,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,193,208,159,206,213,222,195,220,253,145,195,221,210,194,219,245,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,193,211,221,210,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,193,158,135,151,155,130,151,155,135,159,196,210,221,157,136,201,220,195,216,210,229,151,160,151,210,218,214,201,245,248,157,221,196,214,199,200,151,138,151,210,218,214,201,245,248,157,195,201,214,231,195,220,220,233,211,222,220,221,214,218,194,255,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,193,221,210,223,195,151,221,196,214,199,200,151,213,222,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,193,158}, 181, 2)Success_decrypt_str({137,118,137,61,67,78,61,67,68,40,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,137,95,133}, 90, 15)Teleported to Defense Mode_decrypt_str({54,41,54,113,122,98,125,66,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,32,111,62,109,116,125,98,123,92,48,98,124,113,97,122,84,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,32,113,103,122,113,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,32,61,105,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,32,39,54,41,54,124,123,125,98,117,104,97,82,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,32,58}, 21, 1)Error_decrypt_str({197,170,197,241,251,258,241,251,252,232,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,197,159,185}, 156, 9)No defense world selected!_decrypt_str({223,150,161,150,205,234,232,213,150,210,213,215,211,210,150,150,150,150,150,150,150,150,176,211,218,150,150,150,150,176,216,213,266,150,231,234,215,213,220,205,234,232,245,150,145,145,150,150,150,150,176,150,150,150,150,176,218,212,217,150,150,150,150,176,141,225,150,150,150,150,150,150,150,150,176,218,212,217,150,150,150,150,150,150,150,150,150,150,150,150,176,218,212,217,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,176,141,225,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,176,167,150,161,150,212,211,205,234,213,232,233,250,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,176,146}, 169, 13)Drops_decrypt_str({236,224}, 254, 14)Luck_decrypt_str({34,30}, 56, 10)Time_decrypt_str({126,138}, 81, 13)Dungeon_decrypt_str({122,134}, 83, 7)Dreams_decrypt_str({121,55,78,54,61,81,54,83,29,61,61,32,139,60,77,83,32,119,82,67,64,45,129,132,129,55,78,54,61,81,54,83,29,56,77,83,32,129,53,64,66,54,53,129,129,129,129,129,129,129,129,91,129,129,129,129,129,129,129,129,91,68}, 77, 20)ArtiDropdown_decrypt_str({175,156,175,244,235,227,232,259,175,175,175,175,175,175,175,175,175,175,175,175,197,214,175,171}, 186, 21)Choose An Artifact To Equip | Slot 2_decrypt_str({137,164,137,221,213,220,200,207,204,237,137,137,137,137,137,137,137,137,137,137,137,137,179,149,204,218,213,200,207,137,164,137,208,221,213,220,244,137,137,137,137,137,137,137,137,137,137,137,137,179,149,208,221,219,200,137,164,137,218,204,220,213,200,255,137,137,137,137,137,137,137,137,137,137,137,137,179,149}, 161, 8)_decrypt_str({71,42,71,130,123,115,126,83,71,71,71,71,71,71,71,71,71,71,71,71,33,112,63,125,124,115,115,114,105,131,131,102,49,130,115,121,102,61,120,137,134,83,71,71,71,71,71,71,71,71,33,71,71,71,71,71,71,71,71,33,62,131,125,130,71,71,71,71,71,71,71,71,33,130,114,123,134,85,71,42,71,131,130,115,136,130,123,130,88,126,115,121,134,61,134,115,134,131,132,125,126,128,136,114,133,71,71,71,71,71,71,71,71,71,71,71,71,33,62,130,114,123,134,85,63,125,124,126,115,136,125,114,133,63,131,130,132,125,134,127,104,125,92,49,125,116,124,131,119,124,121,99,126,115,121,102,71,71,71,71,71,71,71,71,33,71,71,71,71,71,71,71,71,33,62,106,71,71,71,71,71,71,71,71,33,59}, 29, 10)Equip_decrypt_str({51,72,51,121,122,124,127,131,124,133,118,134,112,79,51,51,51,51,51,51,51,51,51,51,51,51,29,55}, 4, 15)Equip selected artifact_decrypt_str({98,95,98,39,46,22,43,54,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,140,29,106,27,40,43,22,49,80,92,22,48,39,23,46,72,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,140,107,38,39,22,37,39,46,39,53,43,22,20,35,112,35,22,35,38,41,48,43,45,37,23,40,106,22,37,35,40,43,22,20,67,18,43,23,19,71,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,140,48,39,42,22,98,38,39,22,37,39,46,39,53,43,22,20,35,112,35,22,35,38,41,48,43,45,37,23,40,98,40,43,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,140,107,106,48,49,43,22,37,48,23,40,98,95,98,45,37,35,36,46,46,35,69,98,98,98,98,98,98,98,98,98,98,98,98,140,110}, 112, 18)Success_decrypt_str({190,171,190,242,252,259,242,252,253,225,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,190,152,186}, 152, 6)Equipped _decrypt_str({130,125,130,69,78,54,73,22,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,108,59,138,57,72,73,54,79,48,124,54,80,69,53,78,40,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,108,69,51,78,69,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,108,137,61,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,108,115,130,125,130,80,79,73,54,65,52,53,38,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,108,142,70,69,54,67,69,78,69,19,73,54,52,65,144,65,54,65,70,71,80,73,75,67,53,72,130,144,144,130}, 81, 17)Error_decrypt_str({81,52,81,125,135,140,125,135,134,114,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,43,69}, 29, 20)No artifact selected_decrypt_str({208,141,148,143,143,151,188,140,140,169,226,139,155,145,181,214,155,138,137,188,200,229,200,141,148,143,143,151,188,147,142,169,145,156,150,137,200,148,137,139,151,148,200,200,200,200,200,200,200,200,242,151,140,200,200,200,200,242,138,137,188,200,139,155,145,181,200,213,213,200,200,200,200,242,200,200,200,200,242,140,150,141,200,200,200,200,242,209,165,200,200,200,200,200,200,200,200,242,140,150,141,200,200,200,200,200,200,200,200,200,200,200,200,242,140,150,141,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,242,209,165,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,242,219,200,229,200,150,151,145,156,137,154,157,172,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,200,242,212}, 224, 8)AntiAfk_decrypt_str({126,107,126,67,58,50,55,18,126,126,126,126,126,126,126,126,126,126,126,126,88,41,126,122}, 88, 6)Anti-AFK_decrypt_str({172,161,172,233,240,216,245,248,172,172,172,172,172,172,172,172,172,172,172,172,210,227,180,238,239,216,216,217,266,232,232,269,162,235,219,245,273,174,219,234,237,248,172,172,172,172,172,172,172,172,210,172,172,172,172,172,172,172,172,210,181,232,238,233,172,172,172,172,172,172,172,172,210,232,238,233,172,172,172,172,172,172,172,172,172,172,172,172,210,240,245,238,172,161,172,243,230,269,245,216,238,237,174,219,238,239,245,216,235,233,238,238,239,235,174,237,216,237,232,231,238,245,243,235,217,230,172,172,172,172,172,172,172,172,172,172,172,172,172,172,172,172,210,181,180,216,235,233,238,238,239,235,219,245,264,162,243,230,269,245,216,238,237,174,219,238,239,245,216,235,233,238,238,239,235,174,237,216,237,232,231,238,245,243,235,217,230,172,172,172,172,172,172,172,172,172,172,172,172,172,172,172,172,210,238,233,244,216,172,243,230,269,245,216,238,237,174,219,238,239,245,216,235,233,238,238,239,235,174,237,216,237,232,231,238,245,243,235,217,230,172,230,245,233,219,240,233,172,172,172,172,172,172,172,172,172,172,172,172,210,181,180,243,230,269,245,216,238,269,216,245,238,245,174,219,219,237,243,235,217,230,172,172,172,172,172,172,172,172,172,172,172,172,172,172,172,172,210,238,233,244,216,172,233,217,240,237,246,172,230,245,172,172,172,172,172,172,172,172,172,172,172,172,210,233,217,240,237,246,172,161,172,243,230,269,245,216,238,237,174,219,233,240,231,231,239,248,172,172,172,172,172,172,172,172,172,172,172,172,210,181,233,217,240,237,246,180,238,239,245,216,235,238,217,230,180,232,233,231,238,237,244,267,238,271,162,233,240,231,231,239,248,243,230,269,245,216,238,237,172,172,172,172,172,172,172,172,210,172,172,172,172,172,172,172,172,210,181,225,172,172,172,172,172,172,172,172,210,233,217,218,216,172,161,172,216,240,217,237,230,233,264,172,172,172,172,172,172,172,172,172,172,172,172,210,176}, 182, 22)FPS Boost_decrypt_str({32,51,32,98,97,103,108,112,103,110,93,109,91,124,32,32,32,32,32,32,32,32,32,32,32,32,70,36}, 39, 25)Optimize game performance_decrypt_str({168,245,239,233,226,222,245,255,228,245,275,150,245,237,241,243,176,157,176,243,234,233,228,232,243,233,236,176,236,241,239,235,236,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,198,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,198,161,176,157,176,236,245,226,245,268,217,228,233,236,241,229,257,170,243,234,233,222,245,244,234,245,254,170,169,168,223,243,234,233,228,228,245,223,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,198,169,168,234,235,233,228,239,234,229,242,168,236,236,241,239,224,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,176,198,169,168,234,235,233,228,239,234,229,242,176,157,176,231,239,241,238,236,236,241,271,176,176,176,176,176,176,176,176,176,176,176,176,198,172}, 186, 22)Lighting_decrypt_str({20,33,20,89,80,104,77,136,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,95,12,93,90,77,104,83,114,30,104,82,89,105,80,122,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,13,88,82,89,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,88,82,89,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,36,20,33,20,93,87,82,89,102,85,100,103,82,85,102,136,102,89,104,85,139,18,82,77,85,102,102,89,104,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,36,20,33,20,89,87,82,85,104,87,89,80,90,89,134,102,89,104,85,139,18,82,77,85,102,102,89,104,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,36,20,33,20,88,89,89,100,135,89,106,85,139,102,89,104,85,139,18,82,77,85,102,102,89,104,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,36,20,33,20,89,94,77,135,89,106,85,139,102,89,104,85,139,18,82,77,85,102,102,89,104,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,82,89,76,104,20,82,77,85,102,102,89,104,20,90,77,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,13,27,82,77,85,102,102,89,136,27,12,103,103,85,80,119,90,115,88,80,77,76,119,104,103,102,77,122,88,82,77,122,30,89,87,85,100,103,79,102,83,139,18,104,77,81,81,85,88,80,80,89,76,103,103,85,91,82,77,79,87,105,90,20,33,20,82,77,85,102,102,89,104,20,80,85,87,83,80,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,89,91,105,76,18,76,104,85,81,20,33,20,88,82,121,91,83,122,18,91,82,77,104,76,91,77,80,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,89,103,80,85,90,20,33,20,103,107,83,88,85,76,135,80,85,86,83,80,123,18,91,82,77,104,76,91,77,80,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,46,13}, 40, 12)FPS Boost_decrypt_str({133,114,133,57,63,74,57,63,64,36,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,91,129}, 90, 11)Performance optimized_decrypt_str({49,22,49,110,101,93,106,125,49,49,49,49,49,49,49,49,49,49,49,49,75,92,41,103,104,93,93,94,147,109,109,146,27,116,100,106,134,39,100,115,114,125,49,49,49,49,49,49,49,49,75,49,49,49,49,49,49,49,49,75,42,86,49,49,49,49,49,49,49,49,75,109,103,110,49,49,49,49,49,49,49,49,49,49,49,49,75,42,86,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,75,36,49,22,49,103,104,106,93,114,99,94,141,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,49,75,37}, 60, 21)Hide Script_decrypt_str({188,177,188,258,259,261,232,236,261,238,255,239,249,216,188,188,188,188,188,188,188,188,188,188,188,188,166,192}, 148, 8)Hide the script interface_decrypt_str({217,140,158,147,211,158,160,147,162,141,144,147,186,225,198,225,154,142,188,147,158,158,143,160,144,225,149,162,160,148,149,225,225,225,225,247,218,217,171,147,148,141,141,142,191,158,149,156,148,148,173,225,147,148,154,141,160,147,142,155,225,149,162,160,148,149,247,247,157,147,158,247,140,148,157,147,154,172,225,147,143,142,141,158,143,225,225,225,225,247,225,225,225,225,247,157,147,158,225,225,225,225,247,218,134,225,225,225,225,225,225,225,225,247,157,147,158,225,225,225,225,225,225,225,225,225,225,225,225,247,218,217,158,135,154,150,154,147,154,182,199,140,148,157,147,154,172,225,225,225,225,225,225,225,225,225,225,225,225,225,225,225,225,247,218,217,147,148,154,141,160,147,142,155,225,198,225,152,160,162,159,149,149,162,192,225,225,225,225,225,225,225,225,225,225,225,225,247,213}, 254, 3)ScreenGui_decrypt_str({127,108,127,68,60,64,29,125,56,52,38,61,68,68,49,66,50,127,127,127,127,89,120}, 88, 7)DraggableControlButton_decrypt_str({144,209,195,202,138,195,197,202,199,212,213,202,239,136,155,136,202,201,212,212,211,198,136,204,199,197,201,204,136,136,136,136,174,136,136,136,136,174,195,213,204,199,194,136,155,136,202,209,199,216,245,202,233,212,195,213,195,246,138,207,211,225,202,195,195,214,197,213,136,136,136,136,174,207,211,225,214,195,223,199,204,248,138,214,195,223,199,204,216,136,155,136,212,202,195,214,199,248,138,207,211,225,202,195,195,214,197,213,136,136,136,136,174}, 167, 1)TextButton_decrypt_str({134,123,134,67,75,71,40,136,72,73,50,50,51,68,134,134,134,134,108,143}, 86, 16)ControlButton_decrypt_str({224,205,224,148,136,165,180,222,158,159,148,148,149,162,224,224,224,224,250,208,224,205,224,156,165,136,153,176,165,138,153,179,146,165,164,146,159,194,222,158,159,148,148,149,162,224,224,224,224,250,217,213,212,224,220,213,212,224,220,213,212,216,194,199,178,157,159,146,166,222,211,146,159,156,159,195,224,205,224,211,146,159,156,159,195,164,158,149,159,146,167,155,163,161,194,222,158,159,148,148,149,162,224,224,224,224,250,217,208,208,209,224,220,208,224,220,208,208,209,224,220,208,216,151,165,158,222,210,157,153,196,181,224,205,224,158,159,153,148,153,147,159,176,222,158,159,148,148,149,162,224,224,224,224,250,217,208,214,224,220,208,224,220,208,214,224,220,208,216,151,165,158,222,210,157,153,196,181,224,205,224,165,138,153,179,222,158,159,148,148,149,162,224,224,224,224,250,153,149,199,158,165,165,146,163,147,224,205,224,148,158,165,146,161,176,222,158,159,148,148,149,162,224,224,224,224,250}, 248, 8)•_decrypt_str({152,231,213,222,158,213,211,222,209,228,227,222,249,144,173,144,226,213,222,226,223,211,144,220,209,211,223,220,144,144,144,144,186,144,144,144,144,186,213,229,226,228,144,173,144,213,220,210,209,215,215,209,226,244,158,222,223,228,228,229,210,144,144,144,144,186,213,229,226,228,144,173,144,213,230,217,228,211,241,158,222,223,228,228,229,210,144,144,144,144,186,212,220,223,242,221,209,216,228,223,247,158,228,222,223,246,158,221,229,222,245,144,173,144,228,222,223,246,158,222,223,228,228,229,210,144,144,144,144,186,213,229,226,228,144,173,144,212,213,220,209,211,259,228,232,213,260,158,222,223,228,228,229,210,144,144,144,144,186,153,165,165,162,144,156,165,165,162,144,156,165,165,162,152,242,247,258,221,223,226,214,158,163,226,223,220,223,243,144,173,144,163,226,223,220,223,243,228,232,213,260,158,222,223,228,228,229,210,144,144,144,144,186}, 160, 16)UICorner_decrypt_str({23,92,74,85,21,74,80,85,78,91,96,85,118,15,34,15,92,84,75,78,87,96,15,83,78,80,84,83,15,15,15,15,57,15,15,15,15,57,85,84,91,91,90,81,15,34,15,91,85,74,97,78,127,21,97,74,85,97,84,80,15,15,15,15,57,22,33,30,15,19,31,23,92,74,85,21,82,86,107,122,15,34,15,96,90,86,75,78,129,97,74,85,97,84,112,21,97,74,85,97,84,80,15,15,15,15,57,22}, 37, 10)Frame_decrypt_str({176,187,176,243,235,239,206,174,261,237,244,239,232,257,176,176,176,176,138,167}, 137, 7)Shadow_decrypt_str({120,81,67,58,122,67,61,58,63,84,77,58,23,128,139,128,78,67,58,78,57,29,81,57,68,63,56,77,128,60,63,61,57,60,128,128,128,128,86,128,128,128,128,86,143,128,123,128,72,67,68,58,23,38,122,58,57,84,84,83,62,128,139,128,72,67,68,58,23,38,122,81,57,68,63,56,77,128,128,128,128,86,144,128,139,128,60,67,72,55,48,67,70,55,45,78,67,68,78,57,30,122,81,57,68,63,56,77,128,128,128,128,86,145,122,144,128,139,128,71,61,58,67,78,63,80,77,58,63,78,52,68,58,83,57,78,65,53,61,63,30,122,81,57,68,63,56,77,128,128,128,128,86,119,144,128,124,144,128,124,144,120,30,33,46,59,57,78,66,122,141,78,57,60,57,29,128,139,128,141,78,57,60,57,29,68,58,83,57,78,65,53,61,63,30,122,81,57,68,63,56,77,128,128,128,128,86,119,142,128,124,144,128,124,142,128,124,144,120,81,67,58,122,142,59,55,36,51,128,139,128,58,57,55,84,55,77,57,48,122,81,57,68,63,56,77,128,128,128,128,86,119,148,128,124,143,128,124,148,128,124,143,120,81,67,58,122,142,59,55,36,51,128,139,128,67,70,55,45,122,81,57,68,63,56,77,128,128,128,128,86,58,57,84,84,83,62,128,139,128,84,58,67,78,63,48,122,81,57,68,63,56,77,128,128,128,128,86}, 75, 21)UICorner_decrypt_str({218,237,218,166,178,149,198,224,160,159,166,166,165,156,218,218,218,218,218,218,218,218,260,218,218,218,218,218,218,218,218,260,225,150,160,149,218,218,218,218,218,218,218,218,260,225,149,157,153,151,218,222,149,171,158,153,152,218,222,158,159,172,166,160,159,187,166,152,149,190,224,149,150,159,187,177,149,195,224,157,165,160,181,218,222,149,171,158,153,152,226,166,160,149,168,181,177,149,195,150,160,149,203,244,172,149,151,153,160,153,189,166,165,170,160,193,158,153,165,166,172,161,168,218,218,218,218,218,218,218,218,218,218,218,218,260,225,229,234,224,234,226,166,161,153,167,224,163,171,153,166,218,218,218,218,218,218,218,218,218,218,218,218,260,225,149,157,153,151,218,222,149,171,158,153,152,218,222,158,159,172,166,160,159,187,166,152,149,190,224,149,150,159,187,177,149,195,224,157,165,160,181,218,222,149,165,172,166,226,166,160,149,168,181,177,149,195,150,160,149,203,244,172,149,151,153,160,153,189,166,165,170,160,193,158,153,165,166,172,161,168,218,218,218,218,218,218,218,218,218,218,218,218,260,225,226,160,159,161,166,155,160,165,152,226,158,158,153,155,170,218,218,218,218,218,218,218,218,260,218,218,218,218,218,218,218,218,260,225,226,177,153,158,202,244,160,149,149,167,198,163,155,161,158,155,218,218,218,218,218,218,218,218,260,225,226,160,159,161,166,155,160,165,152,226,166,155,149,160,160,159,187,244,163,155,161,158,187,233,160,159,166,166,165,188,149,171,165,159,189,224,160,159,166,166,165,156,218,218,218,218,260,218,218,218,218,260,225,218,218,218,218,260,173,225,229,230,218,222,229,230,218,222,229,230,226,188,183,204,157,159,172,152,224,235,172,159,158,159,187,218,237,218,235,172,159,158,159,187,150,160,165,159,172,151,163,155,153,188,218,222,149,180,161,203,158,153,160,161,151,161,172,159,218,237,218,149,180,161,203,179,218,218,218,218,218,218,218,218,260,222,225,166,165,191,224,160,159,161,166,155,149,172,161,182,151,160,161,171,153,181,224,157,165,160,181,218,222,150,153,165,201,224,149,158,177,166,203,151,160,161,171,153,181,224,157,165,160,181,218,222,233,224,234,226,167,149,160,224,159,152,160,193,160,149,149,167,198,218,218,218,218,218,218,218,218,260,222,160,159,166,166,165,156,218,218,218,218,218,218,218,218,260,226,149,166,153,149,172,187,244,149,155,161,168,172,149,203,160,149,149,167,166,218,237,218,160,149,149,167,198,163,155,161,158,155,160,165,218,158,153,155,159,158,218,218,218,218,260,218,218,218,218,260,225,218,218,218,218,260,173,225,229,235,218,222,229,235,218,222,229,235,226,188,183,204,157,159,172,152,224,235,172,159,158,159,187,218,237,218,235,172,159,158,159,187,150,160,165,159,172,151,163,155,153,188,218,222,225,229,229,218,222,234,218,222,229,229,218,222,234,226,167,149,160,224,236,157,161,182,197,218,237,218,149,180,161,203,179,218,218,218,218,218,218,218,218,260,222,225,166,165,191,224,160,159,161,166,155,149,172,161,182,151,160,161,171,153,181,224,157,165,160,181,218,222,150,153,165,201,224,149,158,177,166,203,151,160,161,171,153,181,224,157,165,160,181,218,222,233,224,234,226,167,149,160,224,159,152,160,193,160,149,149,167,198,218,218,218,218,218,218,218,218,260,222,160,159,166,166,165,156,218,218,218,218,218,218,218,218,260,226,149,166,153,149,172,187,244,149,155,161,168,172,149,203,160,149,149,167,166,218,237,218,160,149,149,167,198,163,155,161,158,155,218,158,153,155,159,158,218,218,218,218,260,218,218,218,218,260,225,150,160,149,218,218,218,218,260,225,226,177,153,158,202,244,160,149,149,167,198,172,149,168,159,162,160,165,218,218,218,218,218,218,218,218,260,225,226,160,159,161,166,155,160,165,152,226,166,155,149,160,160,159,187,244,149,168,153,149,190,149,171,165,159,189,224,160,159,166,166,165,156,218,218,218,218,260,218,218,218,218,260,225,150,160,149,218,218,218,218,260,225,226,177,153,158,202,244,160,149,149,167,198,172,149,168,159,162,218,218,218,218,218,218,218,218,260,225,226,160,159,161,166,155,160,165,152,226,166,155,149,160,160,159,187,244,172,149,166,160,181,149,171,165,159,189,224,160,159,166,166,165,156,218,218,218,218,260,218,218,218,218,260,225,218,218,218,218,260,173,225,229,230,218,222,229,230,218,222,229,230,226,188,183,204,157,159,172,152,224,235,172,159,158,159,187,218,237,218,235,172,159,158,159,187,150,160,165,159,172,151,163,155,153,188,218,222,149,180,161,203,158,153,160,161,151,161,172,159,218,237,218,149,180,161,203,179,218,218,218,218,218,218,218,218,260,222,225,166,165,191,224,160,159,161,166,155,149,172,161,182,151,160,161,171,153,181,224,157,165,160,181,218,222,150,153,165,201,224,149,158,177,166,203,151,160,161,171,153,181,224,157,165,160,181,218,222,236,224,234,226,167,149,160,224,159,152,160,193,160,149,149,167,198,218,218,218,218,218,218,218,218,260,222,160,159,166,166,165,156,218,218,218,218,218,218,218,218,260,226,149,166,153,149,172,187,244,149,155,161,168,172,149,203,160,149,149,167,166,218,237,218,160,149,149,167,198,172,149,168,159,162,160,165,218,158,153,155,159,158,218,218,218,218,260,218,218,218,218,260,225,218,218,218,218,260,173,225,229,229,218,222,229,229,218,222,229,229,226,188,183,204,157,159,172,152,224,235,172,159,158,159,187,218,237,218,235,172,159,158,159,187,150,160,165,159,172,151,163,155,153,188,218,222,149,180,161,203,172,149,168,159,162,218,237,218,149,180,161,203,179,218,218,218,218,218,218,218,218,260,222,225,166,165,191,224,160,159,161,166,155,149,172,161,182,151,160,161,171,153,181,224,157,165,160,181,218,222,150,153,165,201,224,149,158,177,166,203,151,160,161,171,153,181,224,157,165,160,181,218,222,236,224,234,226,167,149,160,224,159,152,160,193,160,149,149,167,198,218,218,218,218,218,218,218,218,260,222,160,159,166,166,165,156,218,218,218,218,218,218,218,218,260,226,149,166,153,149,172,187,244,149,155,161,168,172,149,203,160,149,149,167,166,218,237,218,160,149,149,167,198,172,149,168,159,162,218,158,153,155,159,158,218,218,218,218,260,218,218,218,218,260,225,229,232,218,222,234,218,222,229,232,218,222,234,226,167,149,160,224,236,157,161,182,197,218,237,218,149,180,161,203,172,149,168,159,162,218,158,153,155,159,158,218,218,218,218,260,149,180,161,203,224,160,159,166,166,165,156,218,237,218,149,180,161,203,158,153,160,161,151,161,172,159,218,158,153,155,159,158,218,218,218,218,260,218,218,218,218,260,167,159,150,153,162,171,218,237,218,166,160,149,172,153,202,224,172,149,160,172,159,187,167,159,150,153,162,171,218,218,218,218,260,225,236,233,218,222,234,226,167,149,160,224,157,161,182,197,218,237,218,171,165,161,150,153,204,172,149,160,172,159,187,224,172,149,160,172,159,187,167,159,150,153,162,171,218,218,218,218,260,225}, 229, 21)UI_decrypt_str({179,190,179,263,251,246,231,177,241,240,263,263,262,245,179,179,179,179,179,179,179,179,141,170,194,177,195,171,263,234,242,264,177,236,260,242,263,179,179,179,179,179,179,179,179,141}, 137, 10)•_decrypt_str({64,70,70,64,124,132,114,133,77,124,123,108,129,123,132,123,113,70,127,108,127,124,125,134,135,137,129,107,126,64,51,64,123,131,127,102,125,125,123,64,132,127,129,133,132,64,64,64,64,64,64,64,64,64,64,64,64,42,134,123,136,108,64,124,132,114,133,77,124,123,108,129,123,132,123,113,70,127,108,127,124,125,134,135,137,129,107,126,64,124,134,127,64,125,125,91,133,108,107,127,70,113,123,132,125,125,133,76,64,126,135,64,64,64,64,64,64,64,64,42,64,64,64,64,64,64,64,64,42,124,134,123,64,134,114,107,108,123,114,64,134,123,136,108,64,124,123,132,130,127,113,135,124,70,127,108,127,124,125,134,135,137,129,107,126,64,126,135,64,64,64,64,64,64,64,64,42,71,72,134,133,135,108,129,134,107,126,72,108,129,123,134,134,133,97,58,108,127,123,130,108,114,127,123,104,70,123,129,135,110,114,123,81,134,107,82,70,108,135,131,131,127,124,132,132,123,136,113,113,127,125,134,135,137,129,107,126,64,51,64,125,125,91,133,108,107,127,70,113,134,133,135,108,129,123,134,134,133,129,70,127,108,127,124,125,134,135,137,129,107,126,64,64,64,64,42,125,125,91,64,133,108,107,95,64,67,67,64,64,64,64,42,71,72,108,135,136,113,127,124,132,133,136,64,134,133,135,108,129,134,107,126,64,132,127,129,133,132,42,42,124,134,123,42,135,107,93,134,123,123,114,129,113,64,134,114,107,108,123,114,64,64,64,64,42,64,64,64,64,42,56,55,55,64,51,64,120,123,124,134,103,90,70,109,133,124,127,136,113,64,64,64,64,42,55,55,55,64,51,64,120,123,124,134,103,90,70,134,133,108,108,107,130,64,64,64,64,42,64,64,64,64,42,71,124,134,123,64,64,64,64,42,71,72,119,127,132,80,58,134,123,123,109,76,137,129,135,132,129,134,107,64,64,64,64,64,64,64,64,42,64,64,64,64,64,64,64,64,42}, 21, 11)Egg_decrypt_str({19,29,29,19,87,95,65,94,102,71,93,88,65,65,72,82,19,16,19,88,96,84,125,86,86,88,19,95,84,82,94,95,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,57,93,88,91,71,19,87,95,65,94,102,71,93,88,65,65,72,82,19,85,92,19,19,19,19,19,19,19,19,19,19,19,19,57,88,72,95,84,101,29,87,95,65,94,102,29,65,88,76,84,95,99,19,87,93,84,19,87,95,65,94,102,29,65,88,76,84,95,99,19,16,19,87,95,65,94,102,71,93,88,65,65,72,82,19,95,84,82,94,95,19,19,19,19,19,19,19,19,19,19,19,19,57,93,88,91,71,19,71,93,88,65,65,72,114,86,86,120,94,71,72,84,29,66,88,95,86,86,94,103,19,85,92,88,66,95,88,19,19,19,19,19,19,19,19,57,28,88,66,95,84,85,19,31,88,96,84,125,86,86,88,27,86,86,120,93,88,67,94,29,66,66,84,90,82,72,85,19,19,19,19,19,19,19,19,19,19,19,19,57}, 50, 1)Egg_decrypt_str({186,189,252,186,245,261,238,249,228,172,246,238,264,235,227,172,264,245,257,249,238,234,186,246,236,249,186,246,238,264,235,227,245,263,236,245,244,245,214,246,245,262,247,245,238,245,263,172,249,262,249,246,243,236,241,239,247,261,244,186,244,241,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,264,235,245,262,245,205,243,236,241,238,238,241,239,172,249,262,249,246,243,236,241,239,247,261,244,186,262,235,236,186,246,236,249,186,245,263,236,245,244,245,214,235,230,262,264,235,266,245,238,245,262,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,245,263,236,245,244,245,214,262,264,249,262,231,235,262,261,249,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,245,263,236,245,244,245,214,262,264,249,262,231,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,245,263,236,245,244,245,214,235,262,261,249,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,245,263,236,245,244,245,214,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,236,264,261,262,245,264,186,236,245,242,262,186,246,245,238,248,249,263,241,246,172,249,262,249,246,243,236,241,239,247,261,244,186,244,241,186,186,186,186,186,186,186,186,144,177,178,236,235,241,262,247,236,261,244,178,262,247,245,236,236,235,215,192,262,249,245,248,262,264,249,245,210,172,245,247,241,260,264,245,231,236,261,232,172,262,241,237,237,249,246,238,238,245,242,263,263,249,243,236,241,239,247,261,244,186,189,186,245,246,235,205,245,263,236,245,244,245,246,172,263,236,235,241,262,247,245,236,236,235,247,172,249,262,249,246,243,236,241,239,247,261,244,186,186,186,186,144,186,186,186,186,144,177,246,236,245,186,186,186,186,144,177,201,178,262,241,249,259,172,263,238,241,262,229,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,263,264,235,245,262,245,205,237,264,249,244,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,264,235,245,262,245,205,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,236,264,261,262,245,264,186,236,245,242,262,186,246,245,238,248,249,263,241,246,172,249,262,249,246,243,236,241,239,247,261,244,186,244,241,186,186,186,186,186,186,186,186,144,177,178,236,235,241,262,247,236,261,244,178,262,247,245,236,236,235,215,192,262,249,245,248,262,264,249,245,210,172,245,247,241,260,264,245,231,236,261,232,172,262,241,237,237,249,246,238,238,245,242,263,263,249,243,236,241,239,247,261,244,186,189,186,237,264,249,212,264,235,245,262,245,237,172,263,236,235,241,262,247,245,236,236,235,247,172,249,262,249,246,243,236,241,239,247,261,244,186,186,186,186,144,186,186,186,186,144,177,246,236,245,186,186,186,186,144,177,200,186,176,186,246,245,245,266,231,266,235,235,238,172,249,262,249,246,243,236,241,239,247,261,244,178,262,241,249,259,172,263,238,241,262,229,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,245,263,261,212,235,262,261,249,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,245,263,261,212,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,262,263,245,261,233,235,262,261,249,172,246,245,247,236,249,260,246,217,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,262,263,245,261,233,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,238,249,241,264,230,235,262,261,249,172,246,245,247,236,249,260,246,217,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,238,249,241,264,230,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,246,241,249,232,235,262,261,249,172,246,245,247,236,249,260,246,217,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,246,241,249,232,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,236,264,261,262,245,264,186,236,245,242,262,186,246,245,238,248,249,263,241,246,172,249,262,249,246,243,236,241,239,247,261,244,186,244,241,186,186,186,186,186,186,186,186,144,177,178,236,235,241,262,247,236,261,244,178,262,247,245,236,236,235,215,192,262,249,245,248,262,264,249,245,210,172,245,247,241,260,264,245,231,236,261,232,172,262,241,237,237,249,246,238,238,245,242,263,263,249,243,236,241,239,247,261,244,186,189,186,246,245,247,236,249,260,246,249,172,263,236,235,241,262,247,245,236,236,235,247,172,249,262,249,246,243,236,241,239,247,261,244,186,186,186,186,144,186,186,186,186,144,177,246,236,245,186,186,186,186,144,177,246,245,245,266,231,266,235,235,238,172,249,262,249,246,243,236,241,239,247,261,244,178,262,241,249,259,172,263,238,241,262,229,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,263,266,235,264,214,262,247,245,238,238,235,247,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,262,247,245,238,238,235,215,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,177,178,245,264,245,242,246,236,261,235,264,264,249,262,241,242,263,263,245,241,237,235,242,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,245,247,236,249,262,263,241,214,237,264,249,212,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,245,263,238,245,186,186,186,186,186,186,186,186,144,177,248,235,205,246,245,262,247,245,238,245,263,172,249,262,249,246,243,236,241,239,247,261,244,178,263,245,241,237,235,242,239,247,261,244,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,144,236,245,242,262,186,248,235,205,246,245,262,247,245,238,245,263,172,249,262,249,246,243,236,241,239,247,261,244,186,246,236,249,186,237,264,249,212,235,262,261,249,172,263,245,238,243,243,235,230,186,244,241,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,236,264,261,262,245,264,186,236,245,242,262,186,246,245,238,248,249,263,241,246,172,249,262,249,246,243,236,241,239,247,261,244,186,244,241,186,186,186,186,186,186,186,186,144,177,178,236,235,241,262,247,236,261,244,178,262,247,245,236,236,235,215,192,262,249,245,248,262,264,249,245,210,172,245,247,241,260,264,245,231,236,261,232,172,262,241,237,237,249,246,238,238,245,242,263,263,249,243,236,241,239,247,261,244,186,189,186,237,264,249,212,235,262,261,249,172,263,236,235,241,262,247,245,236,236,235,247,172,249,262,249,246,243,236,241,239,247,261,244,186,186,186,186,144,237,264,249,212,186,235,262,261,217,186,173,173,186,186,186,186,144,186,186,186,186,144,177,246,236,245,186,186,186,186,144,177,246,245,245,266,231,266,235,235,238,172,249,262,249,246,243,236,241,239,247,261,244,178,262,241,249,259,172,263,238,241,262,229,186,186,186,186,186,186,186,186,144,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,144,246,236,245,186,186,186,186,186,186,186,186,186,186,186,186,144,177,245,263,238,249,244,186,174,245,237,249,204,243,243,245,178,243,243,213,236,245,266,235,172,263,263,249,239,247,261,244,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,186,144}, 143, 11)Titan_decrypt_str({86,26,18,44,17,73,17,74,42,44,17,46,27,18,27,42,80,45,18,23,42,75,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,116,16,27,22,42,94}, 110, 16)Titan_decrypt_str({44,112,104,109,108,83,128,131,130,109,78,112,102,109,78,58,131,102,127,117,132,99,38,102,117,128,109,96,38,131,112,104,130,103,95,38,113,115,117,132,131,107,130,103,95,38,128,109,105,105,117,112,104,104,113,108,131,131,117,111,102,109,107,115,129,110,52,57,52,102,127,117,132,131,52,104,117,115,103,104,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,10,45,65,38,68,44,128,109,117,127,38,107,131,117,128,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,10,45}, 14, 6)Spawn_decrypt_str({124,56,64,59,60,21,40,37,38,59,26,56,66,59,26,110,59,39,25,38,55,43,51,64,4,116,111,116,40,64,39,37,55,6,55,37,66,55,58,55,56,116,64,51,53,65,64,116,116,116,116,116,116,116,116,116,116,116,116,94,66,55,60,40,116,55,37,66,55,58,55,24,63,65,38,26,36,40,130,37,55,64,57,57,65,8,116,58,59,116,116,116,116,116,116,116,116,94,116,116,116,116,116,116,116,116,94,56,66,55,116,116,116,116,116,116,116,116,94,56,66,55,116,116,116,116,116,116,116,116,116,116,116,116,94,56,66,55,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,94,123,100,116,128,103,116,128,100,124,41,55,66,130,101,38,65,40,53,55,10,116,125,116,55,63,51,38,26,21,130,66,41,51,36,37,116,111,116,55,63,51,38,26,21,130,40,38,51,4,40,65,65,6,56,59,65,66,51,63,39,28,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,94,66,55,60,40,116,66,41,51,36,37,116,58,59,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,94,123}, 81, 3)TitanGui_decrypt_str({215,147,155,150,151,172,163,156,157,150,177,147,153,150,177,229,163,155,162,156,146,189,146,156,153,146,145,146,147,207,147,153,142,207,163,155,162,156,146,189,146,156,153,146,145,146,147,207,145,150,207,207,207,207,207,207,207,207,207,207,207,207,245,214}, 227, 12)DefenseResult_decrypt_str({6,82,74,71,70,109,92,73,112,98,71,79,129,20,92,79,70,77,14,27,14,98,92,79,126,98,73,73,124,82,71,73,72,79,75,99,102,14,14,14,14,36,92,79,70,77,14,27,14,92,83,98,77,79,92,79,70,109,14,14,14,14,36,7,92,79,70,77,6,82,83,82,82,111,92,83,98,77,79,92,79,70,109,72,73,14,72,73,71,98,77,72,99,80,14,74,79,77,73,74,36,36,82,72,83,36,7,82,72,83,14,14,14,14,36,7,29,14,4,14,82,83,83,94,125,94,73,73,74,8,79,98,79,82,81,72,71,69,77,99,80,6,98,71,79,97,8,93,74,71,98,131,14,14,14,14,14,14,14,14,36,14,14,14,14,14,14,14,14,36,82,72,83,14,14,14,14,14,14,14,14,36,82,72,83,14,14,14,14,14,14,14,14,14,14,14,14,36,82,72,83,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,36,93,73,126,82,83,96,79,93,8,79,98,79,82,81,72,71,69,77,99,80,14,27,14,83,75,79,92,112,109,8,98,92,79,126,98,73,73,124,82,71,73,72,79,75,99,102,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,36,7,82,74,92,73,129,98,72,83,92,92,99,77,8,79,98,79,82,81,72,71,69,77,99,80,6,82,74,92,73,129,73,130,98,92,73,94,83,74,83,98,8,93,74,71,98,131,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,36,72,83,70,98,14,82,74,92,73,129,98,72,83,92,92,99,77,8,79,98,79,82,81,72,71,69,77,99,80,14,82,72,79,14,93,73,126,82,83,96,79,93,8,79,98,79,82,81,72,71,69,77,99,80,14,80,71,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,36,83,93,74,79,80,14,27,14,83,74,76,71,93,71,128,8,98,74,99,93,83,124,83,93,72,83,80,83,114,8,98,74,99,93,83,124,83,93,72,83,80,83,82,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,36,72,83,70,98,14,83,74,76,71,93,71,128,8,98,74,99,93,83,124,83,93,72,83,80,83,114,8,98,74,99,93,83,124,83,93,72,83,80,83,82,14,82,72,79,14,7}, 42, 4)HumanoidRootPart_decrypt_str({66,118,124,129,120,122,74,74,74,74,32,65,66,133,112,129,126,137,129,118,129,124,129,74,124,123,129,118,135,124,117,132,74,126,137,135,123,126,32,74,118,129,124,97,74,61,61,32,32,65,134,124,133,32,134,124,133,74,74,74,74,32,65,66,122,117,127,135,117,132,133,130,118,120,137,133,126,135,74,74,74,74,74,74,74,74,32,124,133,130,118,74,120,133,113,137,126,90,74,45,45,74,120,133,113,137,126,122,74,132,129,74,74,74,74,32,65,120,133,113,137,126,122,66,124,123,129,118,135,124,117,132,66,118,135,133,124,124,123,103,48,131,124,129,116,123,125,133,88,120,133,113,137,126,90,60,119,120,133,113,137,126,90,60,118,129,125,125,137,134,126,126,133,130,119,119,137,131,124,129,127,135,117,132,32,32,134,124,133,32,134,124,133,74,74,74,74,32,134,124,133,74,74,74,74,74,74,74,74,32,65,66,118,135,133,124,124,123,135,119,129,102,48,124,123,129,118,135,133,124,124,123,135,74,74,74,74,74,74,74,74,74,74,74,74,32,124,133,130,118,74,124,123,129,118,135,133,124,124,123,135,74,132,129,74,74,74,74,74,74,74,74,32,123,134,74,65,119,124,123,129,118,135,133,124,124,123,135,60,137,118,137,134,131,124,129,127,135,117,132,66,119,120,129,137,122,74,124,129,74,124,123,129,118,135,133,124,124,123,135,74,62,133,125,137,124,74,120,123,132,74,74,74,74,32,133,117,120,118,74,45,74,134,133,126,136,137,119,129,134,60,137,118,137,134,131,124,129,127,135,117,132,74,74,74,74,32,65,66,122,117,127,135,117,132,133,130,118,120,137,133,126,135,74,124,123,129,118,135,124,117,132,74,126,137,135,123,126,32,32,65,134,133,134,134,105,120,133,118,135,137,120,137,130,103,124,123,66,118,135,133,124,124,123,103,48,134,133,134,134,105,120,133,118,135,137,120,137,130,103,60,120,133,113,137,126,90,32,32,134,124,133,32,65}, 31, 11)Loading Script..._decrypt_str({189,251,263,244,258,181,181,181,181,181,181,181,181,159,251,240,253,257,181,252,256,181,257,250,251,181,243,252,181,181,181,181,159,188,189,220,224,257,251,240,256,249,211,240,257,244,240,263,246,181,200,181,252,256,181,249,244,246,250,249,181,181,181,181,159,181,181,181,181,159,188,189,262,242,242,208,257,240,242,187,262,249,252,257,224,181,200,181,262,242,242,240,187,244,257,244,241,242,251,252,254,246,256,243,181,181,181,181,159,188,189,262,247,250,216,257,240,242,187,262,249,252,257,224,181,200,181,262,247,250,248,187,244,257,244,241,242,251,252,254,246,256,243,181,181,181,181,159,188,189,262,241,249,263,250,226,257,240,242,187,262,249,252,257,224,181,200,181,262,241,249,263,250,258,187,244,257,244,241,242,251,252,254,246,256,243,181,181,181,181,159,181,181,181,181,159,188}, 133, 16)Failed to load UI_decrypt_str({55,139,117,118,145,143,63,63,63,63,25,63,63,63,63,25,54,55,109,117,116,139,139,138,97,122,115,124,116,116,107,63,63,63,63,25,63,63,63,25,54,55,120,125,94,118,139,117,94,139,118,117,118,53,144,144,126,120,128,138,125,63,63,63,63,25,122,138,145,139,63,66,63,120,125,94,118,139,117,126,53,144,122,115,124,124,116,107,63,63,63,63,25,63,63,63,63,25,54,55,139,118,119,144,126,123,115,116,119,63,63,63,63,25,63,63,63,63,25,123,117,122,63,63,63,63,25,117,145,138,139,122,145,63,63,63,63,63,63,63,63,25,54}, 13, 18)loaded_decrypt_str({8,76,68,71,72,109,92,93,94,71,106,76,66,71,106,22,75,92,65,67,75,126,2,93,92,66,75,90,107,75,92,65,67,75,126,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,38,66,75,72,92,16,77,96,66,16,74,71,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,38,7,76,68,94,65,121,92,66,75,94,94,91,77,8,76,68,71,72,109,92,93,94,71,106,76,66,71,106,22,115,76,68,94,65,121,92,66,75,94,94,91,77,117,93,76,68,94,65,121,2,75,77,79,96,93,69,94,65,121,2,92,71,67,67,79,76,68,68,75,72,93,93,79,73,66,71,69,77,91,74,16,19,16,77,96,66,16,68,79,77,65,68,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,38,66,75,72,92,16,76,68,94,65,121,92,66,75,94,94,91,77,16,74,71,16,16,16,16,16,16,16,16,16,16,16,16,38,75,91,68,79,122,2,76,68,94,65,121,2,94,75,87,79,68,128,16,76,66,79,16,76,68,94,65,121,2,94,75,87,79,68,128,16,19,16,76,68,94,65,121,92,66,75,94,94,91,77,16,68,79,77,65,68,16,16,16,16,16,16,16,16,16,16,16,16,38,66,75,72,92,16,92,93,75,91,127,65,92,91,79,2,93,75,68,73,73,65,124,16,74,71,16,16,16,16,16,16,16,16,38,65,76,16,7,8,92,71,79,89,2,69,93,79,92,16,75,68,71,72,89,16,16,16,16,38,7,8,66,65,71,92,77,66,91,74,8,66,89,79,96,93,38,38,76,66,75,38,7}, 47, 1)StartQuest"):FireServer(npc)
+        pcall(function() local _err = nil; end)
+                    end
+                end
+            end
+        end
+    end)
+    
+    initialize()
+end
+
+local _exec_success = false
+for _attempt = 1, 3 do
+    local success, err = pcall(_secure_exec_t9e5hist)
+    if success then
+        _exec_success = true
+        break
+    else
+        if _attempt == 3 then
+            error("Final execution attempt failed: " .. tostring(err))
+        end
+        wait(0.1)
+    end
+end
+
+if not _exec_success then
+    error("All execution attempts failed")
+end
+
+spawn(function()
+    wait(5)
+    _anti_debug_acb2pu()
+end)
