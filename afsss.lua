@@ -579,54 +579,55 @@ function Advanced.autoRaid()
 end
 
 function Advanced.autoTrial()
-    if fuckingdata.disabled or Player.World.Value ~= "Tower" then return end
-    local towerWorld = fuckingasshelldammit.Workspace.Worlds.Tower
-    while Player.World.Value == "Tower" and not fuckingdata.disabled do
-        local enemies = towerWorld:FindFirstChild("Enemies")
-        if enemies then
-            local enemyList = enemies:GetChildren()
-            if #enemyList > 0 then
-                for _, enemy in ipairs(enemyList) do
-                    if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
-                        pcall(function()
-                            Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
-                            local sendPet = RemoteEvents.Bindable:FindFirstChild("SendPet")
-                            wait(0.3)
-                            if sendPet then
-                                sendPet:Fire(enemy, true)
-                            end
-                        end)
-                    end
-                end
-            end
-        end
-        if enemies and #enemies:GetChildren() == 0 then
-            local map = towerWorld:FindFirstChild("Map")
-            if map then
-                local confirmPart
-                local timeout = tick() + 5
-                repeat
-                    confirmPart = map:FindFirstChild("ConfirmPart")
-                    wait(0.1)
-                until confirmPart or tick() > timeout
+    if fuckingdata.disabled or Player.World.Value ~= "Tower" then return end
+    local towerWorld = fuckingasshelldammit.Workspace.Worlds.Tower
+    while Player.World.Value == "Tower" and not fuckingdata.disabled do
+        local enemies = towerWorld:FindFirstChild("Enemies")
+        if enemies then
+            local enemyList = enemies:GetChildren()
+            if #enemyList > 0 then
+                for _, enemy in ipairs(enemyList) do
+                    if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
+                        pcall(function()
+                            Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
+                            local sendPet = RemoteEvents.Bindable:FindFirstChild("SendPet")
+                            wait(0.3)
+                            if sendPet then
+                                sendPet:Fire(enemy, true)
+                            end
+                        end)
+                    end
+                end
+            end
+        end
 
-                if confirmPart then
-                    local prompt
-                    timeout = tick() + 5
-                    repeat
-                        prompt = confirmPart:FindFirstChildOfClass("ProximityPrompt")
-                        wait(0.1)
-                    until prompt or tick() > timeout
+        if enemies and #enemies:GetChildren() == 0 then
+            local map = towerWorld:FindFirstChild("Map")
+            if map then
+                local confirmPart
+                local timeout = tick() + 5
+                repeat
+                    confirmPart = map:FindFirstChild("ConfirmPart")
+                    wait(0.1)
+                until confirmPart or tick() > timeout
 
-                    if prompt then
-                        pcall(function()
-                            fireproximityprompt(prompt)
-                        end)
-                    end
-                end
-            end
-        end
-    end
+                if confirmPart then
+                    local prompt
+                    timeout = tick() + 5
+                    repeat
+                        prompt = confirmPart:FindFirstChildOfClass("ProximityPrompt")
+                        wait(0.1)
+                    until prompt or tick() > timeout
+
+                    if prompt then
+                        pcall(function()
+                            fireproximityprompt(prompt)
+                        end)
+                    end
+                end
+            end
+        end
+    end
 end
 
 
