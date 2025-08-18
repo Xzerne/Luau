@@ -416,24 +416,6 @@ function Advanced.autoTrial()
 end
 
 
-
-function Advanced.autoQuest()
-    if fuckingdata.disabled then return end
-    
-    local currentWorld = Player.World and Player.World.Value
-    if currentWorld then
-        pcall(function()
-            local npc = fuckingasshelldammit.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
-            if npc then
-                RemoteEvents.Remote:FindFirstChild("StartQuest"):FireServer(npc)
-                RemoteEvents.Remote:FindFirstChild("FinishQuest"):FireServer(npc)
-                RemoteEvents.Remote:FindFirstChild("FinishQuestline"):FireServer(npc)
-            end
-        end)
-    end
-end
-
-
 local QuestTracker = {
     lastQuestText = "",
     currentTarget = nil,
@@ -703,7 +685,128 @@ if not string.trim then
     end
 end
 
-Advanced.autoQuest = Advanced.enhancedAutoQuest
+
+function Advanced.autoQuest()
+    if fuckingdata.disabled or not Toggles.autoQuest then return end
+    
+    local currentTime = tick()
+    if currentTime - QuestTracker.lastQuestCheck < QuestTracker.questCheckInterval then
+        if QuestTracker.currentTarget and QuestTracker.currentKilled < QuestTracker.requiredKills then
+            local targetMob = QuestTracker.findTargetMob(QuestTracker.currentTarget)
+            if targetMob then
+                QuestTracker.attackTargetMob(targetMob)
+            end
+        end
+        return
+    end
+    
+    QuestTracker.lastQuestCheck = currentTime
+    
+    local questText = QuestTracker.getCurrentQuestInfo()
+    
+    if not questText or questText == "" or questText:find("No active quest") or questText:find("Complete") then
+        if not QuestTracker.questCompleted then
+            print("No quest found, starting new quest...")
+            QuestTracker.startQuest()
+        else
+            print("Quest completed, starting new quest...")
+            QuestTracker.questCompleted = false
+            task.wait(0.5)
+            QuestTracker.startQuest()
+        end
+        
+        QuestTracker.currentTarget = nil
+        QuestTracker.currentKilled = 0
+        QuestTracker.requiredKills = 0
+        QuestTracker.lastQuestText = ""
+        
+        task.wait(1)
+        return
+    end
+    
+    local mobName, killed, required = QuestTracker.parseQuestText(questText)
+    
+    if not mobName then
+        print("Unable to parse quest text: " .. tostring(questText))
+        
+        if questText:find("Collect") or questText:find("Open") or questText:find("Upgrade") then
+            print("Non-combat quest detected, handling...")
+            task.wait(1)
+            QuestTracker.finishQuest()
+            task.wait(1)
+            QuestTracker.startQuest()
+        end
+        return
+    end
+    
+    if mobName ~= QuestTracker.currentTarget or (killed == 0 and QuestTracker.currentKilled > 0) then
+        print(string.format("New quest detected: %s [%d/%d] (Previous: %s)", 
+            mobName, killed, required, tostring(QuestTracker.currentTarget)))
+        QuestTracker.questCompleted = false
+        QuestTracker.lastQuestText = ""
+    end
+    
+    QuestTracker.currentTarget = mobName
+    QuestTracker.currentKilled = killed
+    QuestTracker.requiredKills = required
+    
+    if questText ~= QuestTracker.lastQuestText then
+        QuestTracker.lastQuestText = questText
+        print(string.format("Quest Progress: %s [%d/%d]", mobName, killed, required))
+    end
+    
+    if killed >= required then
+        if not QuestTracker.questCompleted then
+            QuestTracker.questCompleted = true
+            print("Quest completed! Finishing and preparing for next quest...")
+            
+            QuestTracker.finishQuest()
+            
+            task.spawn(function()
+                task.wait(2)
+                print("Attempting to start next quest in chain...")
+                QuestTracker.startQuest()
+                
+                task.wait(1)
+                QuestTracker.currentTarget = nil
+                QuestTracker.currentKilled = 0
+                QuestTracker.requiredKills = 0
+                QuestTracker.questCompleted = false
+                QuestTracker.lastQuestText = ""
+            end)
+        end
+        return
+    end
+    
+    local targetMob = QuestTracker.findTargetMob(mobName)
+    if targetMob then
+        QuestTracker.attackTargetMob(targetMob)
+    else
+        local currentWorld = Player.World and Player.World.Value
+        if currentWorld then
+            local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
+            if worldFolder and worldFolder:FindFirstChild("Enemies") then
+                for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
+                    local displayName = enemy:FindFirstChild("DisplayName")
+                    if displayName then
+                        local enemyName = displayName.Value:lower()
+                        local targetName = mobName:lower()
+                        
+                        if enemyName:find(targetName) or targetName:find(enemyName) then
+                            local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
+                            local attackers = enemy:FindFirstChild("Attackers")
+                            if humanoidRootPart and attackers then
+                                QuestTracker.attackTargetMob(enemy)
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
 
 
 
@@ -762,7 +865,7 @@ local function createFluentUI()
             Toggles.autoEgg = Value
             if Value then
                 Toggles.autoEggCurrent = false
-                -- -- Options.AutoEggCurrent:SetValue(false)
+                Options.AutoEggCurrent:SetValue(false)
             end
         end)
         
@@ -775,7 +878,7 @@ local function createFluentUI()
             Toggles.autoEggCurrent = Value
             if Value then
                 Toggles.autoEgg = false
-              --  -- Options.AutoEgg:SetValue(false)
+              --  Options.AutoEgg:SetValue(false)
             end
         end)
         
@@ -829,7 +932,7 @@ local function createFluentUI()
             Description = "Update mob list for current world",
             Callback = function()
                 fuckingdata.mobs = Utils.getMobs()
-             --   -- Options.MobSelect:SetValues(fuckingdata.mobs)
+             Options.MobSelect:SetValues(fuckingdata.mobs)
                 Fluent:Notify({
                     Title = "Updated",
                     Content = string.format("Found %d mobs in current world", #fuckingdata.mobs),
@@ -847,7 +950,7 @@ local function createFluentUI()
             Toggles.autoFarm = Value
             if Value then
                 Toggles.autoFarmDistance = false
-           --     -- Options.AutoFarmDistance:SetValue(false)
+           --     Options.AutoFarmDistance:SetValue(false)
             end
         end)
         
@@ -874,7 +977,7 @@ local function createFluentUI()
             Toggles.autoFarmDistance = Value
             if Value then
                 Toggles.autoFarm = false
-             --   -- Options.AutoFarm:SetValue(false)
+             Options.AutoFarm:SetValue(false)
             end
         end)
         
@@ -1200,7 +1303,7 @@ local function holdashit()
         end
         
         if Toggles.autoQuest then
-            Advanced.enhancedAutoQuest()
+            Advanced.autoQuest()
         end
         
         if Toggles.autoFuse then
