@@ -401,19 +401,34 @@ end
 
 function Advanced.autoTrial()
     if fuckingdata.disabled or Player.World.Value ~= "Tower" then return end
-    
-    local enemies = fuckingasshelldammit.Workspace.Worlds.Tower.Enemies
-    for _, enemy in ipairs(enemies:GetChildren()) do
-        if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
-            pcall(function()
-                Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
-                if RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet") then
-                    RemoteEvents.Bindable.SendPet:Fire(enemy, true)
-                end
-            end)
+
+    local towerWorld = fuckingasshelldammit.Workspace.Worlds.Tower
+    local enemies = towerWorld:FindFirstChild("Enemies")
+    if enemies and #enemies:GetChildren() > 0 then
+        for _, enemy in ipairs(enemies:GetChildren()) do
+            if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
+                pcall(function()
+                    Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
+                    local sendPet = RemoteEvents.Bindable:FindFirstChild("SendPet")
+                    if sendPet then
+                        sendPet:Fire(enemy, true)
+                    end
+                end)
+            end
+        end
+        return
+    end
+    local map = towerWorld:FindFirstChild("Map")
+    if map then
+        local confirmPart = map:FindFirstChild("ConfirmPart")
+        if confirmPart and confirmPart:FindFirstChildOfClass("ProximityPrompt") then
+            local prompt = confirmPart:FindFirstChildOfClass("ProximityPrompt")
+            fireproximityprompt(prompt)
+            print("fireproximity")
         end
     end
 end
+
 
 
 local QuestTracker = {
