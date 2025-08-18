@@ -422,68 +422,53 @@ local QuestTracker = {
     currentKilled = 0,
     requiredKills = 0,
     questCompleted = false,
-    questCheckInterval = 0.5, -- Check quest every 0.5 seconds for faster response
+    questCheckInterval = 0.5,
     lastQuestCheck = 0,
     questChainActive = false,
     consecutiveQuestAttempts = 0,
     maxQuestAttempts = 3
 }
 
+local function trim(s)
+    return s:match("^()%s*$") and "" or s:match("^%s*(.-)%s*$")
+end
+
 function QuestTracker.parseQuestText(questText)
-    if not questText or questText == "" then
-        return nil, 0, 0
-    end
-    
-    local pattern = "%[(%d+)/(%d+)%]%s*(.+)"
-    local killed, required, mobName = string.match(questText, pattern)
-    
+    if not questText or questText == "" then return nil, 0, 0 end
+    local killed, required, mobName = string.match(questText, "%[(%d+)/(%d+)%]%s*(.+)")
     if killed and required and mobName then
-        return trim(mobName), tonumber(killed), tonumber(required)        
+        return trim(mobName), tonumber(killed), tonumber(required)
     end
-    
     return nil, 0, 0
 end
 
 function QuestTracker.getCurrentQuestInfo()
     local success, result = pcall(function()
-        local questUI = PlayerGui:FindFirstChild("MainGui")
-        if not questUI then return nil end
+        local questUI = PlayerGui:WaitForChild("MainGui", 5)
+        local quest = questUI:WaitForChild("Quest", 5)
+        local objectives = quest:WaitForChild("Objectives", 5)
+        local questText = objectives:WaitForChild("QuestText", 5)
 
-        local quest = questUI:FindFirstChild("Quest")
-        if not quest then return nil end
-
-        local objectives = quest:FindFirstChild("Objectives")
-        if not objectives then return nil end
-
-        local questText = objectives:FindFirstChild("QuestText")
-        if not questText then return nil end
-
-    
-        if questText:IsA("TextLabel") and questText.ContentText then
-            return questText.ContentText
+        if questText:IsA("TextLabel") and questText.Text ~= "" then
+            return questText.Text
         end
 
         local contentText = questText:FindFirstChild("ContentText")
-        if contentText and contentText:IsA("TextLabel") then
-            return contentText.ContentText
+        if contentText and contentText:IsA("TextLabel") and contentText.Text ~= "" then
+            return contentText.Text
         end
 
         return nil
     end)
-
     return success and result or nil
 end
 
-
 function QuestTracker.findTargetMob(mobName)
     if not mobName then return nil end
-    
     local currentWorld = Player.World and Player.World.Value
     if not currentWorld then return nil end
-    
     local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
     if not worldFolder or not worldFolder:FindFirstChild("Enemies") then return nil end
-    
     for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
         local displayName = enemy:FindFirstChild("DisplayName")
         if displayName and displayName.Value == mobName then
@@ -494,19 +479,15 @@ function QuestTracker.findTargetMob(mobName)
             end
         end
     end
-    
     return nil
 end
 
 function QuestTracker.attackTargetMob(enemy)
     if not enemy or not enemy.Parent then return false end
-    
     local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
     if not humanoidRootPart then return false end
-    
     local success = Utils.teleportToPosition(humanoidRootPart.CFrame)
     if not success then return false end
-    
     local attackSuccess = pcall(function()
         if RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet") then
             RemoteEvents.Bindable.SendPet:Fire(enemy, true)
@@ -514,23 +495,36 @@ function QuestTracker.attackTargetMob(enemy)
         end
         return false
     end)
-    
     return attackSuccess
+end
+
+function QuestTracker.finishQuest()
+    local currentWorld = Player.World and Player.World.Value
+    if not currentWorld then return false end
+    local success = pcall(function()
+        local npc = fuckingasshelldammit.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
+        if npc then
+            RemoteEvents.Remote:FindFirstChild("FinishQuest"):FireServer(npc)
+            RemoteEvents.Remote:FindFirstChild("FinishQuestline"):FireServer(npc)
+            print("Quest finished in world: " .. currentWorld)
+            QuestTracker.consecutiveQuestAttempts = 0
+            return true
+        end
+        return false
+    end)
+    return success
 end
 
 function QuestTracker.startQuest()
     local currentWorld = Player.World and Player.World.Value
     if not currentWorld then return false end
-    
     QuestTracker.consecutiveQuestAttempts = QuestTracker.consecutiveQuestAttempts + 1
-    
     if QuestTracker.consecutiveQuestAttempts > QuestTracker.maxQuestAttempts then
         print("Max quest attempts reached, waiting before retry...")
         task.wait(5)
         QuestTracker.consecutiveQuestAttempts = 0
         return false
     end
-    
     local success = pcall(function()
         local npc = fuckingasshelldammit.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
         if npc then
@@ -541,276 +535,66 @@ function QuestTracker.startQuest()
         end
         return false
     end)
-    
     return success
 end
-
-function QuestTracker.finishQuest()
-    local currentWorld = Player.World and Player.World.Value
-    if not currentWorld then return false end
-    
-    local success = pcall(function()
-        local npc = fuckingasshelldammit.Workspace.Worlds[currentWorld]:FindFirstChild(currentWorld)
-        if npc then
-            RemoteEvents.Remote:FindFirstChild("FinishQuest"):FireServer(npc)
-            RemoteEvents.Remote:FindFirstChild("FinishQuestline"):FireServer(npc)
-            print("Quest finished in world: " .. currentWorld)
-            QuestTracker.consecutiveQuestAttempts = 0 -- Reset attempts on successful completion
-            return true
-        end
-        return false
-    end)
-    
-    return success
-end
-
-function Advanced.enhancedAutoQuest()
-    if fuckingdata.disabled or not Toggles.autoQuest then return end
-    
-    local currentTime = tick()
-    if currentTime - QuestTracker.lastQuestCheck < QuestTracker.questCheckInterval then
-        if QuestTracker.currentTarget and QuestTracker.currentKilled < QuestTracker.requiredKills then
-            local targetMob = QuestTracker.findTargetMob(QuestTracker.currentTarget)
-            if targetMob then
-                QuestTracker.attackTargetMob(targetMob)
-            end
-        end
-        return
-    end
-    
-    QuestTracker.lastQuestCheck = currentTime
-    
-    local questText = QuestTracker.getCurrentQuestInfo()
-    
-    if not questText or questText == "" or questText:find("No active quest") or questText:find("Complete") then
-        if not QuestTracker.questCompleted then
-            print("No quest found, starting new quest...")
-            QuestTracker.startQuest()
-        else
-            print("Quest completed, starting new quest...")
-            QuestTracker.questCompleted = false
-            task.wait(0.5)
-            QuestTracker.startQuest()
-        end
-        
-        QuestTracker.currentTarget = nil
-        QuestTracker.currentKilled = 0
-        QuestTracker.requiredKills = 0
-        QuestTracker.lastQuestText = ""
-        
-        task.wait(1)
-        return
-    end
-    
-    local mobName, killed, required = QuestTracker.parseQuestText(questText)
-    
-    if not mobName then
-        print("Unable to parse quest text: " .. tostring(questText))
-        
-        if questText:find("Collect") or questText:find("Open") or questText:find("Upgrade") then
-            print("Non-combat quest detected, handling...")
-            task.wait(1)
-            QuestTracker.finishQuest()
-            task.wait(1)
-            QuestTracker.startQuest()
-        end
-        return
-    end
-    
-    if mobName ~= QuestTracker.currentTarget or (killed == 0 and QuestTracker.currentKilled > 0) then
-        print(string.format("New quest detected: %s [%d/%d] (Previous: %s)", 
-            mobName, killed, required, tostring(QuestTracker.currentTarget)))
-        QuestTracker.questCompleted = false
-        QuestTracker.lastQuestText = ""
-    end
-    
-    QuestTracker.currentTarget = mobName
-    QuestTracker.currentKilled = killed
-    QuestTracker.requiredKills = required
-    
-    if questText ~= QuestTracker.lastQuestText then
-        QuestTracker.lastQuestText = questText
-        print(string.format("Quest Progress: %s [%d/%d]", mobName, killed, required))
-    end
-    
-    if killed >= required then
-        if not QuestTracker.questCompleted then
-            QuestTracker.questCompleted = true
-            print("Quest completed! Finishing and preparing for next quest...")
-            
-            QuestTracker.finishQuest()
-            
-            task.spawn(function()
-                task.wait(2) -- Wait for quest completion processing
-                print("Attempting to start next quest in chain...")
-                QuestTracker.startQuest()
-                
-                task.wait(1)
-                QuestTracker.currentTarget = nil
-                QuestTracker.currentKilled = 0
-                QuestTracker.requiredKills = 0
-                QuestTracker.questCompleted = false
-                QuestTracker.lastQuestText = ""
-            end)
-        end
-        return
-    end
-    
-    local targetMob = QuestTracker.findTargetMob(mobName)
-    if targetMob then
-        QuestTracker.attackTargetMob(targetMob)
-    else
-        local currentWorld = Player.World and Player.World.Value
-        if currentWorld then
-            local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
-            if worldFolder and worldFolder:FindFirstChild("Enemies") then
-                -- Try to find partial matches
-                for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
-                    local displayName = enemy:FindFirstChild("DisplayName")
-                    if displayName then
-                        local enemyName = displayName.Value:lower()
-                        local targetName = mobName:lower()
-                        
-                        -- Check if names are similar (contains or partial match)
-                        if enemyName:find(targetName) or targetName:find(enemyName) then
-                            local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
-                            local attackers = enemy:FindFirstChild("Attackers")
-                            if humanoidRootPart and attackers then
-                                QuestTracker.attackTargetMob(enemy)
-                                break
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
-
-local function trim(s)
-    return s:match("^()%s*$") and "" or s:match("^%s*(.-)%s*$")
-end
-
 
 function Advanced.autoQuest()
     if fuckingdata.disabled or not Toggles.autoQuest then return end
-    
     local currentTime = tick()
     if currentTime - QuestTracker.lastQuestCheck < QuestTracker.questCheckInterval then
         if QuestTracker.currentTarget and QuestTracker.currentKilled < QuestTracker.requiredKills then
             local targetMob = QuestTracker.findTargetMob(QuestTracker.currentTarget)
-            if targetMob then
-                QuestTracker.attackTargetMob(targetMob)
-            end
+            if targetMob then QuestTracker.attackTargetMob(targetMob) end
         end
         return
     end
-    
     QuestTracker.lastQuestCheck = currentTime
-    
+
     local questText = QuestTracker.getCurrentQuestInfo()
-    
-    if not questText or questText == "" or questText:find("No active quest") or questText:find("Complete") then
-        if not QuestTracker.questCompleted then
-            print("No quest found, starting new quest...")
-            QuestTracker.startQuest()
-        else
-            print("Quest completed, starting new quest...")
-            QuestTracker.questCompleted = false
-            task.wait(0.5)
-            QuestTracker.startQuest()
-        end
-        
-        QuestTracker.currentTarget = nil
-        QuestTracker.currentKilled = 0
-        QuestTracker.requiredKills = 0
-        QuestTracker.lastQuestText = ""
-        
-        task.wait(1)
-        return
-    end
-    
-    local mobName, killed, required = QuestTracker.parseQuestText(questText)
-    
-    if not mobName then
-        print("Unable to parse quest text: " .. tostring(questText))
-        
-        if questText:find("Collect") or questText:find("Open") or questText:find("Upgrade") then
-            print("Non-combat quest detected, handling...")
-            task.wait(1)
-            QuestTracker.finishQuest()
-            task.wait(1)
-            QuestTracker.startQuest()
-        end
-        return
-    end
-    
-    if mobName ~= QuestTracker.currentTarget or (killed == 0 and QuestTracker.currentKilled > 0) then
-        print(string.format("New quest detected: %s [%d/%d] (Previous: %s)", 
-            mobName, killed, required, tostring(QuestTracker.currentTarget)))
+    print("[DEBUG] Quest Text:", questText)
+
+    if not questText or questText == "" or questText:lower():find("no active quest") then
+        print("No quest found, starting new quest...")
         QuestTracker.questCompleted = false
+        QuestTracker.startQuest()
+        QuestTracker.currentTarget, QuestTracker.currentKilled, QuestTracker.requiredKills = nil, 0, 0
         QuestTracker.lastQuestText = ""
+        return
     end
-    
+
+    local mobName, killed, required = QuestTracker.parseQuestText(questText)
+    if not mobName then
+        print("Unable to parse quest text:", tostring(questText))
+        return
+    end
+
+    if killed >= required then
+        if not QuestTracker.questCompleted then
+            QuestTracker.questCompleted = true
+            print("Quest completed!")
+            QuestTracker.finishQuest()
+            task.wait(1.5)
+            QuestTracker.startQuest()
+            task.wait(1)
+            QuestTracker.currentTarget, QuestTracker.currentKilled, QuestTracker.requiredKills = nil, 0, 0
+            QuestTracker.questCompleted = false
+            QuestTracker.lastQuestText = ""
+        end
+        return
+    end
+
     QuestTracker.currentTarget = mobName
     QuestTracker.currentKilled = killed
     QuestTracker.requiredKills = required
-    
+
     if questText ~= QuestTracker.lastQuestText then
         QuestTracker.lastQuestText = questText
         print(string.format("Quest Progress: %s [%d/%d]", mobName, killed, required))
     end
-    
-    if killed >= required then
-        if not QuestTracker.questCompleted then
-            QuestTracker.questCompleted = true
-            print("Quest completed! Finishing and preparing for next quest...")
-            
-            QuestTracker.finishQuest()
-            
-            task.spawn(function()
-                task.wait(2)
-                print("Attempting to start next quest in chain...")
-                QuestTracker.startQuest()
-                
-                task.wait(1)
-                QuestTracker.currentTarget = nil
-                QuestTracker.currentKilled = 0
-                QuestTracker.requiredKills = 0
-                QuestTracker.questCompleted = false
-                QuestTracker.lastQuestText = ""
-            end)
-        end
-        return
-    end
-    
+
     local targetMob = QuestTracker.findTargetMob(mobName)
     if targetMob then
         QuestTracker.attackTargetMob(targetMob)
-    else
-        local currentWorld = Player.World and Player.World.Value
-        if currentWorld then
-            local worldFolder = fuckingasshelldammit.Workspace.Worlds:FindFirstChild(currentWorld)
-            if worldFolder and worldFolder:FindFirstChild("Enemies") then
-                for _, enemy in ipairs(worldFolder.Enemies:GetChildren()) do
-                    local displayName = enemy:FindFirstChild("DisplayName")
-                    if displayName then
-                        local enemyName = displayName.Value:lower()
-                        local targetName = mobName:lower()
-                        
-                        if enemyName:find(targetName) or targetName:find(enemyName) then
-                            local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
-                            local attackers = enemy:FindFirstChild("Attackers")
-                            if humanoidRootPart and attackers then
-                                QuestTracker.attackTargetMob(enemy)
-                                break
-                            end
-                        end
-                    end
-                end
-            end
-        end
     end
 end
 
