@@ -435,7 +435,6 @@ function fuckass.farmMeteors()
         if fruitMeteor and not table.find(fuckingdata.tempMeteorFarmIgnore, world.Name) then
             fuckingdata.killingMeteor = true
             
-            -- Save current position and world
             local oldWorld = Player.World.Value
             local oldPos = HumanoidRootPart.CFrame
             
@@ -578,55 +577,46 @@ function Advanced.autoRaid()
     end
 end
 
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+
 function Advanced.autoTrial()
-    if fuckingdata.disabled or Player.World.Value ~= "Tower" then return end
-    local towerWorld = fuckingasshelldammit.Workspace.Worlds.Tower
+    if not fuckingdata or fuckingdata.disabled or not Player or Player.World.Value ~= "Tower" then return end
+
+    local towerWorld = fuckingasshelldammit and fuckingasshelldammit.Workspace:FindFirstChild("Worlds") and fuckingasshelldammit.Workspace.Worlds:FindFirstChild("Tower")
+    if not towerWorld then return end
+
     while Player.World.Value == "Tower" and not fuckingdata.disabled do
         local enemies = towerWorld:FindFirstChild("Enemies")
-        if enemies then
-            local enemyList = enemies:GetChildren()
-            if #enemyList > 0 then
-                for _, enemy in ipairs(enemyList) do
-                    if enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
-                        pcall(function()
+        if enemies and #enemies:GetChildren() > 0 then
+            for _, enemy in ipairs(enemies:GetChildren()) do
+                if enemy and enemy:FindFirstChild("HumanoidRootPart") and enemy:FindFirstChild("Attackers") then
+                    pcall(function()
+                        if Utils and Utils.teleportToPosition then
                             Utils.teleportToPosition(enemy.HumanoidRootPart.CFrame)
-                            local sendPet = RemoteEvents.Bindable:FindFirstChild("SendPet")
-                            wait(0.3)
-                            if sendPet then
-                                sendPet:Fire(enemy, true)
-                            end
-                        end)
-                    end
+                        end
+                        local sendPet = RemoteEvents and RemoteEvents.Bindable and RemoteEvents.Bindable:FindFirstChild("SendPet")
+                        if sendPet then
+                            task.wait(0.3)
+                            sendPet:Fire(enemy, true)
+                        end
+                    end)
                 end
             end
-        end
-
-        if enemies and #enemies:GetChildren() == 0 then
+        else
             local map = towerWorld:FindFirstChild("Map")
             if map then
-                local confirmPart
-                local timeout = tick() + 5
-                repeat
-                    confirmPart = map:FindFirstChild("ConfirmPart")
-                    wait(0.1)
-                until confirmPart or tick() > timeout
-
-                if confirmPart then
-                    local prompt
-                    timeout = tick() + 5
-                    repeat
-                        prompt = confirmPart:FindFirstChildOfClass("ProximityPrompt")
-                        wait(0.1)
-                    until prompt or tick() > timeout
-
-                    if prompt then
-                        pcall(function()
-                            fireproximityprompt(prompt)
-                        end)
-                    end
+                local confirmPart = map:FindFirstChild("ConfirmPart")
+                if confirmPart and confirmPart:FindFirstChildOfClass("ProximityPrompt") then
+                    local prompt = confirmPart:FindFirstChildOfClass("ProximityPrompt")
+                    pcall(function()
+                        local FirePrompt = fireproximityprompt or (prompt and function(p) p:InputHoldBegin(); task.wait(p.HoldDuration); p:InputHoldEnd() end)
+                        FirePrompt(prompt)
+                    end)
                 end
             end
         end
+        task.wait(0.1)
     end
 end
 
@@ -1513,8 +1503,3 @@ end)
 
 initialize()
 
-Fluent:Notify({
-                        Title = "Loaded",
-                        Content = "wsp!",
-                        Duration = 3
-                    })
