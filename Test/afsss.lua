@@ -1623,7 +1623,6 @@ function equipTeam(teamName)
     end
 end
 
-do
     local TeamsDropdown = Tabs.Team:AddDropdown("TeamsSelectDropDown", {
         Title = "Select Defense World",
         Values = teamsTable,
@@ -1656,10 +1655,10 @@ do
             end
         end
     })
-end
 
         
      
+
 
 
 initialize()
