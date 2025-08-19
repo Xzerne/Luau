@@ -1583,19 +1583,12 @@ end)
 
 
 
-spawn(function()
-while task.wait() do
-if Toogles.autoClick then
-game:GetService("ReplicatedStorage").Remote.ClickerDamage:FireServer()
-end
-end
-end)
 
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local HttpService = game:GetService("HttpService")
 
-local GameData = require(ReplicatedStorage.ModuleScripts.LocalDairebStore):GetStoreProxy("GameData")
+local GameData = require(ReplicatedStorage.ModuleScripts.LocalDairebStore).GetStoreProxy("GameData")
 local allData = GameData:GetData() or {}
 local petTeams = allData["PetTeams"] or {}
 
